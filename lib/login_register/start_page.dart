@@ -38,7 +38,7 @@ class GetStartedPage extends StatelessWidget {
                         color: Colors.white,
                       ),
                       const Text(
-                        ' Skip.',
+                        ' Skip',
                         style: TextStyle(
                           fontSize: 15,
                           color: Colors.white,
