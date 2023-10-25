@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/application/dashboard.dart';
+import 'package:redresq_app/application/navbar.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/login_register/terms_and_conditions.dart';
 
@@ -264,7 +265,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Dashboard()),
+                    MaterialPageRoute(builder: (context) => NavBar()),
                   );
                 },
                 minWidth: 350,
