@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/login_register/register_formular_2.dart';
 
-// Single Child Scroll einbauen
-
-
-class FirstFormular extends StatelessWidget {
+class FirstFormular extends StatefulWidget {
   const FirstFormular({Key? key}) : super(key: key);
+
+  @override
+  _FirstFormularState createState() => _FirstFormularState();
+}
+
+class _FirstFormularState extends State<FirstFormular> {
+  TextEditingController _firstNameController = TextEditingController();
+  TextEditingController _lastNameController = TextEditingController();
+  TextEditingController _dobController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _mobileNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +23,6 @@ class FirstFormular extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-
             const SizedBox(height: 35),
             Align(
               alignment: Alignment.topLeft,
@@ -37,8 +44,6 @@ class FirstFormular extends StatelessWidget {
             ),
             const SizedBox(height: 15),
             const Text(
-              // '*' bei jedem Textfeld welches benötigt wird
-              // -- Befülle die Textfelder!
               'Fill out the text fields below',
               style: TextStyle(
                 color: Color(0xff464444),
@@ -46,218 +51,112 @@ class FirstFormular extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 5),
-
-            // -- Bild einfügen 1 von 3 und so weiter
             const Image(
               image: AssetImage('lib/assets/register/progress_formular_1outOf3.png'),
               width: 350,
               height: 100,
               fit: BoxFit.contain,
             ),
-
             const SizedBox(height: 10),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
-              child: Material(
-                elevation: 5,
-                borderRadius: BorderRadius.circular(15),
-                color: const Color(0xfff3f3f3),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.person, // Ändern !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        color: Color(0xff464444),
-                      ),
-                    ),
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
-                          ),
-                          hintText: 'First name', // Überetzen !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            _buildTextFieldWithIcon(Icons.person, _firstNameController, 'First name'),
             const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
-              child: Material(
-                elevation: 5,
-                borderRadius: BorderRadius.circular(15),
-                color: const Color(0xfff3f3f3),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.person, // ändern !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        color: Color(0xff464444),
-                      ),
-                    ),
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
-                          ),
-                          hintText: 'Last name', // Übersetzen !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
+            _buildTextFieldWithIcon(Icons.person, _lastNameController, 'Last name'),
             const SizedBox(height: 10),
-
-            //Ändern!!!!!!!!!!!!!!!!!!!!
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
-              child: Material(
-                elevation: 5,
-                borderRadius: BorderRadius.circular(15),
-                color: const Color(0xfff3f3f3),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.cake, // ändern !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        color: Color(0xff464444),
-                      ),
-                    ),
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
-                          ),
-                          hintText: 'Date of birth', // Übersetzen !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-
+            _buildTextFieldWithIcon(Icons.cake, _dobController, 'Date of birth'),
             const SizedBox(height: 30),
 
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
-              child: Material(
-                elevation: 5,
-                borderRadius: BorderRadius.circular(15),
-                color: const Color(0xfff3f3f3),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.email,
-                        color: Color(0xff464444),
-                      ),
-                    ),
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
-                          ),
-                          hintText: 'E-Mail',
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            _buildTextFieldWithIcon(Icons.email, _emailController, 'E-Mail'),
             const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
-              child: Material(
-                elevation: 5,
-                borderRadius: BorderRadius.circular(15),
-                color: const Color(0xfff3f3f3),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.phone,
-                        color: Color(0xff464444),
-                      ),
-                    ),
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
-                          ),
-                          hintText: 'Mobile number',
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            _buildTextFieldWithIcon(Icons.phone, _mobileNumberController, 'Mobile number'),
 
             const Spacer(),
-            Material(
-              elevation: 10,
-              borderRadius: const BorderRadius.all(Radius.circular(15)),
-              color: myRedColor,
-              child: MaterialButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SecondFormular()),
-                  );
+
+            _buildNextButton(context),
+
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextFieldWithIcon(IconData icon, TextEditingController controller, String hintText) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      child: Material(
+        elevation: 5,
+        borderRadius: BorderRadius.circular(15),
+        color: const Color(0xfff3f3f3),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                icon,
+                color: Color(0xff464444),
+              ),
+            ),
+            Expanded(
+              child: TextField(
+                controller: controller,
+                onChanged: (value) {
+                  // Wert wird in die entsprechenden Variable gespeichert
+                  if (controller == _firstNameController) {
+                    // Vorname-Feld
+                    _firstNameController.text = value;
+                  } else if (controller == _lastNameController) {
+                    // Nachname-Feld
+                    _lastNameController.text = value;
+                  } else if (controller == _dobController) {
+                    // Geburtsdatum-Feld
+                    _dobController.text = value;
+                  } else if (controller == _emailController) {
+                    // E-Mail
+                    _emailController.text = value;
+                  } else if (controller == _mobileNumberController) {
+                    // Telefonnummer
+                    _mobileNumberController.text = value;
+                  }
                 },
-                minWidth: 350,
-                height: 60,
-                child: const Text(
-                  // Vielleicht noch ein Pfeil einbauen ->
-                  'Next',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0x00000000)),
                   ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0x00000000)),
+                  ),
+                  hintText: hintText,
                 ),
               ),
             ),
-            const SizedBox(height: 20),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNextButton(BuildContext context) {
+    return Material(
+      elevation: 10,
+      borderRadius: const BorderRadius.all(Radius.circular(15)),
+      color: myRedColor,
+      child: MaterialButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SecondFormular()),
+          );
+        },
+        minWidth: 350,
+        height: 60,
+        child: const Text(
+          'Next',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 25,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

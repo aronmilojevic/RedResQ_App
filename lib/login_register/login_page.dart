@@ -4,7 +4,6 @@ import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/login_register/password_reset_1.dart';
 import 'package:redresq_app/login_register/register_formular_1.dart';
 
-
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -14,6 +13,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _isPasswordVisible = false;
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,6 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-
             const SizedBox(height: 35),
             Align(
               alignment: Alignment.topLeft,
@@ -68,6 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Expanded(
                       child: TextField(
+                        controller: _usernameController,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Color(0x00000000)),
@@ -101,6 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Expanded(
                       child: TextField(
+                        controller: _passwordController,
                         obscureText: !_isPasswordVisible,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
@@ -154,16 +156,33 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             const SizedBox(height: 5),
+
+            // Wenn man sich am Dashboard befindet darf die möglichkeit nicht bestehen zurück zum login zu kommen
             Material(
               elevation: 10,
               borderRadius: const BorderRadius.all(Radius.circular(15)),
               color: myRedColor,
               child: MaterialButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Dashboard()),
-                  );
+                  // Überprüfe Benutzername und Passwort
+                  if (_usernameController.text == "admin" &&
+                      _passwordController.text == "12345") {
+                    // Wenn Benutzername und Passwort stimmen, navigiere zur Dashboard-Seite
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Dashboard()),
+                    );
+                  } else {
+                    // Zeige eine Fehlermeldung an
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Falscher Benutzername oder Passwort',
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ),
+                    );
+                  }
                 },
                 minWidth: 350,
                 height: 60,
@@ -178,13 +197,14 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
+
             const SizedBox(height: 10),
             const Spacer(),
             TextButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FirstFormular( )),
+                  MaterialPageRoute(builder: (context) => FirstFormular()),
                 );
               },
               child: RichText(

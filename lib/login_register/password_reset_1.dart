@@ -30,7 +30,7 @@ class ResetPasswordPage extends StatelessWidget {
             const Text(
               //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
               // -- Überetzen
-              'Passwort zurücksetzen',
+              'Reset password',
               style: TextStyle(color: Color(0xff464444),
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
@@ -42,7 +42,7 @@ class ResetPasswordPage extends StatelessWidget {
             const Text(
               //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
               // -- Überetzen
-              'Sie erhlaten in kürze eine E-Mail',
+              'You will receive an email shortly',
               style: TextStyle(color: Color(0xff464444),
                 fontSize: 15,
               ),
@@ -50,7 +50,7 @@ class ResetPasswordPage extends StatelessWidget {
 
             const SizedBox(height: 50),
 
-            //
+            // EMAIL ODER USERNAME ????????
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.0),
               child: Material(
@@ -92,7 +92,7 @@ class ResetPasswordPage extends StatelessWidget {
                 child: const Text(
                   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                   // -- Überetzen
-                  'Zurücksetzen',
+                  'Reset',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 25,

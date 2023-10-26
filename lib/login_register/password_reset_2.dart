@@ -18,7 +18,7 @@ class SecondReset extends StatelessWidget {
 
             const Text(
               // -- Übersetzen
-              'Du hast Post!',
+              'You\'ve got mail!',
               style: TextStyle(color: Color(0xff464444),
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
@@ -29,7 +29,7 @@ class SecondReset extends StatelessWidget {
 
             const Text(
               // -- Übersetzen
-              'Prüfe deine Mails',
+              'Check your mails',
               style: TextStyle(color: Color(0xff464444),
                 fontSize: 15,
               ),
@@ -40,7 +40,7 @@ class SecondReset extends StatelessWidget {
 
             const Image(
               // -- Anderes Bild finden
-              image: AssetImage('lib/assets/login/PasswortZ.png'),
+              image: AssetImage('lib/assets/login/check_your_mails.png'),
               width: 250,
               height: 250,
               fit: BoxFit.contain,
@@ -67,7 +67,7 @@ class SecondReset extends StatelessWidget {
                 child: const Text(
                   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                   // -- Überetzen
-                  'Zurück zum Start',
+                  'Back to the start',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 25,

@@ -4,7 +4,6 @@ import 'package:redresq_app/application/navbar.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/login_register/terms_and_conditions.dart';
 
-
 class ThirdFormular extends StatefulWidget {
   const ThirdFormular({Key? key}) : super(key: key);
 
@@ -16,6 +15,12 @@ class _ThirdFormularState extends State<ThirdFormular> {
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
   bool _isChecked = false;
+
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
+
+  String _passwordErrorText = '';
 
   @override
   Widget build(BuildContext context) {
@@ -59,136 +64,20 @@ class _ThirdFormularState extends State<ThirdFormular> {
               fit: BoxFit.contain,
             ),
             const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
-              child: Material(
-                elevation: 5,
-                borderRadius: BorderRadius.circular(15),
-                color: const Color(0xfff3f3f3),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.person,
-                        color: Color(0xff464444),
-                      ),
-                    ),
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
-                          ),
-                          hintText: 'Username',
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            _buildTextFieldWithIcon(Icons.person, _usernameController, 'Username'),
             const SizedBox(height: 25),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
-              child: Material(
-                elevation: 5,
-                borderRadius: BorderRadius.circular(15),
-                color: const Color(0xfff3f3f3),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.lock,
-                        color: Color(0xff464444),
-                      ),
-                    ),
-                    Expanded(
-                      child: TextField(
-                        obscureText: !_isPasswordVisible,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
-                          ),
-                          hintText: 'New password',
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        _isPasswordVisible
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                        color: Color(0xff464444),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _isPasswordVisible = !_isPasswordVisible;
-                        });
-                      },
-                    ),
-                  ],
-                ),
+            _buildPasswordTextField(),
+            const SizedBox(height: 5),
+            _buildConfirmPasswordTextField(),
+            const SizedBox(height: 5),
+            Text(
+              _passwordErrorText,
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 16,
               ),
             ),
-            const SizedBox(height: 5),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
-              child: Material(
-                elevation: 5,
-                borderRadius: BorderRadius.circular(15),
-                color: const Color(0xfff3f3f3),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.lock,
-                        color: Color(0xff464444),
-                      ),
-                    ),
-                    Expanded(
-                      child: TextField(
-                        obscureText: !_isConfirmPasswordVisible,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
-                          ),
-                          hintText: 'Confirm password',
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        _isConfirmPasswordVisible
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                        color: Color(0xff464444),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _isConfirmPasswordVisible =
-                          !_isConfirmPasswordVisible;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 5),
 
-            // Statt dem TextButton eine Checkbox erstellen
             Align(
               alignment: Alignment.centerRight,
               child: Padding(
@@ -221,9 +110,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
                     ),
                     const SizedBox(width: 8),
                     GestureDetector(
-                      onTap: () {
-
-                      },
+                      onTap: () {},
                       child: const Text(
                         'I agree to the ',
                         textAlign: TextAlign.center,
@@ -237,7 +124,8 @@ class _ThirdFormularState extends State<ThirdFormular> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => TermsAndConditions()),);
+                          MaterialPageRoute(builder: (context) => TermsAndConditions()),
+                        );
                       },
                       child: const Text(
                         'terms and conditions',
@@ -257,32 +145,213 @@ class _ThirdFormularState extends State<ThirdFormular> {
 
             const Spacer(),
 
-            Material(
-              elevation: 10,
-              borderRadius: const BorderRadius.all(Radius.circular(15)),
-              color: myRedColor,
-              child: MaterialButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NavBar()),
-                  );
+            _buildFinishButton(context),
+
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextFieldWithIcon(IconData icon, TextEditingController controller, String hintText) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      child: Material(
+        elevation: 5,
+        borderRadius: BorderRadius.circular(15),
+        color: const Color(0xfff3f3f3),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                icon,
+                color: Color(0xff464444),
+              ),
+            ),
+            Expanded(
+              child: TextField(
+                controller: controller,
+                onChanged: (value) {
+                  // Hier wird der eingegebene Wert in der entsprechenden Variable gespeichert
+                  // Beispiel: Wenn es sich um das Benutzername-Feld handelt, dann _usernameController.text = value;
                 },
-                minWidth: 350,
-                height: 60,
-                child: const Text(
-                  'Finish',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0x00000000)),
                   ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0x00000000)),
+                  ),
+                  hintText: hintText,
                 ),
               ),
             ),
-            const SizedBox(height: 20),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPasswordTextField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      child: Material(
+        elevation: 5,
+        borderRadius: BorderRadius.circular(15),
+        color: const Color(0xfff3f3f3),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.lock,
+                color: Color(0xff464444),
+              ),
+            ),
+            Expanded(
+              child: TextField(
+                controller: _passwordController,
+                obscureText: !_isPasswordVisible,
+                onChanged: (value) {
+                  // Hier wird der eingegebene Wert in der entsprechenden Variable gespeichert
+                  // Beispiel: Wenn es sich um das Passwort-Feld handelt, dann _passwordController.text = value;
+                  setState(() {
+                    _passwordErrorText = '';
+                  });
+                },
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0x00000000)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0x00000000)),
+                  ),
+                  hintText: 'New password',
+                ),
+              ),
+            ),
+            IconButton(
+              icon: Icon(
+                _isPasswordVisible
+                    ? Icons.visibility_off
+                    : Icons.visibility,
+                color: Color(0xff464444),
+              ),
+              onPressed: () {
+                setState(() {
+                  _isPasswordVisible = !_isPasswordVisible;
+                });
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildConfirmPasswordTextField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      child: Material(
+        elevation: 5,
+        borderRadius: BorderRadius.circular(15),
+        color: const Color(0xfff3f3f3),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.lock,
+                color: Color(0xff464444),
+              ),
+            ),
+            Expanded(
+              child: TextField(
+                controller: _confirmPasswordController,
+                obscureText: !_isConfirmPasswordVisible,
+                onChanged: (value) {
+                  // Hier wird der eingegebene Wert in der entsprechenden Variable gespeichert
+                  // Beispiel: Wenn es sich um das Bestätigungspasswort-Feld handelt, dann _confirmPasswordController.text = value;
+                  setState(() {
+                    _passwordErrorText = '';
+                  });
+                },
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0x00000000)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0x00000000)),
+                  ),
+                  hintText: 'Confirm password',
+                ),
+              ),
+            ),
+            IconButton(
+              icon: Icon(
+                _isConfirmPasswordVisible
+                    ? Icons.visibility_off
+                    : Icons.visibility,
+                color: Color(0xff464444),
+              ),
+              onPressed: () {
+                setState(() {
+                  _isConfirmPasswordVisible =
+                  !_isConfirmPasswordVisible;
+                });
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFinishButton(BuildContext context) {
+    return Material(
+      elevation: 10,
+      borderRadius: const BorderRadius.all(Radius.circular(15)),
+      color: myRedColor,
+      child: MaterialButton(
+        onPressed: () {
+          if (_usernameController.text.isEmpty ||
+              _passwordController.text.isEmpty ||
+              _confirmPasswordController.text.isEmpty) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('All fields must be filled'),
+              ),
+            );
+          } else if (!_isChecked) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('You must agree to the terms and conditions'),
+              ),
+            );
+          } else if (_passwordController.text !=
+              _confirmPasswordController.text) {
+            setState(() {
+              _passwordErrorText = 'Passwords do not match';
+            });
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => NavBar()),
+            );
+          }
+        },
+        minWidth: 350,
+        height: 60,
+        child: const Text(
+          'Finish',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 25,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
