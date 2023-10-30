@@ -19,7 +19,7 @@ class NavigationExample extends StatefulWidget {
 
 class _NavigationExampleState extends State<NavigationExample> {
   int currentPageIndex = 2;
-  static List<Widget> _widgetOptions = <Widget>[
+  static final List<Widget> _widgetOptions = <Widget>[
     Scaffold(
         body: Container(
       color: Colors.blueGrey,
@@ -28,7 +28,7 @@ class _NavigationExampleState extends State<NavigationExample> {
         body: Container(
       color: Colors.green,
     )),
-    Dashboard(),
+    const Dashboard(),
     Scaffold(
         body: Container(
       color: Colors.amber,
