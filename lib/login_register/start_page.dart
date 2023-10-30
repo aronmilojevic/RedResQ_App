@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redresq_app/application/dashboard.dart';
+import 'package:redresq_app/application/UIManagement.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/login_register/login_page.dart';
 import 'package:redresq_app/login_register/register_formular_1.dart';
@@ -9,7 +9,8 @@ class GetStartedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        constraints: const BoxConstraints.expand(), // Damit der Container die gesamte verfügbare Größe einnimmt
+        constraints: const BoxConstraints
+            .expand(), // Damit der Container die gesamte verfügbare Größe einnimmt
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('lib/assets/start/background_get_started.png'),
@@ -28,7 +29,7 @@ class GetStartedPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Dashboard()),
+                      MaterialPageRoute(builder: (context) => StartUI()),
                     );
                   },
                   child: Row(
@@ -47,9 +48,7 @@ class GetStartedPage extends StatelessWidget {
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 350),
-
                 const Text(
                   'Let\'s Get\nStarted',
                   style: TextStyle(
@@ -58,9 +57,7 @@ class GetStartedPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-
                 const SizedBox(height: 20),
-
                 const Text(
                   'Protect yourself and others around you!',
                   style: TextStyle(
@@ -68,9 +65,7 @@ class GetStartedPage extends StatelessWidget {
                     fontSize: 15,
                   ),
                 ),
-
                 const SizedBox(height: 70),
-
                 Material(
                   elevation: 10,
                   borderRadius: const BorderRadius.all(Radius.circular(15)),
@@ -79,7 +74,8 @@ class GetStartedPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => FirstFormular()),
+                        MaterialPageRoute(
+                            builder: (context) => FirstFormular()),
                       );
                     },
                     minWidth: 370,
@@ -95,9 +91,7 @@ class GetStartedPage extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 10),
-
                 Material(
                   elevation: 0,
                   borderRadius: const BorderRadius.all(Radius.circular(15)),
@@ -126,7 +120,6 @@ class GetStartedPage extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 5),
               ],
             ),
