@@ -21,6 +21,18 @@ class _ThirdFormularState extends State<ThirdFormular> {
 
   String _passwordErrorText = '';
 
+  // Konstanten
+  static const double _screenPadding = 30.0;
+  static const TextStyle _headerTextStyle = TextStyle(
+    color: Color(0xff464444),
+    fontSize: 30,
+    fontWeight: FontWeight.bold,
+  );
+  static const TextStyle _subHeaderTextStyle = TextStyle(
+    color: Color(0xff464444),
+    fontSize: 15,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,21 +51,14 @@ class _ThirdFormularState extends State<ThirdFormular> {
                 color: Color(0xff464444),
               ),
             ),
-            const Text(
+            Text(
               'Create your user',
-              style: TextStyle(
-                color: Color(0xff464444),
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
+              style: _headerTextStyle,
             ),
             const SizedBox(height: 15),
             const Text(
               'Fill out the text fields below',
-              style: TextStyle(
-                color: Color(0xff464444),
-                fontSize: 15,
-              ),
+              style: _subHeaderTextStyle,
             ),
             const SizedBox(height: 5),
             const Image(
@@ -76,11 +81,10 @@ class _ThirdFormularState extends State<ThirdFormular> {
                 fontSize: 16,
               ),
             ),
-
             Align(
               alignment: Alignment.centerRight,
               child: Padding(
-                padding: const EdgeInsets.only(right: 30.0),
+                padding: const EdgeInsets.only(right: _screenPadding),
                 child: Row(
                   children: [
                     const SizedBox(width: 20),
@@ -141,11 +145,8 @@ class _ThirdFormularState extends State<ThirdFormular> {
               ),
             ),
             const SizedBox(height: 5),
-
             const Spacer(),
-
             _buildFinishButton(context),
-
             const SizedBox(height: 20),
           ],
         ),
@@ -155,7 +156,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
 
   Widget _buildTextFieldWithIcon(IconData icon, TextEditingController controller, String hintText) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      padding: EdgeInsets.symmetric(horizontal: _screenPadding),
       child: Material(
         elevation: 5,
         borderRadius: BorderRadius.circular(15),
@@ -172,7 +173,11 @@ class _ThirdFormularState extends State<ThirdFormular> {
             Expanded(
               child: TextField(
                 controller: controller,
-                onChanged: (value) {},
+                onChanged: (value) {
+                  setState(() {
+                    _passwordErrorText = _validateUsername(value);
+                  });
+                },
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Color(0x00000000)),
@@ -192,7 +197,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
 
   Widget _buildPasswordTextField() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      padding: EdgeInsets.symmetric(horizontal: _screenPadding),
       child: Material(
         elevation: 5,
         borderRadius: BorderRadius.circular(15),
@@ -247,7 +252,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
 
   Widget _buildConfirmPasswordTextField() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      padding: EdgeInsets.symmetric(horizontal: _screenPadding),
       child: Material(
         elevation: 5,
         borderRadius: BorderRadius.circular(15),
@@ -290,8 +295,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
               ),
               onPressed: () {
                 setState(() {
-                  _isConfirmPasswordVisible =
-                  !_isConfirmPasswordVisible;
+                  _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
                 });
               },
             ),
@@ -322,16 +326,28 @@ class _ThirdFormularState extends State<ThirdFormular> {
                 content: Text('You must agree to the terms and conditions'),
               ),
             );
-          } else if (_passwordController.text !=
-              _confirmPasswordController.text) {
-            setState(() {
-              _passwordErrorText = 'Passwords do not match';
-            });
           } else {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => NavBar()),
-            );
+            String usernameError = _validateUsername(_usernameController.text);
+            String passwordError = _validatePassword(_passwordController.text);
+            if (usernameError.isNotEmpty) {
+              setState(() {
+                _passwordErrorText = usernameError;
+              });
+            } else if (passwordError.isNotEmpty) {
+              setState(() {
+                _passwordErrorText = passwordError;
+              });
+            } else if (_passwordController.text !=
+                _confirmPasswordController.text) {
+              setState(() {
+                _passwordErrorText = 'Passwords do not match';
+              });
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NavBar()),
+              );
+            }
           }
         },
         minWidth: 350,
@@ -349,26 +365,40 @@ class _ThirdFormularState extends State<ThirdFormular> {
     );
   }
 
-  // es entsteht ein Problem
-  // Wenn ich zb 1111111 in beiden feldern angebe erfüllt es meine bedingung nicht
-  // Da oben nur relevant ist ob sie matchen kommt man rein
+  String _validateUsername(String username) {
+    // Der Benutzername muss mindestens 6 Zeichen lang sein und darf keine Sonderzeichen oder Leerzeichen enthalten
+    if (username.length < 6) {
+      return 'Username must be at least 6 characters long';
+    }
+    if (RegExp(r'[!@#$%^&*(),.?":{}|<> ]').hasMatch(username)) {
+      return 'Username cannot contain special characters or spaces';
+    }
+    return '';
+  }
 
   String _validatePassword(String password) {
-    //Länge
+    // Der Text sollte vielleicht allgemeiner formuliert werden und nicht für jeden einzelnen Fall:
+    // Das Passwort muss mindestens 8 Zeichen lang sein, mindestens einen Groß- oder Kleinbuchstaben enthalten und darf keine Sonderzeichen oder Leerzeichen enthalten
+
+    // Länge
     if (password.length < 8) {
       return 'Password must be at least 8 characters long';
     }
-    //Zahlen
+    // Zahlen
     if (!password.contains(RegExp(r'[0-9]'))) {
       return 'Password must contain at least one number';
     }
-    //Groß Kleinbuchstaben
-    if (!password.contains(RegExp(r'[A-Za-z]'))) {
-      return 'Password must contain at least one letter';
+    // Großbuchstaben
+    if (!password.contains(RegExp(r'[A-Z]'))) {
+      return 'Password must contain at least one uppercase letter';
     }
-    //Keine Sonderzeichen
-    if (password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
-      return 'Password cannot contain special characters';
+    // Kleinbuchstaben
+    if (!password.contains(RegExp(r'[a-z]'))) {
+      return 'Password must contain at least one lowercase letter';
+    }
+    // Keine Sonderzeichen oder Leerzeichen
+    if (password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<> ]'))) {
+      return 'Password cannot contain special characters or spaces';
     }
 
     return '';

@@ -57,9 +57,9 @@ class _SecondFormularState extends State<SecondFormular> {
               fit: BoxFit.contain,
             ),
             const SizedBox(height: 10),
-            _buildTextFieldWithIcon(Icons.place, _landController, 'Land'),
+            _buildTextFieldWithIcon(Icons.place, _landController, 'Country'),
             const SizedBox(height: 10),
-            _buildTextFieldWithIcon(Icons.place, _adresseController, 'Adresse'),
+            _buildTextFieldWithIcon(Icons.place, _adresseController, 'Address'),
             const SizedBox(height: 10),
 
             _buildCityAndOrtFields(),
@@ -146,7 +146,7 @@ class _SecondFormularState extends State<SecondFormular> {
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Color(0x00000000)),
                         ),
-                        hintText: 'Stadt',
+                        hintText: 'City',
                       ),
                     ),
                   ),
@@ -182,7 +182,7 @@ class _SecondFormularState extends State<SecondFormular> {
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Color(0x00000000)),
                         ),
-                        hintText: 'ORT',
+                        hintText: 'Place',
                       ),
                     ),
                   ),

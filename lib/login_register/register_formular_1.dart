@@ -62,7 +62,7 @@ class _FirstFormularState extends State<FirstFormular> {
             const SizedBox(height: 10),
             _buildTextFieldWithIcon(Icons.person, _lastNameController, 'Last name'),
             const SizedBox(height: 10),
-            _buildTextFieldWithIcon(Icons.cake, _dobController, 'Date of birth'),
+            _buildDateOfBirthTextField(),
             const SizedBox(height: 30),
 
             _buildTextFieldWithIcon(Icons.email, _emailController, 'E-Mail'),
@@ -101,21 +101,22 @@ class _FirstFormularState extends State<FirstFormular> {
                 controller: controller,
                 onChanged: (value) {
                   // Wert wird in die entsprechenden Variable gespeichert
-                  if (controller == _firstNameController) {
-                    // Vorname-Feld
-                    _firstNameController.text = value;
-                  } else if (controller == _lastNameController) {
-                    // Nachname-Feld
-                    _lastNameController.text = value;
-                  } else if (controller == _dobController) {
-                    // Geburtsdatum-Feld
-                    _dobController.text = value;
-                  } else if (controller == _emailController) {
-                    // E-Mail
-                    _emailController.text = value;
-                  } else if (controller == _mobileNumberController) {
-                    // Telefonnummer
-                    _mobileNumberController.text = value;
+                  if (controller == _firstNameController || controller == _lastNameController) {
+                    // Nur Buchstaben erlauben
+                    String formattedValue = value.replaceAll(RegExp(r'[^a-zA-Z]'), '');
+                    if (formattedValue != value) {
+                      controller.text = formattedValue;
+                    }
+                  } else {
+                    // Alle Zeichen erlauben außer Zahlen
+                    if (value.contains(RegExp(r'[0-9]'))) {
+                      String formattedValue = value.replaceAll(RegExp(r'[0-9]'), '');
+                      if (formattedValue != value) {
+                        controller.text = formattedValue;
+                      }
+                    } else {
+                      controller.text = value;
+                    }
                   }
                 },
                 decoration: InputDecoration(
@@ -133,6 +134,93 @@ class _FirstFormularState extends State<FirstFormular> {
         ),
       ),
     );
+  }
+
+  Widget _buildDateOfBirthTextField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      child: Material(
+        elevation: 5,
+        borderRadius: BorderRadius.circular(15),
+        color: const Color(0xfff3f3f3),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.cake,
+                color: Color(0xff464444),
+              ),
+            ),
+            Expanded(
+              child: TextField(
+                controller: _dobController,
+                onChanged: (value) {
+                  // Wert wird in die entsprechende Variable gespeichert
+                  _dobController.text = _formatDateOfBirth(value);
+                },
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0x00000000)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0x00000000)),
+                  ),
+                  hintText: 'Date of birth (DD/MM/YYYY)',
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String _formatDateOfBirth(String input) {
+    // Nur Zahlen zulassen
+    String formattedValue = input.replaceAll(RegExp(r'[^0-9]'), '');
+
+    // ich füge automatisch ein '/' nach der zweiten Ziffer ein
+    if (formattedValue.length > 2) {
+      formattedValue = formattedValue.substring(0, 2) + '/' + formattedValue.substring(2);
+    }
+
+    // ich füge automatisch ein '/' nach der vierten Ziffer ein
+    if (formattedValue.length > 5) {
+      formattedValue = formattedValue.substring(0, 5) + '/' + formattedValue.substring(5);
+    }
+
+    // Begrenze den Tag auf maximal 31 Tage
+    if (formattedValue.length >= 2) {
+      String day = formattedValue.substring(0, 2);
+      if (int.parse(day) > 31) {
+        day = '31';
+      }
+      formattedValue = day + formattedValue.substring(2);
+    }
+
+    // Begrenze den Monat auf maximal 12
+    if (formattedValue.length >= 5) {
+      String month = formattedValue.substring(3, 5);
+      if (int.parse(month) > 12) {
+        month = '12';
+      }
+      formattedValue = formattedValue.substring(0, 3) + month + formattedValue.substring(5);
+    }
+
+    // Begrenze das Jahr auf den gewünschten Bereich
+    if (formattedValue.length >= 8) {
+      String year = formattedValue.substring(6, 10);
+      if (int.parse(year) < 1940) {
+        year = '1940';
+      } else if (int.parse(year) > 2010) {
+        year = '2010';
+      }
+      formattedValue = formattedValue.substring(0, 6) + year;
+    }
+
+    return formattedValue;
   }
 
   Widget _buildNextButton(BuildContext context) {
