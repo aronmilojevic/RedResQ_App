@@ -172,10 +172,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
             Expanded(
               child: TextField(
                 controller: controller,
-                onChanged: (value) {
-                  // Hier wird der eingegebene Wert in der entsprechenden Variable gespeichert
-                  // Beispiel: Wenn es sich um das Benutzername-Feld handelt, dann _usernameController.text = value;
-                },
+                onChanged: (value) {},
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Color(0x00000000)),
@@ -214,10 +211,8 @@ class _ThirdFormularState extends State<ThirdFormular> {
                 controller: _passwordController,
                 obscureText: !_isPasswordVisible,
                 onChanged: (value) {
-                  // Hier wird der eingegebene Wert in der entsprechenden Variable gespeichert
-                  // Beispiel: Wenn es sich um das Passwort-Feld handelt, dann _passwordController.text = value;
                   setState(() {
-                    _passwordErrorText = '';
+                    _passwordErrorText = _validatePassword(value);
                   });
                 },
                 decoration: InputDecoration(
@@ -271,8 +266,6 @@ class _ThirdFormularState extends State<ThirdFormular> {
                 controller: _confirmPasswordController,
                 obscureText: !_isConfirmPasswordVisible,
                 onChanged: (value) {
-                  // Hier wird der eingegebene Wert in der entsprechenden Variable gespeichert
-                  // Beispiel: Wenn es sich um das Bestätigungspasswort-Feld handelt, dann _confirmPasswordController.text = value;
                   setState(() {
                     _passwordErrorText = '';
                   });
@@ -354,5 +347,30 @@ class _ThirdFormularState extends State<ThirdFormular> {
         ),
       ),
     );
+  }
+
+  // es entsteht ein Problem
+  // Wenn ich zb 1111111 in beiden feldern angebe erfüllt es meine bedingung nicht
+  // Da oben nur relevant ist ob sie matchen kommt man rein
+
+  String _validatePassword(String password) {
+    //Länge
+    if (password.length < 8) {
+      return 'Password must be at least 8 characters long';
+    }
+    //Zahlen
+    if (!password.contains(RegExp(r'[0-9]'))) {
+      return 'Password must contain at least one number';
+    }
+    //Groß Kleinbuchstaben
+    if (!password.contains(RegExp(r'[A-Za-z]'))) {
+      return 'Password must contain at least one letter';
+    }
+    //Keine Sonderzeichen
+    if (password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+      return 'Password cannot contain special characters';
+    }
+
+    return '';
   }
 }
