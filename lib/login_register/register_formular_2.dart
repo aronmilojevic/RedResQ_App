@@ -147,6 +147,7 @@ class _SecondFormularState extends State<SecondFormular> {
                       }).toList(),
                       icon: Padding(
                         padding: const EdgeInsets.only(right: 8.0),
+
                         child: Icon(Icons.arrow_drop_down),
                       ),
                       underline: Container(),
