@@ -64,15 +64,11 @@ class _FirstFormularState extends State<FirstFormular> {
             const SizedBox(height: 10),
             _buildDateOfBirthTextField(),
             const SizedBox(height: 30),
-
             _buildTextFieldWithIcon(Icons.email, _emailController, 'E-Mail', isEmail: true),
             const SizedBox(height: 10),
             _buildTextFieldWithIcon(Icons.phone, _mobileNumberController, 'Mobile number'),
-
             const Spacer(),
-
             _buildNextButton(context),
-
             const SizedBox(height: 20),
           ],
         ),
@@ -129,41 +125,6 @@ class _FirstFormularState extends State<FirstFormular> {
     );
   }
 
-  void _validateEmail(String value, TextEditingController controller) {
-    // Überprüfe die E-Mail-Adresse mit einem regulären Ausdruck
-    if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$').hasMatch(value)) {
-      // Wenn die E-Mail-Adresse nicht gültig ist, zeige eine Fehlermeldung
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Invalid Email. Please enter a valid email address.'),
-        ),
-      );
-      // Optional: Setze den Controller-Wert zurück
-      controller.text = '';
-    }
-  }
-
-  void _formatText(String value, TextEditingController controller) {
-    // Wert wird in die entsprechenden Variable gespeichert
-    if (controller == _firstNameController || controller == _lastNameController) {
-      // Nur Buchstaben erlauben
-      String formattedValue = value.replaceAll(RegExp(r'[^a-zA-Z]'), '');
-      if (formattedValue != value) {
-        controller.text = formattedValue;
-      }
-    } else {
-      // Alle Zeichen erlauben außer Zahlen
-      if (value.contains(RegExp(r'[0-9]'))) {
-        String formattedValue = value.replaceAll(RegExp(r'[0-9]'), '');
-        if (formattedValue != value) {
-          controller.text = formattedValue;
-        }
-      } else {
-        controller.text = value;
-      }
-    }
-  }
-
   Widget _buildDateOfBirthTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -184,7 +145,6 @@ class _FirstFormularState extends State<FirstFormular> {
               child: TextField(
                 controller: _dobController,
                 onChanged: (value) {
-                  // Wert wird in die entsprechende Variable gespeichert
                   _dobController.text = _formatDateOfBirth(value);
                 },
                 keyboardType: TextInputType.number,
@@ -205,21 +165,46 @@ class _FirstFormularState extends State<FirstFormular> {
     );
   }
 
+  void _validateEmail(String value, TextEditingController controller) {
+    if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$').hasMatch(value)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Invalid Email. Please enter a valid email address.'),
+        ),
+      );
+      controller.text = '';
+    }
+  }
+
+  void _formatText(String value, TextEditingController controller) {
+    if (controller == _firstNameController || controller == _lastNameController) {
+      String formattedValue = value.replaceAll(RegExp(r'[^a-zA-Z]'), '');
+      if (formattedValue != value) {
+        controller.text = formattedValue;
+      }
+    } else {
+      if (value.contains(RegExp(r'[0-9]'))) {
+        String formattedValue = value.replaceAll(RegExp(r'[0-9]'), '');
+        if (formattedValue != value) {
+          controller.text = formattedValue;
+        }
+      } else {
+        controller.text = value;
+      }
+    }
+  }
+
   String _formatDateOfBirth(String input) {
-    // Nur Zahlen zulassen
     String formattedValue = input.replaceAll(RegExp(r'[^0-9]'), '');
 
-    // ich füge automatisch ein '/' nach der zweiten Ziffer ein
     if (formattedValue.length > 2) {
       formattedValue = formattedValue.substring(0, 2) + '/' + formattedValue.substring(2);
     }
 
-    // ich füge automatisch ein '/' nach der vierten Ziffer ein
     if (formattedValue.length > 5) {
       formattedValue = formattedValue.substring(0, 5) + '/' + formattedValue.substring(5);
     }
 
-    // Begrenze den Tag auf maximal 31 Tage
     if (formattedValue.length >= 2) {
       String day = formattedValue.substring(0, 2);
       if (int.parse(day) > 31) {
@@ -228,7 +213,6 @@ class _FirstFormularState extends State<FirstFormular> {
       formattedValue = day + formattedValue.substring(2);
     }
 
-    // Begrenze den Monat auf maximal 12
     if (formattedValue.length >= 5) {
       String month = formattedValue.substring(3, 5);
       if (int.parse(month) > 12) {
@@ -237,7 +221,6 @@ class _FirstFormularState extends State<FirstFormular> {
       formattedValue = formattedValue.substring(0, 3) + month + formattedValue.substring(5);
     }
 
-    // Begrenze das Jahr auf den gewünschten Bereich
     if (formattedValue.length >= 8) {
       String year = formattedValue.substring(6, 10);
       if (int.parse(year) < 1940) {

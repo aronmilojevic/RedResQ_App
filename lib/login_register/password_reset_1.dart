@@ -10,7 +10,7 @@ class ResetPasswordPage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start, // Ändere hier auf MainAxisAlignment.start
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const SizedBox(height: 35),
 
@@ -28,10 +28,9 @@ class ResetPasswordPage extends StatelessWidget {
             const SizedBox(height: 25),
 
             const Text(
-              //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              // -- Überetzen
               'Reset password',
-              style: TextStyle(color: Color(0xff464444),
+              style: TextStyle(
+                color: Color(0xff464444),
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),
@@ -40,34 +39,37 @@ class ResetPasswordPage extends StatelessWidget {
             SizedBox(height: 10),
 
             const Text(
-              //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-              // -- Überetzen
               'You will receive an email shortly',
-              style: TextStyle(color: Color(0xff464444),
+              style: TextStyle(
+                color: Color(0xff464444),
                 fontSize: 15,
               ),
             ),
 
             const SizedBox(height: 50),
 
-            // EMAIL ODER USERNAME ????????
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.0),
               child: Material(
                 elevation: 5,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15), bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)), // heraudfinden wie man es abrundet!!!
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
+                ),
                 color: Color(0xfff3f3f3),
                 child: TextField(
                   decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        //borderSide: BorderSide(color: Color(0xfff3f3f3)),
-                        borderSide: BorderSide(color: Color(0x00000000)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0x00000000)),
-                      ),
-
-                      hintText: 'E-Mail'
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0x00000000)),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Color(0x00000000)),
+                    ),
+                    hintText: 'E-Mail',
+                    // Hinzufügen des Email-Icons auf der linken Seite
+                    prefixIcon: Icon(Icons.email),
                   ),
                 ),
               ),
@@ -77,9 +79,13 @@ class ResetPasswordPage extends StatelessWidget {
 
             Material(
               elevation: 5,
-              borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15), bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)), // heraudfinden wie man es abrundet!!!
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(15),
+                topRight: Radius.circular(15),
+                bottomLeft: Radius.circular(15),
+                bottomRight: Radius.circular(15),
+              ),
               color: myRedColor,
-
               child: MaterialButton(
                 onPressed: () {
                   Navigator.push(
@@ -90,8 +96,6 @@ class ResetPasswordPage extends StatelessWidget {
                 minWidth: 350,
                 height: 60,
                 child: const Text(
-                  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                  // -- Überetzen
                   'Reset',
                   textAlign: TextAlign.center,
                   style: TextStyle(
