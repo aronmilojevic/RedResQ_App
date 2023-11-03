@@ -65,7 +65,7 @@ class _FirstFormularState extends State<FirstFormular> {
             _buildDateOfBirthTextField(),
             const SizedBox(height: 30),
 
-            _buildTextFieldWithIcon(Icons.email, _emailController, 'E-Mail'),
+            _buildTextFieldWithIcon(Icons.email, _emailController, 'E-Mail', isEmail: true),
             const SizedBox(height: 10),
             _buildTextFieldWithIcon(Icons.phone, _mobileNumberController, 'Mobile number'),
 
@@ -80,7 +80,7 @@ class _FirstFormularState extends State<FirstFormular> {
     );
   }
 
-  Widget _buildTextFieldWithIcon(IconData icon, TextEditingController controller, String hintText) {
+  Widget _buildTextFieldWithIcon(IconData icon, TextEditingController controller, String hintText, {bool isEmail = false, bool isDate = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30.0),
       child: Material(
@@ -99,26 +99,19 @@ class _FirstFormularState extends State<FirstFormular> {
             Expanded(
               child: TextField(
                 controller: controller,
-                onChanged: (value) {
-                  // Wert wird in die entsprechenden Variable gespeichert
-                  if (controller == _firstNameController || controller == _lastNameController) {
-                    // Nur Buchstaben erlauben
-                    String formattedValue = value.replaceAll(RegExp(r'[^a-zA-Z]'), '');
-                    if (formattedValue != value) {
-                      controller.text = formattedValue;
-                    }
-                  } else {
-                    // Alle Zeichen erlauben außer Zahlen
-                    if (value.contains(RegExp(r'[0-9]'))) {
-                      String formattedValue = value.replaceAll(RegExp(r'[0-9]'), '');
-                      if (formattedValue != value) {
-                        controller.text = formattedValue;
-                      }
-                    } else {
-                      controller.text = value;
-                    }
+                onEditingComplete: () {
+                  if (isEmail) {
+                    _validateEmail(controller.text, controller);
                   }
                 },
+                onChanged: (value) {
+                  if (isDate) {
+                    _dobController.text = _formatDateOfBirth(value);
+                  } else {
+                    _formatText(value, controller);
+                  }
+                },
+                keyboardType: isDate ? TextInputType.number : TextInputType.text,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Color(0x00000000)),
@@ -134,6 +127,41 @@ class _FirstFormularState extends State<FirstFormular> {
         ),
       ),
     );
+  }
+
+  void _validateEmail(String value, TextEditingController controller) {
+    // Überprüfe die E-Mail-Adresse mit einem regulären Ausdruck
+    if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$').hasMatch(value)) {
+      // Wenn die E-Mail-Adresse nicht gültig ist, zeige eine Fehlermeldung
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Invalid Email. Please enter a valid email address.'),
+        ),
+      );
+      // Optional: Setze den Controller-Wert zurück
+      controller.text = '';
+    }
+  }
+
+  void _formatText(String value, TextEditingController controller) {
+    // Wert wird in die entsprechenden Variable gespeichert
+    if (controller == _firstNameController || controller == _lastNameController) {
+      // Nur Buchstaben erlauben
+      String formattedValue = value.replaceAll(RegExp(r'[^a-zA-Z]'), '');
+      if (formattedValue != value) {
+        controller.text = formattedValue;
+      }
+    } else {
+      // Alle Zeichen erlauben außer Zahlen
+      if (value.contains(RegExp(r'[0-9]'))) {
+        String formattedValue = value.replaceAll(RegExp(r'[0-9]'), '');
+        if (formattedValue != value) {
+          controller.text = formattedValue;
+        }
+      } else {
+        controller.text = value;
+      }
+    }
   }
 
   Widget _buildDateOfBirthTextField() {

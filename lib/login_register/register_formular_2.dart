@@ -10,10 +10,41 @@ class SecondFormular extends StatefulWidget {
 }
 
 class _SecondFormularState extends State<SecondFormular> {
-  TextEditingController _landController = TextEditingController();
   TextEditingController _adresseController = TextEditingController();
   TextEditingController _stadtController = TextEditingController();
   TextEditingController _ortController = TextEditingController();
+
+  String _selectedCountry = 'Select Country';
+  List<String> _euCountries = [
+    'Select Country',
+    'Austria',
+    'Belgium',
+    'Bulgaria',
+    'Croatia',
+    'Cyprus',
+    'Czech Republic',
+    'Denmark',
+    'Estonia',
+    'Finland',
+    'France',
+    'Germany',
+    'Greece',
+    'Hungary',
+    'Ireland',
+    'Italy',
+    'Latvia',
+    'Lithuania',
+    'Luxembourg',
+    'Malta',
+    'Netherlands',
+    'Poland',
+    'Portugal',
+    'Romania',
+    'Slovakia',
+    'Slovenia',
+    'Spain',
+    'Sweden',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -57,23 +88,79 @@ class _SecondFormularState extends State<SecondFormular> {
               fit: BoxFit.contain,
             ),
             const SizedBox(height: 10),
-            _buildTextFieldWithIcon(Icons.place, _landController, 'Country'),
+            _buildDropdownMenu(),
             const SizedBox(height: 10),
             _buildTextFieldWithIcon(Icons.place, _adresseController, 'Address'),
             const SizedBox(height: 10),
-
             _buildCityAndOrtFields(),
-
             const Spacer(),
-
             _buildNextButton(context),
-
             const SizedBox(height: 20),
           ],
         ),
       ),
     );
   }
+
+  Widget _buildDropdownMenu() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      child: Material(
+        elevation: 5,
+        borderRadius: BorderRadius.circular(15),
+        color: const Color(0xfff3f3f3),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.place,
+                  color: Color(0xff464444),
+                ),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                child: InkWell(
+                  onTap: () {
+                    // Öffne dein Dropdown-Menü hier
+                    // Du kannst eine benutzerdefinierte Dropdown-Lösung verwenden oder eine andere Methode
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 7),
+                    child: DropdownButton<String>(
+                      value: _selectedCountry,
+                      onChanged: (String? value) {
+                        setState(() {
+                          _selectedCountry = value!;
+                        });
+                      },
+                      items: _euCountries.map((String country) {
+                        return DropdownMenuItem<String>(
+                          value: country,
+                          child: Text(
+                            country,
+                            style: TextStyle(color: Color(0xff70706c)),
+                          ),
+                        );
+                      }).toList(),
+                      icon: Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Icon(Icons.arrow_drop_down),
+                      ),
+                      underline: Container(),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
 
   Widget _buildTextFieldWithIcon(IconData icon, TextEditingController controller, String hintText) {
     return Padding(
@@ -95,7 +182,7 @@ class _SecondFormularState extends State<SecondFormular> {
               child: TextField(
                 controller: controller,
                 onChanged: (value) {
-                  _landController.text = value;
+                  controller.text = value;
                 },
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
