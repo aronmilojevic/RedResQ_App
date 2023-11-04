@@ -147,7 +147,6 @@ class _SecondFormularState extends State<SecondFormular> {
                       }).toList(),
                       icon: Padding(
                         padding: const EdgeInsets.only(right: 8.0),
-
                         child: Icon(Icons.arrow_drop_down),
                       ),
                       underline: Container(),
@@ -161,7 +160,6 @@ class _SecondFormularState extends State<SecondFormular> {
       ),
     );
   }
-
 
   Widget _buildTextFieldWithIcon(IconData icon, TextEditingController controller, String hintText) {
     return Padding(
@@ -290,10 +288,18 @@ class _SecondFormularState extends State<SecondFormular> {
       color: myRedColor,
       child: MaterialButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ThirdFormular()),
-          );
+          if (_areAllFieldsFilled()) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ThirdFormular()),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Please fill out all fields.'),
+              ),
+            );
+          }
         },
         minWidth: 350,
         height: 60,
@@ -308,5 +314,12 @@ class _SecondFormularState extends State<SecondFormular> {
         ),
       ),
     );
+  }
+
+  bool _areAllFieldsFilled() {
+    return _adresseController.text.isNotEmpty &&
+        _stadtController.text.isNotEmpty &&
+        _ortController.text.isNotEmpty &&
+        _selectedCountry != 'Select Country';
   }
 }

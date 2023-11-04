@@ -3,7 +3,10 @@ import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/login_register/password_reset_2.dart';
 
 class ResetPasswordPage extends StatelessWidget {
-  const ResetPasswordPage({super.key});
+  final TextEditingController emailController = TextEditingController();
+  late String userEmail;
+
+  ResetPasswordPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +15,7 @@ class ResetPasswordPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 35),
+            SizedBox(height: 35),
 
             Align(
               alignment: Alignment.topLeft,
@@ -25,9 +28,9 @@ class ResetPasswordPage extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 25),
+            SizedBox(height: 25),
 
-            const Text(
+            Text(
               'Reset password',
               style: TextStyle(
                 color: Color(0xff464444),
@@ -38,7 +41,7 @@ class ResetPasswordPage extends StatelessWidget {
 
             SizedBox(height: 10),
 
-            const Text(
+            Text(
               'You will receive an email shortly',
               style: TextStyle(
                 color: Color(0xff464444),
@@ -46,20 +49,19 @@ class ResetPasswordPage extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 50),
+            SizedBox(height: 50),
 
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.0),
               child: Material(
                 elevation: 5,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
-                  bottomLeft: Radius.circular(15),
-                  bottomRight: Radius.circular(15),
-                ),
+                borderRadius: BorderRadius.circular(15),
                 color: Color(0xfff3f3f3),
                 child: TextField(
+                  controller: emailController,
+                  onChanged: (value) {
+                    userEmail = value; // Speichern der E-Mail-Adresse
+                  },
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Color(0x00000000)),
@@ -68,26 +70,21 @@ class ResetPasswordPage extends StatelessWidget {
                       borderSide: BorderSide(color: Color(0x00000000)),
                     ),
                     hintText: 'E-Mail',
-                    // Hinzufügen des Email-Icons auf der linken Seite
-                    prefixIcon: Icon(Icons.email),
+                    prefixIcon: Icon(Icons.email, color: Color(0xff464444)),
+                    fillColor: Color(0xfff3f3f3),
                   ),
                 ),
               ),
             ),
 
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
 
             Material(
               elevation: 5,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(15),
-                topRight: Radius.circular(15),
-                bottomLeft: Radius.circular(15),
-                bottomRight: Radius.circular(15),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(15)),
               color: myRedColor,
               child: MaterialButton(
-                onPressed: () {
+                  onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SecondReset()),
@@ -95,7 +92,7 @@ class ResetPasswordPage extends StatelessWidget {
                 },
                 minWidth: 350,
                 height: 60,
-                child: const Text(
+                child: Text(
                   'Reset',
                   textAlign: TextAlign.center,
                   style: TextStyle(
