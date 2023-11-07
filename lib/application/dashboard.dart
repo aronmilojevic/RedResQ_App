@@ -10,10 +10,9 @@ class Dashboard extends StatelessWidget {
   final _name = 'Theo';
   _launchURL() async {
     Uri url = Uri.parse('https://www.roteskreuz.at/news');
-    if (await launchUrl(url)) {
-      await launchUrl(url);
-    } else {
+    if (!await launchUrl(url)) {
       throw 'Could not launch $url';
+
     }
   }
 

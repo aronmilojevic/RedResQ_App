@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/application/dashboard.dart';
+import 'package:redresq_app/application/news.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
@@ -24,10 +25,7 @@ class _NavigationExampleState extends State<NavigationExample> {
         body: Container(
       color: Colors.blueGrey,
     )),
-    Scaffold(
-        body: Container(
-      color: Colors.green,
-    )),
+    News(),
     const Dashboard(),
     Scaffold(
         body: Container(
