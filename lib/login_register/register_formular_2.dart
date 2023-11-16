@@ -3,7 +3,18 @@ import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/login_register/register_formular_3.dart';
 
 class SecondFormular extends StatefulWidget {
-  const SecondFormular({Key? key}) : super(key: key);
+  final String firstName;
+  final String lastName;
+  final String email;
+  final String bday;
+
+  const SecondFormular({
+    Key? key,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.bday,
+  }) : super(key: key);
 
   @override
   _SecondFormularState createState() => _SecondFormularState();
@@ -291,7 +302,20 @@ class _SecondFormularState extends State<SecondFormular> {
           if (_areAllFieldsFilled()) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ThirdFormular()),
+              MaterialPageRoute(
+                builder: (context) => ThirdFormular(
+                  firstName: widget.firstName,
+                  lastName: widget.lastName,
+                  email: widget.email,
+                  bday: widget.bday,
+                  /*
+                  address: _adresseController.text,
+                  city: _stadtController.text,
+                  place: _ortController.text,
+                  country: _selectedCountry,
+                   */
+                ),
+              ),
             );
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
