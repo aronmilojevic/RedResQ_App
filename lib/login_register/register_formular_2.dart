@@ -135,8 +135,6 @@ class _SecondFormularState extends State<SecondFormular> {
               Expanded(
                 child: InkWell(
                   onTap: () {
-                    // Öffne dein Dropdown-Menü hier
-                    // Du kannst eine benutzerdefinierte Dropdown-Lösung verwenden oder eine andere Methode
                   },
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 7),

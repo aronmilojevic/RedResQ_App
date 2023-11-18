@@ -10,11 +10,11 @@ class GetStartedPage extends StatelessWidget {
     return Scaffold(
       body: Container(
         constraints: const BoxConstraints
-            .expand(), // Damit der Container die gesamte verfügbare Größe einnimmt
+            .expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('lib/assets/start/background_get_started.png'),
-            fit: BoxFit.fill, // Anpassung des BoxFit-Werts
+            fit: BoxFit.fill,
           ),
         ),
         child: Align(

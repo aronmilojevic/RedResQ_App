@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:redresq_app/application/navbar.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/login_register/terms_and_conditions.dart';
 import 'package:redresq_app/login_register/user.dart';
@@ -378,8 +377,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
               });
             } else {
               User newUser = User(
-                id: 0, // ich suche von der api die anzahl der derzeitigen user und erhöhe die zahl um eins
-                // es soll eine fortlaufende Zahl sein
+                id: 0,
                 username: _usernameController.text,
                 password: _passwordController.text,
                 firstName: _firstNameController.text,
@@ -436,11 +434,6 @@ class _ThirdFormularState extends State<ThirdFormular> {
     return '';
   }
 }
-
-
-// Beim anklicken des Buttons Finish wird die Funktion createUserInAPI aufgerufen
-// diese erstellt in der API einen neuen Usereintrag
-
 
 Future<void> createUserInAPI(BuildContext context, User user) async {
   // Korrekten URL auswählen

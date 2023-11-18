@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-// Single Child Scroll einbauen
-
-
 class TermsAndConditions extends StatelessWidget {
   const TermsAndConditions({Key? key}) : super(key: key);
 
