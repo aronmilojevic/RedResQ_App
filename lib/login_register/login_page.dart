@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/application/dashboard.dart';
 import 'package:redresq_app/components/my_colors.dart';
+import 'package:http/http.dart' as http;
 import 'package:redresq_app/login_register/password_reset_1.dart';
 import 'package:redresq_app/login_register/register_formular_1.dart';
 
@@ -162,9 +163,17 @@ class _LoginPageState extends State<LoginPage> {
               borderRadius: const BorderRadius.all(Radius.circular(15)),
               color: myRedColor,
               child: MaterialButton(
-                onPressed: () {
-                  if (_usernameController.text == "admin" &&
-                      _passwordController.text == "12345") {
+                onPressed: () async {
+                  bool isAuthenticated = await authenticateUser(
+                    _usernameController.text,
+                    _passwordController.text,
+                  );
+                  if (isAuthenticated) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Erfolgreiche Anmeldung.'),
+                      ),
+                    );
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => Dashboard()),
@@ -229,5 +238,18 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+}
+
+Future<bool> authenticateUser(String username, String password) async {
+  final response = await http.get(
+    // https://api.redresq.at/session/login?id=11&secret=11
+    Uri.parse('https://api.redresq.at/session/login?id=$username&secret=$password'),
+  );
+
+  if (response.statusCode == 200) {
+    return true;
+  } else {
+    return false;
   }
 }

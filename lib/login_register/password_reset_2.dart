@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/login_register/password_reset_code_input.dart';
-import 'package:redresq_app/login_register/start_page.dart';
 
 class SecondReset extends StatelessWidget {
   const SecondReset({super.key});
