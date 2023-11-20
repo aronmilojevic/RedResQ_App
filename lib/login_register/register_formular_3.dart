@@ -41,6 +41,10 @@ class _ThirdFormularState extends State<ThirdFormular> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _dobController = TextEditingController();
 
+  // Diese werte sollen aus dem Konstruktor kommen!!!!!!!
+  Language userLanguage = Language(id: 1, name: "German");
+  Location userLocation = Location(id: 1, country: "Germany", city: "Berlin", postalCode: "12345");
+
   String _passwordErrorText = '';
 
   static const double _screenPadding = 30.0;
@@ -384,6 +388,10 @@ class _ThirdFormularState extends State<ThirdFormular> {
                 lastName: _lastNameController.text,
                 email: _emailController.text,
                 bday: _dobController.text,
+                // diese daten muss ich aus dem 2 Formular noch erhalten
+                sex: 'male',
+                language: userLanguage,
+                location: userLocation,
               );
               createUserInAPI(context, newUser);
             }
@@ -436,8 +444,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
 }
 
 Future<void> createUserInAPI(BuildContext context, User user) async {
-  // Korrekten URL auswählen
-  final apiUrl = 'https://api.redresq.at/swagger/index.html';
+  final apiUrl = 'https://api.redresq.at/session/register';
 
   try {
     final response = await http.post(
@@ -449,28 +456,40 @@ Future<void> createUserInAPI(BuildContext context, User user) async {
         'password': user.password,
         'email': user.email,
         'birthdate': user.bday,
+        'sex': user.sex,
+        'language': {
+          'id': user.languageId,
+          'name': user.languageName,
+        },
+        'location': {
+          'id': user.locationId,
+          'country': user.country,
+          'city': user.city,
+          'postalCode': user.postalCode,
+        },
       }),
     );
 
     if (response.statusCode == 201) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('User successfully created'),
+          content: Text('Benutzer erfolgreich erstellt'),
         ),
       );
       print('Benutzer erfolgreich erstellt');
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Error creating user: ${response.statusCode}'),
+          content: Text('Fehler bei der Benutzererstellung: ${response.statusCode}'),
         ),
       );
       print('Fehler bei der Benutzererstellung: ${response.statusCode}');
+      print('API-Antwort: ${response.body}');
     }
   } catch (error) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Network error: $error'),
+        content: Text('Netzwerkfehler: $error'),
       ),
     );
     print('Netzwerkfehler: $error');
