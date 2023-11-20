@@ -1,13 +1,35 @@
+class Language {
+  final int id;
+  final String name;
+
+  Language({required this.id, required this.name});
+}
+
+class Location {
+  final int id;
+  final String country;
+  final String city;
+  final String postalCode;
+
+  Location({
+    required this.id,
+    required this.country,
+    required this.city,
+    required this.postalCode,
+  });
+}
+
 class User {
   final int id;
   final String username;
-  // Passwort muss noch in die API implementiert werden
   final String password;
   final String firstName;
   final String lastName;
   final String email;
   final String bday;
-  // Es kommen noch weiter Userdaten hinzu!
+  final String sex;
+  final Language language;
+  final Location location;
 
   User({
     required this.id,
@@ -17,22 +39,18 @@ class User {
     required this.lastName,
     required this.email,
     required this.bday,
+    required this.sex,
+    required this.language,
+    required this.location,
   });
+
+  int get languageId => language.id;
+  String get languageName => language.name;
+  int get locationId => location.id;
+  String get country => location.country;
+  String get city => location.city;
+  String get postalCode => location.postalCode;
 }
-
-
-/*
-class User {
-  final String username;
-  final String password;
-  // Es kommen noch weiter Userdaten hinzu!
-
-  User({
-    required this.username,
-    required this.password,
-  });
-}
-*/
 
 
 // So sieht die API zuzeit aus:
