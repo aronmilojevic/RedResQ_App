@@ -7,10 +7,6 @@ class StartUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        home: Scaffold(
-      body: Dashboard(),
-      bottomNavigationBar: NavBar(),
-    ));
+    return const MaterialApp(home: NavBar());
   }
 }

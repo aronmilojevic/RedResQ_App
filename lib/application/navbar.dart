@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/application/dashboard.dart';
 import 'package:redresq_app/application/news.dart';
+import 'package:redresq_app/application/newsroom.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
@@ -13,33 +14,49 @@ class NavBar extends StatelessWidget {
 
 class NavigationExample extends StatefulWidget {
   const NavigationExample({super.key});
-
   @override
   State<NavigationExample> createState() => _NavigationExampleState();
 }
 
 class _NavigationExampleState extends State<NavigationExample> {
-  int currentPageIndex = 2;
-  static final List<Widget> _widgetOptions = <Widget>[
-    Scaffold(
-        body: Container(
-      color: Colors.blueGrey,
-    )),
-    News(),
-    const Dashboard(),
-    Scaffold(
-        body: Container(
-      color: Colors.amber,
-    )),
-    Scaffold(
-        body: Container(
-      color: Colors.blueAccent,
-    )),
-  ];
+  static int currentPageIndex = 2;
+
+  final PageController _pageController = PageController(initialPage: 2);
+
+  void setCurrentPageIndex(int index) {
+    setState(() {
+      currentPageIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _widgetOptions.elementAt(currentPageIndex),
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: (index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
+          children: [
+            Scaffold(
+                body: Container(
+              color: Colors.blueGrey,
+            )),
+            const Newsroom(),
+            const Dashboard(),
+            Scaffold(
+                body: Container(
+              color: Colors.amber,
+            )),
+            Scaffold(
+              body: Container(
+                color: Colors.blueAccent,
+              ),
+            ),
+          ],
+        ),
         bottomNavigationBar: Container(
             padding: const EdgeInsets.only(
               left: 10,
@@ -59,10 +76,13 @@ class _NavigationExampleState extends State<NavigationExample> {
                   showSelectedLabels: false,
                   showUnselectedLabels: false,
                   onTap: (int index) {
-                    setState(() {
-                      currentPageIndex = index;
-                    });
+                    _pageController.animateToPage(
+                      index,
+                      duration: const Duration(milliseconds: 1),
+                      curve: Curves.easeInOut,
+                    );
                   },
+                  currentIndex: currentPageIndex,
                   items: const [
                     BottomNavigationBarItem(
                       icon: Icon(

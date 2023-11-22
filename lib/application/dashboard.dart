@@ -12,7 +12,6 @@ class Dashboard extends StatelessWidget {
     Uri url = Uri.parse('https://www.roteskreuz.at/news');
     if (!await launchUrl(url)) {
       throw 'Could not launch $url';
-
     }
   }
 
@@ -23,26 +22,23 @@ class Dashboard extends StatelessWidget {
         children: [
           AspectRatio(
             aspectRatio: 2.75,
-            child: Container(
-              alignment: Alignment.center,
-              height: 100,
-              margin: const EdgeInsets.only(
-                top: 50,
-                left: 20,
-                right: 20,
+            child: Card(
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
               ),
-              decoration: const BoxDecoration(
-                color: Color(0xf3f3f3f1),
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              child: Text(
-                'Good Day $_name!',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 27.5,
-                    fontStyle: FontStyle.normal),
+              elevation: 5,
+              child: Container(
+                alignment: Alignment.center,
+                child: Text(
+                  'Good Day $_name!',
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 27.5,
+                      fontStyle: FontStyle.normal),
+                ),
               ),
             ),
           ),
@@ -64,7 +60,7 @@ class Dashboard extends StatelessWidget {
                           width: 150,
                           margin: const EdgeInsets.only(
                             top: 20,
-                            left: 10,
+                            left: 20,
                           ),
                           decoration: const BoxDecoration(
                             color: Color(0xf3f3f3f1),
