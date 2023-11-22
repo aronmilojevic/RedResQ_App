@@ -46,6 +46,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
   late DateTime birthday;
   Language userLanguage = Language(id: 1, name: "German");
   Location userLocation = Location(id: 1, country: "Germany", city: "Berlin", postalCode: "12345");
+  Role userRole = Role(id: 0);
 
   String _passwordErrorText = '';
 
@@ -395,9 +396,11 @@ class _ThirdFormularState extends State<ThirdFormular> {
                 email: _emailController.text,
                 bday: birthday,
                 // diese daten muss ich aus dem 2 Formular noch erhalten
-                sex: 'male',
+                sex: 0,
                 language: userLanguage,
                 location: userLocation,
+                setting: {},
+                role: userRole,
               );
               createUserInAPI(context, newUser);
             }
@@ -459,10 +462,12 @@ Future<void> createUserInAPI(BuildContext context, User user) async {
       body: jsonEncode({
         'id': user.id,
         'username': user.username,
-        'password': user.password,
+        'hash': user.password,
+        'firstName': user.firstName,
+        'lastName': user.lastName,
         'email': user.email,
         //
-        'birthdate': DateFormat('dd/MM/yyyy').format(user.bday),
+        'birthdate': user.bday.toIso8601String(),
         'sex': user.sex,
         'language': {
           'id': user.languageId,
@@ -473,6 +478,10 @@ Future<void> createUserInAPI(BuildContext context, User user) async {
           'country': user.country,
           'city': user.city,
           'postalCode': user.postalCode,
+        },
+        'settings': { },
+        'role': {
+          'id': user.role.id,
         },
       }),
     );

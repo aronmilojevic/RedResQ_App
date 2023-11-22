@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/login_register/register_formular_3.dart';
+import 'package:intl/intl.dart';
+
 
 class SecondFormular extends StatefulWidget {
   final String firstName;
@@ -305,7 +307,7 @@ class _SecondFormularState extends State<SecondFormular> {
                   firstName: widget.firstName,
                   lastName: widget.lastName,
                   email: widget.email,
-                  bday: DateTime.parse(widget.bday),
+                  bday: DateFormat('dd/MM/yyyy').parse(widget.bday),
                   /*
                   address: _adresseController.text,
                   city: _stadtController.text,

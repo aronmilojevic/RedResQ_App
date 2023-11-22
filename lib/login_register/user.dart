@@ -5,6 +5,14 @@ class Language {
   Language({required this.id, required this.name});
 }
 
+class Role {
+  final int id;
+  final String name = 'user';
+
+  Role({required this.id,});
+}
+
+
 class Location {
   final int id;
   final String country;
@@ -27,9 +35,12 @@ class User {
   final String lastName;
   final String email;
   final DateTime bday;
-  final String sex;
+  final int sex;
   final Language language;
   final Location location;
+  // Leeres Objekt
+  final Map<String, dynamic> setting;
+  final Role role;
 
   User({
     required this.id,
@@ -42,6 +53,8 @@ class User {
     required this.sex,
     required this.language,
     required this.location,
+    required this.setting,
+    required this.role,
   });
 
   int get languageId => language.id;
