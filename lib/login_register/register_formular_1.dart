@@ -244,7 +244,12 @@ class _FirstFormularState extends State<FirstFormular> {
           if (_areAllFieldsFilled() && _validateRegex()) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SecondFormular()),
+              MaterialPageRoute(builder: (context) => SecondFormular(
+                firstName: _firstNameController.text,
+                lastName: _lastNameController.text,
+                email: _emailController.text,
+                bday: _dobController.text,
+              )),
             );
           } else {
             ScaffoldMessenger.of(context).showSnackBar(

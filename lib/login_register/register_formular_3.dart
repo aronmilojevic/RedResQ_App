@@ -1,13 +1,32 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:redresq_app/application/navbar.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/login_register/terms_and_conditions.dart';
+import 'package:redresq_app/login_register/user.dart';
 
 class ThirdFormular extends StatefulWidget {
-  const ThirdFormular({Key? key}) : super(key: key);
+  final String firstName;
+  final String lastName;
+  final String email;
+  final DateTime bday;
+
+  const ThirdFormular({
+    Key? key,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.bday,
+  }) : super(key: key);
 
   @override
-  _ThirdFormularState createState() => _ThirdFormularState();
+  _ThirdFormularState createState() => _ThirdFormularState(
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    bday: bday,
+  );
 }
 
 class _ThirdFormularState extends State<ThirdFormular> {
@@ -18,10 +37,18 @@ class _ThirdFormularState extends State<ThirdFormular> {
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
+  TextEditingController _firstNameController = TextEditingController();
+  TextEditingController _lastNameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _dobController = TextEditingController();
+
+  // Diese werte sollen aus dem Konstruktor kommen!!!!!!!
+  late DateTime birthday;
+  Language userLanguage = Language(id: 1, name: "German");
+  Location userLocation = Location(id: 1, country: "Germany", city: "Berlin", postalCode: "12345");
 
   String _passwordErrorText = '';
 
-  // Konstanten
   static const double _screenPadding = 30.0;
   static const TextStyle _headerTextStyle = TextStyle(
     color: Color(0xff464444),
@@ -32,6 +59,22 @@ class _ThirdFormularState extends State<ThirdFormular> {
     color: Color(0xff464444),
     fontSize: 15,
   );
+
+  _ThirdFormularState({
+    required String firstName,
+    required String lastName,
+    required String email,
+    required DateTime bday,
+  }) {
+    _firstNameController.text = firstName;
+    _lastNameController.text = lastName;
+    _emailController.text = email;
+
+    String formattedDate = DateFormat('dd/MM/yyyy').format(bday);
+    _dobController.text = formattedDate;
+
+    birthday = DateFormat('dd/MM/yyyy').parse(formattedDate);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +120,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
             Text(
               _passwordErrorText,
               style: TextStyle(
-                color: Colors.red,
+                color: myRedColor,
                 fontSize: 16,
               ),
             ),
@@ -343,10 +386,20 @@ class _ThirdFormularState extends State<ThirdFormular> {
                 _passwordErrorText = 'Passwords do not match';
               });
             } else {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => NavBar()),
+              User newUser = User(
+                id: 0,
+                username: _usernameController.text,
+                password: _passwordController.text,
+                firstName: _firstNameController.text,
+                lastName: _lastNameController.text,
+                email: _emailController.text,
+                bday: birthday,
+                // diese daten muss ich aus dem 2 Formular noch erhalten
+                sex: 'male',
+                language: userLanguage,
+                location: userLocation,
               );
+              createUserInAPI(context, newUser);
             }
           }
         },
@@ -366,7 +419,6 @@ class _ThirdFormularState extends State<ThirdFormular> {
   }
 
   String _validateUsername(String username) {
-    // Der Benutzername muss mindestens 6 Zeichen lang sein und darf keine Sonderzeichen oder Leerzeichen enthalten
     if (username.length < 6) {
       return 'Username must be at least 6 characters long';
     }
@@ -377,30 +429,76 @@ class _ThirdFormularState extends State<ThirdFormular> {
   }
 
   String _validatePassword(String password) {
-    // Der Text sollte vielleicht allgemeiner formuliert werden und nicht für jeden einzelnen Fall:
-    // Das Passwort muss mindestens 8 Zeichen lang sein, mindestens einen Groß- oder Kleinbuchstaben enthalten und darf keine Sonderzeichen oder Leerzeichen enthalten
-
-    // Länge
     if (password.length < 8) {
       return 'Password must be at least 8 characters long';
     }
-    // Zahlen
     if (!password.contains(RegExp(r'[0-9]'))) {
       return 'Password must contain at least one number';
     }
-    // Großbuchstaben
     if (!password.contains(RegExp(r'[A-Z]'))) {
       return 'Password must contain at least one uppercase letter';
     }
-    // Kleinbuchstaben
     if (!password.contains(RegExp(r'[a-z]'))) {
       return 'Password must contain at least one lowercase letter';
     }
-    // Keine Sonderzeichen oder Leerzeichen
     if (password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<> ]'))) {
       return 'Password cannot contain special characters or spaces';
     }
 
     return '';
+  }
+}
+
+Future<void> createUserInAPI(BuildContext context, User user) async {
+  final apiUrl = 'https://api.redresq.at/session/register';
+
+  try {
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'id': user.id,
+        'username': user.username,
+        'password': user.password,
+        'email': user.email,
+        //
+        'birthdate': DateFormat('dd/MM/yyyy').format(user.bday),
+        'sex': user.sex,
+        'language': {
+          'id': user.languageId,
+          'name': user.languageName,
+        },
+        'location': {
+          'id': user.locationId,
+          'country': user.country,
+          'city': user.city,
+          'postalCode': user.postalCode,
+        },
+      }),
+    );
+
+    if (response.statusCode == 201) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Benutzer erfolgreich erstellt'),
+        ),
+      );
+      print('Benutzer erfolgreich erstellt');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Fehler bei der Benutzererstellung: ${response.statusCode}'),
+        ),
+      );
+      print('Fehler bei der Benutzererstellung: ${response.statusCode}');
+      print('API-Antwort: ${response.body}');
+    }
+  } catch (error) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Netzwerkfehler: $error'),
+      ),
+    );
+    print('Netzwerkfehler: $error');
   }
 }

@@ -9,10 +9,8 @@ import 'dart:io';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Verbindung
   var connectivityResult = await (Connectivity().checkConnectivity());
 
-  // Betriebssystem
   if (Platform.isAndroid) {
     platformName = 'Android';
   } else if (Platform.isIOS) {
@@ -27,8 +25,6 @@ void main() async {
       ),
     );
   } else {
-    // Keine Internetverbindung
-    // Benachrichtigung über das Handy, dass keine Internetverbindung besteht
     NotificationHelperAndroid().showNoInternetNotification();
     /*if(platformName == 'Android'){
         NotificationHelperAndroid().showNoInternetNotification();

@@ -60,7 +60,7 @@ class ResetPasswordPage extends StatelessWidget {
                 child: TextField(
                   controller: emailController,
                   onChanged: (value) {
-                    userEmail = value; // Speichern der E-Mail-Adresse
+                    userEmail = value;
                   },
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
