@@ -305,7 +305,7 @@ class _SecondFormularState extends State<SecondFormular> {
                   firstName: widget.firstName,
                   lastName: widget.lastName,
                   email: widget.email,
-                  bday: widget.bday,
+                  bday: DateTime.parse(widget.bday),
                   /*
                   address: _adresseController.text,
                   city: _stadtController.text,

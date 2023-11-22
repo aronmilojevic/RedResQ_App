@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/login_register/terms_and_conditions.dart';
@@ -9,7 +10,7 @@ class ThirdFormular extends StatefulWidget {
   final String firstName;
   final String lastName;
   final String email;
-  final String bday;
+  final DateTime bday;
 
   const ThirdFormular({
     Key? key,
@@ -42,6 +43,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
   TextEditingController _dobController = TextEditingController();
 
   // Diese werte sollen aus dem Konstruktor kommen!!!!!!!
+  late DateTime birthday;
   Language userLanguage = Language(id: 1, name: "German");
   Location userLocation = Location(id: 1, country: "Germany", city: "Berlin", postalCode: "12345");
 
@@ -62,12 +64,16 @@ class _ThirdFormularState extends State<ThirdFormular> {
     required String firstName,
     required String lastName,
     required String email,
-    required String bday,
+    required DateTime bday,
   }) {
     _firstNameController.text = firstName;
     _lastNameController.text = lastName;
     _emailController.text = email;
-    _dobController.text = bday;
+
+    String formattedDate = DateFormat('dd/MM/yyyy').format(bday);
+    _dobController.text = formattedDate;
+
+    birthday = DateFormat('dd/MM/yyyy').parse(formattedDate);
   }
 
   @override
@@ -387,7 +393,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
                 firstName: _firstNameController.text,
                 lastName: _lastNameController.text,
                 email: _emailController.text,
-                bday: _dobController.text,
+                bday: birthday,
                 // diese daten muss ich aus dem 2 Formular noch erhalten
                 sex: 'male',
                 language: userLanguage,
@@ -455,7 +461,8 @@ Future<void> createUserInAPI(BuildContext context, User user) async {
         'username': user.username,
         'password': user.password,
         'email': user.email,
-        'birthdate': user.bday,
+        //
+        'birthdate': DateFormat('dd/MM/yyyy').format(user.bday),
         'sex': user.sex,
         'language': {
           'id': user.languageId,
