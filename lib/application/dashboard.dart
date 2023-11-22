@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redresq_app/components/my_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
@@ -28,6 +29,7 @@ class Dashboard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               elevation: 5,
+              color: myGreyColor,
               child: Container(
                 alignment: Alignment.center,
                 child: Text(
@@ -63,7 +65,7 @@ class Dashboard extends StatelessWidget {
                             left: 20,
                           ),
                           decoration: const BoxDecoration(
-                            color: Color(0xf3f3f3f1),
+                            color: myGreyColor,
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
                           child: Column(
@@ -159,7 +161,7 @@ class Dashboard extends StatelessWidget {
                             right: 10,
                           ),
                           decoration: const BoxDecoration(
-                            color: Color(0xf3f3f3f1),
+                            color: myGreyColor,
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
                           child: Padding(
@@ -197,7 +199,7 @@ class Dashboard extends StatelessWidget {
                             right: 10,
                           ),
                           decoration: const BoxDecoration(
-                            color: Color(0xf3f3f3f1),
+                            color: myGreyColor,
                             borderRadius: BorderRadius.all(Radius.circular(20)),
                           ),
                           child: Padding(

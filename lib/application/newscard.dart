@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/application/news.dart';
+import 'package:redresq_app/components/my_colors.dart';
 
 class NewsCard extends StatelessWidget {
   final String title;
+  final String content;
 
-  const NewsCard({required this.title, Key? key}) : super(key: key);
+  const NewsCard({required this.title, required this.content, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,10 @@ class NewsCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => News(title: title),
+            builder: (context) => News(
+              title: title,
+              content: content,
+            ),
           ),
         );
       },
@@ -25,6 +31,7 @@ class NewsCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           elevation: 5,
+          color: myGreyColor,
           child: Container(
             alignment: Alignment.center,
             child: Text(

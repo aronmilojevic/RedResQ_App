@@ -8,19 +8,64 @@ class Newsroom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: 30,),
-            NewsCard(title: 'Newsroom'),
-            NewsCard(title: 'Floods in Venice'),
-            NewsCard(title: 'Wildfires in Naples'),
-            NewsCard(title: 'Storms in Vienna'),
-            NewsCard(title: 'Tsunamis Tokyo'),
-            NewsCard(title: 'China-wide Hurricane!'),
-          ],
-        ),
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: AspectRatio(
+              aspectRatio: 2.75,
+              child: Card(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                elevation: 5,
+                color: myGreyColor,
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Newsroom',
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 23,
+                      fontStyle: FontStyle.normal,
+                      color: Color(0xff464444),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                NewsCard(
+                  title: 'Floods in Venice',
+                  content: 'this is a news',
+                ),
+                NewsCard(
+                  title: 'Wildfires in Naples',
+                  content: 'this is a news',
+                ),
+                NewsCard(
+                  title: 'Storms in Vienna',
+                  content: 'this is a news',
+                ),
+                NewsCard(
+                  title: 'Tsunamis Tokyo',
+                  content: 'this is a news',
+                ),
+                NewsCard(
+                  title: 'China-wide Hurricane!',
+                  content: 'this is a news',
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
