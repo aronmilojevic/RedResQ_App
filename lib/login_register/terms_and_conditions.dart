@@ -18,7 +18,7 @@ class TermsAndConditions extends StatelessWidget {
             Align(
               alignment: Alignment.topLeft,
               child: IconButton(
-                icon: Icon(Icons.arrow_back),
+                icon: Icon(Icons.transit_enterexit),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -34,6 +34,8 @@ class TermsAndConditions extends StatelessWidget {
               ),
             ),
 
+
+            // Datenschutzbeauftragter Todor muss mir noch den Text übergeben
           ],
         ),
       ),
