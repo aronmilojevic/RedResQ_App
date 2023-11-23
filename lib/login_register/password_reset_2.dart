@@ -1,3 +1,4 @@
+// ist nicht mehr in verwendung
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/login_register/password_reset_code_input.dart';
@@ -41,6 +42,7 @@ class SecondReset extends StatelessWidget {
 
             const Spacer(),
 
+            /*
             Material(
               elevation: 5,
               borderRadius: const BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15), bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
@@ -66,6 +68,7 @@ class SecondReset extends StatelessWidget {
                 ),
               ),
             ),
+            */
 
             const SizedBox(height: 20),
           ],

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
-import 'package:redresq_app/login_register/password_reset_2.dart';
+import 'package:redresq_app/login_register/password_reset_code_input.dart';
 
-class ResetPasswordPage extends StatelessWidget {
+class ResetPasswordPage extends StatefulWidget {
+  const ResetPasswordPage({Key? key}) : super(key: key);
+
+  @override
+  _ResetPasswordPageState createState() => _ResetPasswordPageState();
+}
+
+class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final TextEditingController emailController = TextEditingController();
-  late String userEmail;
-
-  ResetPasswordPage({Key? key}) : super(key: key);
+  String userEmail = "";
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +21,6 @@ class ResetPasswordPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(height: 35),
-
             Align(
               alignment: Alignment.topLeft,
               child: IconButton(
@@ -27,9 +31,13 @@ class ResetPasswordPage extends StatelessWidget {
                 color: Color(0xff464444),
               ),
             ),
-
-            SizedBox(height: 25),
-
+            const Image(
+              image: AssetImage('lib/assets/reset/forget_password.png'),
+              width: 550,
+              height: 200,
+              fit: BoxFit.contain,
+            ),
+            SizedBox(height: 30),
             Text(
               'Reset password',
               style: TextStyle(
@@ -38,19 +46,15 @@ class ResetPasswordPage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-
             SizedBox(height: 10),
-
             Text(
-              'You will receive an email shortly',
+              'Don’t worry! It happens. Please enter the \n address associated with your account.',
               style: TextStyle(
                 color: Color(0xff464444),
                 fontSize: 15,
               ),
             ),
-
             SizedBox(height: 50),
-
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.0),
               child: Material(
@@ -60,7 +64,9 @@ class ResetPasswordPage extends StatelessWidget {
                 child: TextField(
                   controller: emailController,
                   onChanged: (value) {
-                    userEmail = value;
+                    setState(() {
+                      userEmail = value;
+                    });
                   },
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
@@ -76,18 +82,18 @@ class ResetPasswordPage extends StatelessWidget {
                 ),
               ),
             ),
-
             SizedBox(height: 20),
-
             Material(
               elevation: 5,
               borderRadius: BorderRadius.all(Radius.circular(15)),
               color: myRedColor,
               child: MaterialButton(
-                  onPressed: () {
+                onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SecondReset()),
+                    MaterialPageRoute(
+                      builder: (context) => ResetCodeInput(email: userEmail),
+                    ),
                   );
                 },
                 minWidth: 350,

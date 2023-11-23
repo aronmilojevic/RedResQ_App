@@ -22,17 +22,17 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 35),
-            Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                color: Color(0xff464444),
-              ),
+            SizedBox(height: 50),
+
+            const Image(
+              image: AssetImage('lib/assets/reset/new_password.png'),
+              width: 650,
+              height: 250,
+              fit: BoxFit.contain,
             ),
+
+            SizedBox(height: 30),
+
             const Text(
               'Create new Password',
               style: TextStyle(
@@ -147,7 +147,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
               ),
             ),
 
-            const Spacer(),
+            const SizedBox(height: 30),
 
             Material(
               elevation: 10,

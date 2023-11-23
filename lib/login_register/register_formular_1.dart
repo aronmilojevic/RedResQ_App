@@ -19,62 +19,68 @@ class _FirstFormularState extends State<FirstFormular> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(height: 35),
-            Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                color: Color(0xff464444),
-              ),
+      body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: 35),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    color: Color(0xff464444),
+                  ),
+                ),
+                const Text(
+                  'Create an Account',
+                  style: TextStyle(
+                    color: Color(0xff464444),
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                const Text(
+                  'Fill out the text fields below',
+                  style: TextStyle(
+                    color: Color(0xff464444),
+                    fontSize: 15,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                const Image(
+                  image: AssetImage('lib/assets/register/progress_formular_1outOf3.png'),
+                  width: 350,
+                  height: 100,
+                  fit: BoxFit.contain,
+                ),
+                const SizedBox(height: 10),
+                _buildTextFieldWithIcon(Icons.person, _firstNameController, 'First name'),
+                const SizedBox(height: 10),
+                _buildTextFieldWithIcon(Icons.person, _lastNameController, 'Last name'),
+                const SizedBox(height: 10),
+                _buildDateOfBirthTextField(),
+                const SizedBox(height: 30),
+                _buildTextFieldWithIcon(Icons.email, _emailController, 'E-Mail', isEmail: true),
+                const SizedBox(height: 10),
+                _buildTextFieldWithIcon(Icons.phone, _mobileNumberController, 'Mobile number'),
+                const SizedBox(height: 30),
+                _buildNextButton(context),
+                const SizedBox(height: 20),
+              ],
             ),
-            const Text(
-              'Create an Account',
-              style: TextStyle(
-                color: Color(0xff464444),
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 15),
-            const Text(
-              'Fill out the text fields below',
-              style: TextStyle(
-                color: Color(0xff464444),
-                fontSize: 15,
-              ),
-            ),
-            const SizedBox(height: 5),
-            const Image(
-              image: AssetImage('lib/assets/register/progress_formular_1outOf3.png'),
-              width: 350,
-              height: 100,
-              fit: BoxFit.contain,
-            ),
-            const SizedBox(height: 10),
-            _buildTextFieldWithIcon(Icons.person, _firstNameController, 'First name'),
-            const SizedBox(height: 10),
-            _buildTextFieldWithIcon(Icons.person, _lastNameController, 'Last name'),
-            const SizedBox(height: 10),
-            _buildDateOfBirthTextField(),
-            const SizedBox(height: 30),
-            _buildTextFieldWithIcon(Icons.email, _emailController, 'E-Mail', isEmail: true),
-            const SizedBox(height: 10),
-            _buildTextFieldWithIcon(Icons.phone, _mobileNumberController, 'Mobile number'),
-            const Spacer(),
-            _buildNextButton(context),
-            const SizedBox(height: 20),
-          ],
-        ),
+          ),
       ),
     );
   }
+
+  /*
+
+            */
 
   Widget _buildTextFieldWithIcon(IconData icon, TextEditingController controller, String hintText, {bool isEmail = false, bool isDate = false}) {
     return Padding(

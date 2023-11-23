@@ -3,7 +3,9 @@ import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/login_register/create_new_password.dart';
 
 class ResetCodeInput extends StatefulWidget {
-  const ResetCodeInput({super.key});
+  final String email;
+
+  const ResetCodeInput({Key? key, required this.email}) : super(key: key);
 
   @override
   _ResetCodeInputState createState() => _ResetCodeInputState();
@@ -35,13 +37,28 @@ class _ResetCodeInputState extends State<ResetCodeInput> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: 60),
+              SizedBox(height: 25),
+              const Image(
+                image: AssetImage('lib/assets/reset/code.png'),
+                width: 650,
+                height: 250,
+                fit: BoxFit.contain,
+              ),
+              SizedBox(height: 30),
               const Text(
                 'Enter the code',
                 style: TextStyle(
                   color: Color(0xff464444),
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 10),
+              Text(
+                'A 6 digits code has been sent to \n ${widget.email}',
+                style: TextStyle(
+                  color: Color(0xff464444),
+                  fontSize: 15,
                 ),
               ),
               const SizedBox(height: 10),
@@ -63,7 +80,8 @@ class _ResetCodeInputState extends State<ResetCodeInput> {
                           }
 
                           if (value.isNotEmpty && index < 5) {
-                            FocusScope.of(context).requestFocus(focusNodes[index + 1]);
+                            FocusScope.of(context)
+                                .requestFocus(focusNodes[index + 1]);
                           }
                         },
                         textAlign: TextAlign.center,
@@ -89,7 +107,7 @@ class _ResetCodeInputState extends State<ResetCodeInput> {
                 ),
               ),
 
-              const Spacer(),
+              const SizedBox(height: 30),
 
               Material(
                 elevation: 5,
@@ -101,7 +119,9 @@ class _ResetCodeInputState extends State<ResetCodeInput> {
                     print("Verification Code: $verificationCode");
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => CreateNewPassword()),
+                      MaterialPageRoute(
+                        builder: (context) => CreateNewPassword(),
+                      ),
                     );
                   },
                   minWidth: 350,
