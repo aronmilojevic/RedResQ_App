@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
+import 'package:redresq_app/login_register/login_page.dart';
 import 'package:redresq_app/login_register/register_formular_2.dart';
 
 class FirstFormular extends StatefulWidget {
@@ -70,7 +71,35 @@ class _FirstFormularState extends State<FirstFormular> {
                 _buildTextFieldWithIcon(Icons.phone, _mobileNumberController, 'Mobile number'),
                 const SizedBox(height: 30),
                 _buildNextButton(context),
-                const SizedBox(height: 20),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                    );
+                  },
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      text: 'Already have an account? ',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Color(0xff464444),
+                        fontWeight: FontWeight.normal,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: 'Login',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: myRedColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -78,9 +107,6 @@ class _FirstFormularState extends State<FirstFormular> {
     );
   }
 
-  /*
-
-            */
 
   Widget _buildTextFieldWithIcon(IconData icon, TextEditingController controller, String hintText, {bool isEmail = false, bool isDate = false}) {
     return Padding(

@@ -10,7 +10,7 @@ class Role {
   final String name;
 
   Role({required this.id, required this.name});
-}
+}*/
 
 
 class Location {
@@ -25,20 +25,7 @@ class Location {
     required this.city,
     required this.postalCode,
   });
-}*/
-
-/*
-"username": "string",
-  "firstName": "string",
-  "lastName": "string",
-  "email": "string",
-  "birthdate": "2023-11-23T12:52:07.301Z",
-  "hash": "string",
-  "gender": 0,
-  "language": 0,
-  "location": 0,
-  "role": 0
-*/
+}
 
 class User {
   //final int id;
@@ -87,41 +74,3 @@ class User {
   */
 }
 
-
-// So sieht die API zuzeit aus:
-/*
-Person{
-id	integer($int32)
-username	string
-nullable: true
-firstName	string
-nullable: true
-lastName	string
-nullable: true
-email	string
-nullable: true
-birthdate	string($date-time)
-sex	Sexinteger($int32)
-Enum:
-[ 0, 1 ]
-language	Language{
-id	integer($int32)
-name	string
-nullable: true
-}
-location	Location{
-id	integer($int32)
-country	string
-nullable: true
-city	string
-nullable: true
-postalCode	string
-nullable: true
-}
-settings	Settings{
-}
-role	Role{
-id	[...]
-name	[...]
-}
-}*/

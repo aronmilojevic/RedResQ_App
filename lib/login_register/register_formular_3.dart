@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:redresq_app/application/UIManagement.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/login_register/terms_and_conditions.dart';
 import 'package:redresq_app/login_register/user.dart';
@@ -42,7 +43,6 @@ class _ThirdFormularState extends State<ThirdFormular> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _dobController = TextEditingController();
 
-  // Diese werte sollen aus dem Konstruktor kommen!!!!!!!
   late DateTime birthday;
   //Language userLanguage = Language(id: 1, name: "German");
   //Location userLocation = Location(id: 1, country: "Germany", city: "Berlin", postalCode: "12345");
@@ -489,13 +489,18 @@ Future<void> createUserInAPI(BuildContext context, User user) async {
       }),
     );
 
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Benutzer erfolgreich erstellt'),
         ),
       );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => StartUI()),
+        );
       print('Benutzer erfolgreich erstellt');
+
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

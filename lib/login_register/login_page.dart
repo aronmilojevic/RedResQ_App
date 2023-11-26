@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redresq_app/application/UIManagement.dart';
 import 'package:redresq_app/application/dashboard.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:http/http.dart' as http;
@@ -176,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                     );
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Dashboard()),
+                      MaterialPageRoute(builder: (context) => StartUI()),
                     );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -203,8 +204,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
 
-            const SizedBox(height: 10),
-            const Spacer(),
             TextButton(
               onPressed: () {
                 Navigator.push(
@@ -226,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                       text: 'Sign Up',
                       style: TextStyle(
                         fontSize: 15,
-                        color: Color(0xff464444),
+                        color: myRedColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
