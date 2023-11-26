@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/application/dashboard.dart';
+import 'package:redresq_app/application/modulesroom.dart';
 import 'package:redresq_app/application/news.dart';
 import 'package:redresq_app/application/newsroom.dart';
 
@@ -50,11 +51,7 @@ class _NavigationExampleState extends State<NavigationExample> {
                 body: Container(
               color: Colors.amber,
             )),
-            Scaffold(
-              body: Container(
-                color: Colors.blueAccent,
-              ),
-            ),
+            const ModulesRoom(),
           ],
         ),
         bottomNavigationBar: Container(

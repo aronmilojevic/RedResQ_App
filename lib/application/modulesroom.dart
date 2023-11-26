@@ -3,8 +3,8 @@ import 'package:redresq_app/application/newscard.dart';
 import 'package:redresq_app/application/news.dart';
 import 'package:redresq_app/components/my_colors.dart';
 
-class Newsroom extends StatelessWidget {
-  const Newsroom({super.key});
+class ModulesRoom extends StatelessWidget {
+  const ModulesRoom({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +34,7 @@ class Newsroom extends StatelessWidget {
                     child: Container(
                       alignment: Alignment.center,
                       child: Text(
-                        'Newsroom',
+                        'Modules',
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -58,55 +58,35 @@ class Newsroom extends StatelessWidget {
             delegate: SliverChildListDelegate(
               [
                 NewsCard(
-                  title: 'Floods in Venice',
+                  title: 'Earthquake',
                   content: 'this is a news',
                 ),
                 NewsCard(
-                  title: 'Wildfires in Naples',
+                  title: 'Floods',
                   content: 'this is a news',
                 ),
                 NewsCard(
-                  title: 'Storms in Vienna',
+                  title: 'Tsunami',
                   content: 'this is a news',
                 ),
                 NewsCard(
-                  title: 'Tsunamis Tokyo',
+                  title: 'Volcano',
                   content: 'this is a news',
                 ),
                 NewsCard(
-                  title: 'China-wide Hurricane!',
+                  title: 'Biohazard',
                   content: 'this is a news',
                 ),
                 NewsCard(
-                  title: 'China-wide Hurricane!',
+                  title: 'Terrorist Attack',
                   content: 'this is a news',
                 ),
                 NewsCard(
-                  title: 'China-wide Hurricane!',
+                  title: 'Tornado',
                   content: 'this is a news',
                 ),
                 NewsCard(
-                  title: 'China-wide Hurricane!',
-                  content: 'this is a news',
-                ),
-                NewsCard(
-                  title: 'China-wide Hurricane!',
-                  content: 'this is a news',
-                ),
-                NewsCard(
-                  title: 'China-wide Hurricane!',
-                  content: 'this is a news',
-                ),
-                NewsCard(
-                  title: 'China-wide Hurricane!',
-                  content: 'this is a news',
-                ),
-                NewsCard(
-                  title: 'China-wide Hurricane!',
-                  content: 'this is a news',
-                ),
-                NewsCard(
-                  title: 'China-wide Hurricane!',
+                  title: 'Wildfire',
                   content: 'this is a news',
                 ),
               ],
