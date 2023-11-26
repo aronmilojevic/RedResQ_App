@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
+import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/register_formular_3.dart';
 import 'package:intl/intl.dart';
 
@@ -80,19 +81,12 @@ class _SecondFormularState extends State<SecondFormular> {
                 ),
                 const Text(
                   'Few more steps',
-                  style: TextStyle(
-                    color: Color(0xff464444),
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: headerTextStyle,
                 ),
                 const SizedBox(height: 15),
                 const Text(
                   'Fill out the text fields below',
-                  style: TextStyle(
-                    color: Color(0xff464444),
-                    fontSize: 15,
-                  ),
+                  style: subHeaderTextStyle,
                 ),
                 const SizedBox(height: 5),
                 const Image(

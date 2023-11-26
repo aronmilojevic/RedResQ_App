@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
+import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/start_page.dart';
 
 class CreateNewPassword extends StatefulWidget {
@@ -35,19 +36,12 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
 
             const Text(
               'Create new Password',
-              style: TextStyle(
-                color: Color(0xff464444),
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
+              style: headerTextStyle,
             ),
             const SizedBox(height: 15),
             const Text(
               'Enter your new password below',
-              style: TextStyle(
-                color: Color(0xff464444),
-                fontSize: 15,
-              ),
+              style: subHeaderTextStyle,
             ),
             const SizedBox(height: 50),
 

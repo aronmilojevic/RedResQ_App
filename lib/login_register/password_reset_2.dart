@@ -1,6 +1,7 @@
 // ist nicht mehr in verwendung
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
+import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/password_reset_code_input.dart';
 
 class SecondReset extends StatelessWidget {
@@ -16,19 +17,14 @@ class SecondReset extends StatelessWidget {
             SizedBox(height: 60),
             const Text(
               'You\'ve got mail!',
-              style: TextStyle(color: Color(0xff464444),
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
+              style: headerTextStyle,
             ),
 
             const SizedBox(height: 10),
 
             const Text(
               'Check your mails',
-              style: TextStyle(color: Color(0xff464444),
-                fontSize: 15,
-              ),
+              style: subHeaderTextStyle,
             ),
 
             const SizedBox(height: 70),

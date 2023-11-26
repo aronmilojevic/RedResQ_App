@@ -3,6 +3,7 @@ import 'package:redresq_app/application/UIManagement.dart';
 import 'package:redresq_app/application/dashboard.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:http/http.dart' as http;
+import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/password_reset_1.dart';
 import 'package:redresq_app/login_register/register_formular_1.dart';
 
@@ -38,19 +39,12 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const Text(
               'Welcome back!',
-              style: TextStyle(
-                color: Color(0xff464444),
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
+              style: headerTextStyle,
             ),
             const SizedBox(height: 15),
             const Text(
               'Nice to see you again',
-              style: TextStyle(
-                color: Color(0xff464444),
-                fontSize: 15,
-              ),
+              style: subHeaderTextStyle,
             ),
             const SizedBox(height: 50),
             Padding(

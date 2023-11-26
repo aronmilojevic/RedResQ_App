@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
+import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/password_reset_code_input.dart';
 
 class ResetPasswordPage extends StatefulWidget {
@@ -40,19 +41,12 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
             SizedBox(height: 30),
             Text(
               'Reset password',
-              style: TextStyle(
-                color: Color(0xff464444),
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
+              style: headerTextStyle,
             ),
             SizedBox(height: 10),
             Text(
               'Don’t worry! It happens. Please enter the \n address associated with your account.',
-              style: TextStyle(
-                color: Color(0xff464444),
-                fontSize: 15,
-              ),
+              style: subHeaderTextStyle,
             ),
             SizedBox(height: 50),
             Padding(

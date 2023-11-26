@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redresq_app/components/my_headers.dart';
 
 class TermsAndConditions extends StatelessWidget {
   const TermsAndConditions({Key? key}) : super(key: key);
@@ -24,11 +25,7 @@ class TermsAndConditions extends StatelessWidget {
             ),
             const Text(
               'Terms and Conditions',
-              style: TextStyle(
-                color: Color(0xff464444),
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
+              style: headerTextStyle,
             ),
 
 

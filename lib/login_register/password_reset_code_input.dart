@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
+import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/create_new_password.dart';
 
 class ResetCodeInput extends StatefulWidget {
@@ -47,19 +48,12 @@ class _ResetCodeInputState extends State<ResetCodeInput> {
               SizedBox(height: 30),
               const Text(
                 'Enter the code',
-                style: TextStyle(
-                  color: Color(0xff464444),
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: headerTextStyle,
               ),
               SizedBox(height: 10),
               Text(
                 'A 6 digits code has been sent to \n ${widget.email}',
-                style: TextStyle(
-                  color: Color(0xff464444),
-                  fontSize: 15,
-                ),
+                style: subHeaderTextStyle,
               ),
               const SizedBox(height: 10),
               Row(

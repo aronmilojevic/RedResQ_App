@@ -4,8 +4,10 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:redresq_app/application/UIManagement.dart';
 import 'package:redresq_app/components/my_colors.dart';
+import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/terms_and_conditions.dart';
 import 'package:redresq_app/login_register/user.dart';
+
 
 class ThirdFormular extends StatefulWidget {
   final String firstName;
@@ -51,15 +53,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
   String _passwordErrorText = '';
 
   static const double _screenPadding = 30.0;
-  static const TextStyle _headerTextStyle = TextStyle(
-    color: Color(0xff464444),
-    fontSize: 30,
-    fontWeight: FontWeight.bold,
-  );
-  static const TextStyle _subHeaderTextStyle = TextStyle(
-    color: Color(0xff464444),
-    fontSize: 15,
-  );
+
 
   _ThirdFormularState({
     required String firstName,
@@ -98,12 +92,12 @@ class _ThirdFormularState extends State<ThirdFormular> {
               ),
               Text(
                 'Create your user',
-                style: _headerTextStyle,
+                style: headerTextStyle,
               ),
               const SizedBox(height: 15),
               const Text(
                 'Fill out the text fields below',
-                style: _subHeaderTextStyle,
+                style: subHeaderTextStyle,
               ),
               const SizedBox(height: 5),
               const Image(
