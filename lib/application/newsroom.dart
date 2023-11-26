@@ -11,32 +11,44 @@ class Newsroom extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(
-            child: AspectRatio(
-              aspectRatio: 2.75,
-              child: Card(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                elevation: 5,
-                color: myGreyColor,
-                child: Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Newsroom',
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 23,
-                      fontStyle: FontStyle.normal,
-                      color: Color(0xff464444),
+          SliverAppBar(
+            pinned: true,
+            collapsedHeight: 125,
+            backgroundColor: Colors.transparent,
+            scrolledUnderElevation: 0,
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              titlePadding: EdgeInsets.zero,
+              title: AspectRatio(
+                aspectRatio: 2.75,
+                child: Card(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  elevation: 5,
+                  color: myGreyColor,
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Newsroom',
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 23,
+                        fontStyle: FontStyle.normal,
+                        color: Color(0xff464444),
+                      ),
                     ),
                   ),
                 ),
               ),
+            ),
+            titleSpacing: 20,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
           ),
           SliverList(
