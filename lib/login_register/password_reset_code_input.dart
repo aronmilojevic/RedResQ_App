@@ -32,109 +32,111 @@ class _ResetCodeInputState extends State<ResetCodeInput> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(height: 25),
-              const Image(
-                image: AssetImage('lib/assets/reset/code.png'),
-                width: 650,
-                height: 250,
-                fit: BoxFit.contain,
-              ),
-              SizedBox(height: 30),
-              const Text(
-                'Enter the code',
-                style: headerTextStyle,
-              ),
-              SizedBox(height: 10),
-              Text(
-                'A 6 digits code has been sent to \n ${widget.email}',
-                style: subHeaderTextStyle,
-              ),
-              const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: List.generate(
-                  6,
-                      (index) => SizedBox(
-                    width: 50,
-                    child: Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(0xfff3f3f3),
-                      child: TextField(
-                        controller: textControllers[index],
-                        onChanged: (value) {
-                          if (value.length > 1) {
-                            textControllers[index].text = value.substring(0, 1);
-                          }
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(height: 25),
+                const Image(
+                  image: AssetImage('lib/assets/reset/code.png'),
+                  width: 650,
+                  height: 250,
+                  fit: BoxFit.contain,
+                ),
+                SizedBox(height: 30),
+                const Text(
+                  'Enter the code',
+                  style: headerTextStyle,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'A 6 digits code has been sent to \n ${widget.email}',
+                  style: subHeaderTextStyle,
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: List.generate(
+                    6,
+                        (index) => SizedBox(
+                      width: 50,
+                      child: Material(
+                        elevation: 5,
+                        borderRadius: BorderRadius.circular(15),
+                        color: Color(0xfff3f3f3),
+                        child: TextField(
+                          controller: textControllers[index],
+                          onChanged: (value) {
+                            if (value.length > 1) {
+                              textControllers[index].text = value.substring(0, 1);
+                            }
 
-                          if (value.isNotEmpty && index < 5) {
-                            FocusScope.of(context)
-                                .requestFocus(focusNodes[index + 1]);
-                          }
-                        },
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: myRedColor,
-                        ),
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
+                            if (value.isNotEmpty && index < 5) {
+                              FocusScope.of(context)
+                                  .requestFocus(focusNodes[index + 1]);
+                            }
+                          },
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: myRedColor,
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Color(0x00000000)),
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0x00000000)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0x00000000)),
+                            ),
+                            fillColor: Color(0xfff3f3f3),
+                            alignLabelWithHint: true,
                           ),
-                          fillColor: Color(0xfff3f3f3),
-                          alignLabelWithHint: true,
+                          focusNode: focusNodes[index],
                         ),
-                        focusNode: focusNodes[index],
                       ),
                     ),
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 30),
+                const SizedBox(height: 30),
 
-              Material(
-                elevation: 5,
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                color: myRedColor,
-                child: MaterialButton(
-                  onPressed: () {
-                    String verificationCode = getVerificationCode();
-                    print("Verification Code: $verificationCode");
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CreateNewPassword(),
+                Material(
+                  elevation: 5,
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  color: myRedColor,
+                  child: MaterialButton(
+                    onPressed: () {
+                      String verificationCode = getVerificationCode();
+                      print("Verification Code: $verificationCode");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CreateNewPassword(),
+                        ),
+                      );
+                    },
+                    minWidth: 350,
+                    height: 60,
+                    child: Text(
+                      'Send',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
-                    );
-                  },
-                  minWidth: 350,
-                  height: 60,
-                  child: Text(
-                    'Send',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
+      )
     );
   }
 }

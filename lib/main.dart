@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:redresq_app/login_register/start_page.dart';
 import 'package:redresq_app/components/phone_information.dart';
+import 'package:redresq_app/login_register/start_page_2.0.dart';
 import 'package:redresq_app/notifications/notification_helper_android.dart';
 import 'dart:io';
 
@@ -21,7 +22,7 @@ void main() async {
       (connectivityResult == ConnectivityResult.wifi)) {
     runApp(
       MaterialApp(
-        home: GetStartedPage(),
+        home: GetStartedPage2(),
       ),
     );
   } else {
