@@ -7,6 +7,7 @@ import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/terms_and_conditions.dart';
 import 'package:redresq_app/login_register/user.dart';
+import 'package:redresq_app/components/my_snackbars.dart';
 
 
 class ThirdFormular extends StatefulWidget {
@@ -350,20 +351,14 @@ class _ThirdFormularState extends State<ThirdFormular> {
       color: myRedColor,
       child: MaterialButton(
         onPressed: () {
-          if (_usernameController.text.isEmpty ||
-              _passwordController.text.isEmpty ||
-              _confirmPasswordController.text.isEmpty) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('All fields must be filled'),
-              ),
-            );
+          if (_usernameController.text.isEmpty || _passwordController.text.isEmpty || _confirmPasswordController.text.isEmpty) {
+
+            showErrorSnackbar(context, 'All fields must be filled');
+
           } else if (!_isChecked) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('You must agree to the terms and conditions'),
-              ),
-            );
+
+            showErrorSnackbar(context, 'You must agree to the terms and conditions');
+
           } else {
             String usernameError = _validateUsername(_usernameController.text);
             String passwordError = _validatePassword(_passwordController.text);
@@ -484,11 +479,8 @@ Future<void> createUserInAPI(BuildContext context, User user) async {
     );
 
     if (response.statusCode == 200) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Benutzer erfolgreich erstellt'),
-        ),
-      );
+      showErrorSnackbar(context, 'Congratulations! You have successfully registered');
+
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => StartUI()),
@@ -496,20 +488,12 @@ Future<void> createUserInAPI(BuildContext context, User user) async {
       print('Benutzer erfolgreich erstellt');
 
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Fehler bei der Benutzererstellung: ${response.statusCode}'),
-        ),
-      );
+      showErrorSnackbar(context, 'Fehler bei der Benutzererstellung: ${response.statusCode}');
       print('Fehler bei der Benutzererstellung: ${response.statusCode}');
       print('API-Antwort: ${response.body}');
     }
   } catch (error) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Netzwerkfehler: $error'),
-      ),
-    );
+    showErrorSnackbar(context, 'Netzwerkfehler: $error');
     print('Netzwerkfehler: $error');
   }
 }

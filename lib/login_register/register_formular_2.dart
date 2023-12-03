@@ -3,6 +3,7 @@ import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/register_formular_3.dart';
 import 'package:intl/intl.dart';
+import 'package:redresq_app/components/my_snackbars.dart';
 
 
 class SecondFormular extends StatefulWidget {
@@ -313,11 +314,7 @@ class _SecondFormularState extends State<SecondFormular> {
               ),
             );
           } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Please fill out all fields.'),
-              ),
-            );
+            showErrorSnackbar(context, 'Please fill out all fields');
           }
         },
         minWidth: 350,

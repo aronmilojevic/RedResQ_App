@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/password_reset_1.dart';
 import 'package:redresq_app/login_register/register_formular_1.dart';
+import 'package:redresq_app/components/my_snackbars.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -173,24 +175,12 @@ class _LoginPageState extends State<LoginPage> {
                       _passwordController.text,
                     );
                     if (isAuthenticated) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Erfolgreiche Anmeldung.'),
-                        ),
-                      );
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => StartUI()),
                       );
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'Falscher Benutzername oder Passwort',
-                            style: TextStyle(color: Colors.red),
-                          ),
-                        ),
-                      );
+                      showErrorSnackbar(context, 'username or password is incorrect');
                     }
                   },
                   minWidth: 350,

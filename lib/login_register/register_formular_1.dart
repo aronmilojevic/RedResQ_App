@@ -3,6 +3,8 @@ import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/login_page.dart';
 import 'package:redresq_app/login_register/register_formular_2.dart';
+import 'package:redresq_app/components/my_snackbars.dart';
+
 
 class FirstFormular extends StatefulWidget {
   const FirstFormular({Key? key}) : super(key: key);
@@ -193,11 +195,9 @@ class _FirstFormularState extends State<FirstFormular> {
 
   void _validateEmail(String value, TextEditingController controller) {
     if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$').hasMatch(value)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Invalid Email. Please enter a valid email address.'),
-        ),
-      );
+
+      showErrorSnackbar(context, 'Invalid Email. Please enter a valid email address');
+
       controller.text = '';
     }
   }
@@ -278,11 +278,7 @@ class _FirstFormularState extends State<FirstFormular> {
               )),
             );
           } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Please fill out all fields correctly.'),
-              ),
-            );
+            showErrorSnackbar(context, 'Please fill out all fields correctly');
           }
         },
         minWidth: 350,
