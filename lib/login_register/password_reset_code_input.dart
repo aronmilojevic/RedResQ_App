@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/create_new_password.dart';
+import 'package:redresq_app/components/my_snackbars.dart';
+import 'package:http/http.dart' as http;
 
 class ResetCodeInput extends StatefulWidget {
   final String email;
 
-  const ResetCodeInput({Key? key, required this.email}) : super(key: key);
+  const ResetCodeInput({
+    Key? key,
+    required this.email,
+  }) : super(key: key);
 
   @override
   _ResetCodeInputState createState() => _ResetCodeInputState();
@@ -109,15 +114,24 @@ class _ResetCodeInputState extends State<ResetCodeInput> {
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                   color: myRedColor,
                   child: MaterialButton(
-                    onPressed: () {
+                    onPressed: () async {
                       String verificationCode = getVerificationCode();
                       print("Verification Code: $verificationCode");
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CreateNewPassword(),
-                        ),
-                      );
+                      bool resetSuccess = await isVerificationCode(
+                          verificationCode, widget.email);
+
+                      if (resetSuccess) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateNewPassword(email: widget.email, confirmationCode: verificationCode),
+                          ),
+                        );
+
+                      } else {
+                        showErrorSnackbar(context, 'Wrong Code');
+                        print('Fehler beim Zurücksetzen des Passworts');
+                      }
                     },
                     minWidth: 350,
                     height: 60,
@@ -136,7 +150,21 @@ class _ResetCodeInputState extends State<ResetCodeInput> {
             ),
           ),
         ),
-      )
+      ),
     );
+  }
+}
+
+Future<bool> isVerificationCode(String code, String email) async {
+  final response = await http.post(
+    Uri.parse('https://api.redresq.at/reset'),
+    body: {'code': code, 'email': email},
+  );
+
+  if (response.statusCode == 200) {
+    return true;
+  } else {
+    print('API-Aufruf fehlgeschlagen. Statuscode: ${response.statusCode}');
+    return false;
   }
 }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/components/my_headers.dart';
+import 'package:redresq_app/components/my_snackbars.dart';
 import 'package:redresq_app/login_register/password_reset_code_input.dart';
+import 'package:http/http.dart' as http;
+
 
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({Key? key}) : super(key: key);
@@ -83,13 +86,20 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 borderRadius: BorderRadius.all(Radius.circular(15)),
                 color: myRedColor,
                 child: MaterialButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ResetCodeInput(email: userEmail),
-                      ),
-                    );
+                  onPressed: () async {
+                    bool resetSuccess = await resetPassword(userEmail);
+
+                    if (resetSuccess) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ResetCodeInput(email: userEmail),
+                        ),
+                      );
+                    } else {
+                      showErrorSnackbar(context, 'Wrong Username');
+                      print('Fehler beim Zurücksetzen des Passworts');
+                    }
                   },
                   minWidth: 350,
                   height: 60,
@@ -109,5 +119,24 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         ),
       )
     );
+  }
+}
+
+
+Future<bool> resetPassword(String email) async {
+  try {
+    final response = await http.get(
+      Uri.parse('https://api.redresq.at/reset/request?email=$email'),
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      print('Fehler beim Zurücksetzen des Passworts. Statuscode: ${response.statusCode}');
+      return false;
+    }
+  } catch (e) {
+    print('Fehler beim Zurücksetzen des Passworts: $e');
+    return false;
   }
 }

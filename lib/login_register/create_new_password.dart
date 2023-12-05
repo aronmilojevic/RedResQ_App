@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/components/my_headers.dart';
-import 'package:redresq_app/login_register/start_page.dart';
 import 'package:redresq_app/login_register/start_page_2.0.dart';
+import 'package:redresq_app/components/my_snackbars.dart';
+import 'package:http/http.dart' as http;
 
 class CreateNewPassword extends StatefulWidget {
-  const CreateNewPassword({Key? key}) : super(key: key);
+  final String email;
+  final String confirmationCode;
+  const CreateNewPassword({Key? key, required this.email, required this.confirmationCode}) : super(key: key);
 
   @override
   _CreateNewPasswordState createState() => _CreateNewPasswordState();
@@ -150,21 +153,19 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                 borderRadius: const BorderRadius.all(Radius.circular(15)),
                 color: myRedColor,
                 child: MaterialButton(
-                  onPressed: () {
-                    if (_passwordControllerOne.text == _passwordControllerTwo.text) {
+                  onPressed: () async {
+                    bool resetSuccess = await resetPassword(widget.confirmationCode, widget.email, _passwordControllerOne.text);
+
+                    if (resetSuccess) {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => GetStartedPage2()),
-                      );
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'Password do not match',
-                            style: TextStyle(color: Colors.red),
-                          ),
+                        MaterialPageRoute(
+                          builder: (context) => GetStartedPage2(),
                         ),
                       );
+                    } else {
+                      showErrorSnackbar(context, 'Something went wrong');
+                      print('Fehler beim Zurücksetzen des Passworts');
                     }
                   },
                   minWidth: 350,
@@ -186,5 +187,27 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
         ),
       )
     );
+  }
+}
+
+
+Future<bool> resetPassword(String confirmationCode, String email, String password) async {
+  final apiUrl = 'https://api.redresq.at/reset/confirm';
+
+  final response = await http.post(
+    Uri.parse(apiUrl),
+    body: {
+      'confirmationCode': confirmationCode,
+      'email': email,
+      'password': password,
+    },
+  );
+
+  if (response.statusCode == 200) {
+    print('Passwort erfolgreich zurückgesetzt!');
+    return true;
+  } else {
+    print('Fehler beim Zurücksetzen des Passworts: ${response.statusCode}');
+    return false;
   }
 }
