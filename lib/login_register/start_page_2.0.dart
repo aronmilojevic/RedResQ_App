@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/application/UIManagement.dart';
 import 'package:redresq_app/components/my_colors.dart';
+import 'package:redresq_app/components/offline_no_user.dart';
 import 'package:redresq_app/login_register/login_page.dart';
 import 'package:redresq_app/login_register/register_formular_1.dart';
 
@@ -15,29 +16,90 @@ class GetStartedPage2 extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => StartUI()),
-                    );
-                  },
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.arrow_back,
-                        color: myBlackColor,
+                const SizedBox(height: 10),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: TextButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(
+                              "Would you like to continue?",
+                              style: TextStyle(
+                                color: myBlackColor,
+                              ),
+                            ),
+                            content: Text(
+                              "If you continue, you will not be able to use the free features.",
+                              style: TextStyle(
+                                color: myBlackColor,
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text(
+                                  "Cancel",
+                                  style: TextStyle(
+                                    color: myRedColor,
+                                  ),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => StartUI()),
+                                  );
+                                },
+                                child: Text(
+                                  "Continue",
+                                  style: TextStyle(
+                                    color: myBlackColor,
+                                  ),
+                                ),
+                              ),
+                            ],
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                            backgroundColor: Colors.white, // Ändere die Hintergrundfarbe nach Bedarf
+                          );
+                        },
+                      );
+                    },
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(maxWidth: 55.0),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.white,
+                            size: 15,
+                          ),
+                          const Text(
+                            ' Skip',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
-                      const Text(
-                        ' Skip',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: myBlackColor,
-                        ),
+                    ),
+                    style: TextButton.styleFrom(
+                      backgroundColor: myRedColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
-                    ],
+                    ),
                   ),
                 ),
+                const SizedBox(height: 10),
                 const Image(
                   image: AssetImage('lib/assets/start/get_started_img.png'),
                   width: 450,
@@ -46,7 +108,7 @@ class GetStartedPage2 extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 const Text(
-                  'Let\'s Get Started',
+                  'Become a ResQer',
                   style: TextStyle(
                     color: myBlackColor,
                     fontSize: 40,
