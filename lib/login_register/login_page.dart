@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/application/UIManagement.dart';
-import 'package:redresq_app/application/dashboard.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:http/http.dart' as http;
 import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/password_reset_1.dart';
 import 'package:redresq_app/login_register/register_formular_1.dart';
 import 'package:redresq_app/components/my_snackbars.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 
 class LoginPage extends StatefulWidget {
@@ -236,13 +237,20 @@ class _LoginPageState extends State<LoginPage> {
 
 Future<bool> authenticateUser(String username, String password) async {
   final response = await http.get(
-    // https://api.redresq.at/session/login?id=11&secret=11
     Uri.parse('https://api.redresq.at/session/login?id=$username&secret=$password'),
   );
 
   if (response.statusCode == 200) {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('username', username);
+    prefs.setString('password', password);
+
+    DateTime expirationDate = DateTime.now().add(Duration(days: 30));
+    prefs.setString('expirationDate', expirationDate.toIso8601String());
+
     return true;
   } else {
     return false;
   }
 }
+
