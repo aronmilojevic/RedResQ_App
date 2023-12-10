@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:redresq_app/application/module_navbar.dart';
 import 'package:redresq_app/application/news.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/application/tsunami_module.dart';
+import 'package:redresq_app/application/module_navbar.dart';
 
 class ModulesCard extends StatelessWidget {
   final String title;
@@ -19,7 +21,7 @@ class ModulesCard extends StatelessWidget {
       // Add more cases as needed for other titles
       default:
         // Return a default module or handle the case accordingly
-        return Container();
+        return ModuleNavbar();
     }
   }
 

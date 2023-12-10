@@ -62,13 +62,15 @@ class _ThirdFormularState extends State<ThirdFormular> {
             ),
             const SizedBox(height: 5),
             const Image(
-              image: AssetImage('lib/assets/register/progress_formular_3outOf3.png'),
+              image: AssetImage(
+                  'lib/assets/register/progress_formular_3outOf3.png'),
               width: 350,
               height: 100,
               fit: BoxFit.contain,
             ),
             const SizedBox(height: 10),
-            _buildTextFieldWithIcon(Icons.person, _usernameController, 'Username'),
+            _buildTextFieldWithIcon(
+                Icons.person, _usernameController, 'Username'),
             const SizedBox(height: 25),
             _buildPasswordTextField(),
             const SizedBox(height: 5),
@@ -96,7 +98,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
                         });
                       },
                       fillColor: MaterialStateProperty.resolveWith<Color>(
-                            (Set<MaterialState> states) {
+                        (Set<MaterialState> states) {
                           if (states.contains(MaterialState.selected)) {
                             return myRedColor;
                           }
@@ -127,7 +129,8 @@ class _ThirdFormularState extends State<ThirdFormular> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => TermsAndConditions()),
+                          MaterialPageRoute(
+                              builder: (context) => TermsAndConditions()),
                         );
                       },
                       child: const Text(
@@ -154,7 +157,8 @@ class _ThirdFormularState extends State<ThirdFormular> {
     );
   }
 
-  Widget _buildTextFieldWithIcon(IconData icon, TextEditingController controller, String hintText) {
+  Widget _buildTextFieldWithIcon(
+      IconData icon, TextEditingController controller, String hintText) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: _screenPadding),
       child: Material(
@@ -233,9 +237,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
             ),
             IconButton(
               icon: Icon(
-                _isPasswordVisible
-                    ? Icons.visibility_off
-                    : Icons.visibility,
+                _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
                 color: Color(0xff464444),
               ),
               onPressed: () {
@@ -345,7 +347,10 @@ class _ThirdFormularState extends State<ThirdFormular> {
             } else {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NavBar()),
+                MaterialPageRoute(
+                    builder: (context) => NavBar(
+                          isOnline: false,
+                        )),
               );
             }
           }
