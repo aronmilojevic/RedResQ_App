@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/application/news.dart';
 import 'package:redresq_app/components/my_colors.dart';
+import 'package:redresq_app/application/tsunami_module.dart';
 
-class NewsCard extends StatelessWidget {
+class QuizCard extends StatelessWidget {
   final String title;
-  final String content;
+  final Color my_colors;
 
-  const NewsCard({required this.title, required this.content, Key? key})
-      : super(key: key);
+  const QuizCard({required this.title, required this.my_colors, super.key});
+
+  Widget _getModule() {
+    switch (title.toLowerCase()) {
+      case 'tsunami':
+        return const TsunamiModule();
+      //case 'earthquake':
+      // return const EarthquakeModule();
+      // Add more cases as needed for other titles
+      default:
+        // Return a default module or handle the case accordingly
+        return Container();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +29,7 @@ class NewsCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => News(
-              title: title,
-              content: content,
-            ),
+            builder: (context) => _getModule(),
           ),
         );
       },
@@ -31,13 +41,13 @@ class NewsCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           elevation: 5,
-          color: myGreyColor,
+          color: my_colors,
           child: Container(
             alignment: Alignment.center,
             child: Text(
               title,
               textAlign: TextAlign.center,
-              softWrap: true,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 23,

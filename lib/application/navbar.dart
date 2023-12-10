@@ -3,6 +3,7 @@ import 'package:redresq_app/application/dashboard.dart';
 import 'package:redresq_app/application/modulesroom.dart';
 import 'package:redresq_app/application/news.dart';
 import 'package:redresq_app/application/newsroom.dart';
+import 'package:redresq_app/application/quizroom.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
@@ -47,10 +48,7 @@ class _NavigationExampleState extends State<NavigationExample> {
             )),
             const Newsroom(),
             const Dashboard(),
-            Scaffold(
-                body: Container(
-              color: Colors.amber,
-            )),
+            const QuizRoom(),
             const ModulesRoom(),
           ],
         ),
