@@ -5,7 +5,6 @@ import 'package:redresq_app/components/phone_information.dart';
 import 'package:redresq_app/notifications/notification_helper_android.dart';
 import 'dart:io';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -19,8 +18,8 @@ void main() async {
     platformName = 'iOS';
   }
 
-  if ((connectivityResult != ConnectivityResult.mobile) ||
-      (connectivityResult != ConnectivityResult.wifi)) {
+  if ((connectivityResult == ConnectivityResult.mobile) ||
+      (connectivityResult == ConnectivityResult.wifi)) {
     runApp(
       MaterialApp(
         home: GetStartedPage(),
