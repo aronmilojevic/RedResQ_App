@@ -5,9 +5,9 @@ import 'package:redresq_app/application/tsunami_module.dart';
 
 class QuizCard extends StatelessWidget {
   final String title;
-  final Color my_colors;
+  final Color myColors;
 
-  const QuizCard({required this.title, required this.my_colors, super.key});
+  const QuizCard({required this.title, required this.myColors, super.key});
 
   Widget _getModule() {
     switch (title.toLowerCase()) {
@@ -34,14 +34,14 @@ class QuizCard extends StatelessWidget {
         );
       },
       child: AspectRatio(
-        aspectRatio: 2.75,
+        aspectRatio: 1.5,
         child: Card(
           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
           elevation: 5,
-          color: my_colors,
+          color: myColors,
           child: Container(
             alignment: Alignment.center,
             child: Text(

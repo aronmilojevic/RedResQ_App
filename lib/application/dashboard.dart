@@ -32,7 +32,7 @@ class Dashboard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               elevation: 5,
-              color: myGreyColor,
+              color: myRedColor,
               child: Container(
                 alignment: Alignment.center,
                 child: Text(
@@ -42,7 +42,8 @@ class Dashboard extends StatelessWidget {
                   style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 27.5,
-                      fontStyle: FontStyle.normal),
+                      fontStyle: FontStyle.normal,
+                      color: Colors.white),
                 ),
               ),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
+import 'package:redresq_app/application/Module_Ressources/volcano_module.dart';
 
 class ModuleNavbar extends StatelessWidget {
   const ModuleNavbar({Key? key}) : super(key: key);
@@ -39,8 +40,8 @@ class _NavigationExampleState extends State<ModuleNavbarState> {
           });
         },
         children: [
-          Container(color: Colors.blue),
-          Container(color: Colors.blue),
+          VolcanoModule(),
+          VolcanoModule(),
           Container(color: Colors.blue),
           Container(color: Colors.blue),
           Container(color: Colors.blue)
