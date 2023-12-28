@@ -193,7 +193,8 @@ class _ThirdFormularState extends State<ThirdFormular> {
     );
   }
 
-  Widget _buildTextFieldWithIcon(IconData icon, TextEditingController controller, String hintText) {
+  Widget _buildTextFieldWithIcon(
+      IconData icon, TextEditingController controller, String hintText) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: _screenPadding),
       child: Material(
@@ -272,9 +273,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
             ),
             IconButton(
               icon: Icon(
-                _isPasswordVisible
-                    ? Icons.visibility_off
-                    : Icons.visibility,
+                _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
                 color: Color(0xff464444),
               ),
               onPressed: () {
