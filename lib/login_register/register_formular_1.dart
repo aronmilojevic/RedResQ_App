@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
+import 'package:redresq_app/components/my_headers.dart';
+import 'package:redresq_app/login_register/login_page.dart';
 import 'package:redresq_app/login_register/register_formular_2.dart';
+import 'package:redresq_app/components/my_snackbars.dart';
+
 
 class FirstFormular extends StatefulWidget {
   const FirstFormular({Key? key}) : super(key: key);
@@ -19,62 +23,86 @@ class _FirstFormularState extends State<FirstFormular> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(height: 35),
-            Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                color: Color(0xff464444),
-              ),
+      body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: 35),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    color: Color(0xff464444),
+                  ),
+                ),
+                const Text(
+                  'Create an Account',
+                  style: headerTextStyle,
+                ),
+                const SizedBox(height: 15),
+                const Text(
+                  'Fill out the text fields below',
+                  style: subHeaderTextStyle,
+                ),
+                const SizedBox(height: 5),
+                const Image(
+                  image: AssetImage('lib/assets/register/progress_formular_1outOf3.png'),
+                  width: 350,
+                  height: 100,
+                  fit: BoxFit.contain,
+                ),
+                const SizedBox(height: 10),
+                _buildTextFieldWithIcon(Icons.person, _firstNameController, 'First name'),
+                const SizedBox(height: 10),
+                _buildTextFieldWithIcon(Icons.person, _lastNameController, 'Last name'),
+                const SizedBox(height: 10),
+                _buildDateOfBirthTextField(),
+                const SizedBox(height: 30),
+                _buildTextFieldWithIcon(Icons.email, _emailController, 'E-Mail', isEmail: true),
+                const SizedBox(height: 10),
+                _buildTextFieldWithIcon(Icons.phone, _mobileNumberController, 'Mobile number'),
+                const SizedBox(height: 30),
+                _buildNextButton(context),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                    );
+                  },
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      text: 'Already have an account? ',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Color(0xff464444),
+                        fontWeight: FontWeight.normal,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: 'Login',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: myRedColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-            const Text(
-              'Create an Account',
-              style: TextStyle(
-                color: Color(0xff464444),
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 15),
-            const Text(
-              'Fill out the text fields below',
-              style: TextStyle(
-                color: Color(0xff464444),
-                fontSize: 15,
-              ),
-            ),
-            const SizedBox(height: 5),
-            const Image(
-              image: AssetImage('lib/assets/register/progress_formular_1outOf3.png'),
-              width: 350,
-              height: 100,
-              fit: BoxFit.contain,
-            ),
-            const SizedBox(height: 10),
-            _buildTextFieldWithIcon(Icons.person, _firstNameController, 'First name'),
-            const SizedBox(height: 10),
-            _buildTextFieldWithIcon(Icons.person, _lastNameController, 'Last name'),
-            const SizedBox(height: 10),
-            _buildDateOfBirthTextField(),
-            const SizedBox(height: 30),
-            _buildTextFieldWithIcon(Icons.email, _emailController, 'E-Mail', isEmail: true),
-            const SizedBox(height: 10),
-            _buildTextFieldWithIcon(Icons.phone, _mobileNumberController, 'Mobile number'),
-            const Spacer(),
-            _buildNextButton(context),
-            const SizedBox(height: 20),
-          ],
-        ),
+          ),
       ),
     );
   }
+
 
   Widget _buildTextFieldWithIcon(IconData icon, TextEditingController controller, String hintText, {bool isEmail = false, bool isDate = false}) {
     return Padding(
@@ -167,11 +195,9 @@ class _FirstFormularState extends State<FirstFormular> {
 
   void _validateEmail(String value, TextEditingController controller) {
     if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$').hasMatch(value)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Invalid Email. Please enter a valid email address.'),
-        ),
-      );
+
+      showErrorSnackbar(context, 'Invalid Email. Please enter a valid email address');
+
       controller.text = '';
     }
   }
@@ -244,14 +270,15 @@ class _FirstFormularState extends State<FirstFormular> {
           if (_areAllFieldsFilled() && _validateRegex()) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SecondFormular()),
+              MaterialPageRoute(builder: (context) => SecondFormular(
+                firstName: _firstNameController.text,
+                lastName: _lastNameController.text,
+                email: _emailController.text,
+                bday: _dobController.text,
+              )),
             );
           } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Please fill out all fields correctly.'),
-              ),
-            );
+            showErrorSnackbar(context, 'Please fill out all fields correctly');
           }
         },
         minWidth: 350,

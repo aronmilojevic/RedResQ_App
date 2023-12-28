@@ -10,11 +10,11 @@ class GetStartedPage extends StatelessWidget {
     return Scaffold(
       body: Container(
         constraints: const BoxConstraints
-            .expand(), // Damit der Container die gesamte verfügbare Größe einnimmt
+            .expand(),
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('lib/assets/start/background_get_started.png'),
-            fit: BoxFit.fill, // Anpassung des BoxFit-Werts
+            fit: BoxFit.fill,
           ),
         ),
         child: Align(
@@ -110,7 +110,7 @@ class GetStartedPage extends StatelessWidget {
                       side: BorderSide(color: Colors.white, width: 3),
                     ),
                     child: const Text(
-                      'Sign up',
+                      'Login',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 25,
