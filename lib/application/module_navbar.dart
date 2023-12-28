@@ -1,27 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:redresq_app/application/Module_Ressources/Tsunami_Module/tsunami_general_information.dart';
+import 'package:redresq_app/application/Module_Ressources/Tsunami_Module/tsunami_howtohelpothers.dart';
+import 'package:redresq_app/application/Module_Ressources/Tsunami_Module/tsunami_whatnottodo.dart';
+import 'package:redresq_app/application/Module_Ressources/Tsunami_Module/tsunami_whattodo.dart';
+import 'package:redresq_app/application/Module_Ressources/table_of_contents.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/application/Module_Ressources/volcano_module.dart';
 
 class ModuleNavbar extends StatelessWidget {
-  const ModuleNavbar({Key? key}) : super(key: key);
+  final String disasterType;
+
+  const ModuleNavbar({Key? key, required this.disasterType}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ModuleNavbarState();
+    return ModuleNavbarState(disasterType: disasterType);
   }
 }
 
 class ModuleNavbarState extends StatefulWidget {
-  const ModuleNavbarState({Key? key}) : super(key: key);
+  final String disasterType;
+
+  const ModuleNavbarState({Key? key, required this.disasterType})
+      : super(key: key);
 
   @override
-  State<ModuleNavbarState> createState() => _NavigationExampleState();
+  State<ModuleNavbarState> createState() =>
+      _NavigationExampleState(disasterType: disasterType);
 }
 
 class _NavigationExampleState extends State<ModuleNavbarState> {
-  int currentPageIndex = 1;
+  int currentPageIndex = 0;
+  final String disasterType;
+  final PageController _pageController = PageController(initialPage: 0);
 
-  final PageController _pageController = PageController(initialPage: 2);
+  _NavigationExampleState({required this.disasterType});
 
   void setCurrentPageIndex(int index) {
     setState(() {
@@ -40,11 +53,11 @@ class _NavigationExampleState extends State<ModuleNavbarState> {
           });
         },
         children: [
-          VolcanoModule(),
-          VolcanoModule(),
-          Container(color: Colors.blue),
-          Container(color: Colors.blue),
-          Container(color: Colors.blue)
+          TableOfContents(disasterType: disasterType),
+          TsunamiGeneralInformation(),
+          TsunamiWhatToDo(), // Add your pages here
+          TsunamiWhatNotToDo(),
+          TsunamiHowToHelpOthers(),
         ],
       ),
       bottomNavigationBar: Flexible(
@@ -70,7 +83,7 @@ class _NavigationExampleState extends State<ModuleNavbarState> {
                     color: Colors.white,
                     icon: const Icon(Icons.arrow_back_ios),
                     onPressed: () {
-                      if (currentPageIndex > 0) {
+                      if (currentPageIndex >= 0) {
                         _pageController.previousPage(
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut,
@@ -79,7 +92,7 @@ class _NavigationExampleState extends State<ModuleNavbarState> {
                     },
                   ),
                   Text(
-                    '$currentPageIndex / 5',
+                    '${currentPageIndex + 1} / 5',
                     style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -89,7 +102,7 @@ class _NavigationExampleState extends State<ModuleNavbarState> {
                     color: Colors.white,
                     icon: const Icon(Icons.arrow_forward_ios),
                     onPressed: () {
-                      if (currentPageIndex > 0) {
+                      if (currentPageIndex >= 0) {
                         _pageController.nextPage(
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut,

@@ -15,13 +15,17 @@ class ModulesCard extends StatelessWidget {
   Widget _getModule() {
     switch (title.toLowerCase()) {
       case 'tsunami':
-        return const TsunamiModule();
+        return const ModuleNavbar(
+          disasterType: 'tsunami',
+        );
       //case 'earthquake':
       // return const EarthquakeModule();
       // Add more cases as needed for other titles
       default:
         // Return a default module or handle the case accordingly
-        return ModuleNavbar();
+        return ModuleNavbar(
+          disasterType: 'Tsunami',
+        );
     }
   }
 

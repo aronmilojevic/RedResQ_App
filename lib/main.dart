@@ -18,8 +18,8 @@ void main() async {
     platformName = 'iOS';
   }
 
-  if ((connectivityResult == ConnectivityResult.mobile) ||
-      (connectivityResult == ConnectivityResult.wifi)) {
+  if ((connectivityResult != ConnectivityResult.mobile) ||
+      (connectivityResult != ConnectivityResult.wifi)) {
     runApp(
       MaterialApp(
         home: GetStartedPage(),
