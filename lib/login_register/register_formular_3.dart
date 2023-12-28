@@ -2,9 +2,13 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:redresq_app/application/UIManagement.dart';
 import 'package:redresq_app/components/my_colors.dart';
+import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/terms_and_conditions.dart';
 import 'package:redresq_app/login_register/user.dart';
+import 'package:redresq_app/components/my_snackbars.dart';
+
 
 class ThirdFormular extends StatefulWidget {
   final String firstName;
@@ -42,23 +46,15 @@ class _ThirdFormularState extends State<ThirdFormular> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _dobController = TextEditingController();
 
-  // Diese werte sollen aus dem Konstruktor kommen!!!!!!!
   late DateTime birthday;
-  Language userLanguage = Language(id: 1, name: "German");
-  Location userLocation = Location(id: 1, country: "Germany", city: "Berlin", postalCode: "12345");
+  //Language userLanguage = Language(id: 1, name: "German");
+  //Location userLocation = Location(id: 1, country: "Germany", city: "Berlin", postalCode: "12345");
+  //Role userRole = Role(id: 0, name: 'user');
 
   String _passwordErrorText = '';
 
   static const double _screenPadding = 30.0;
-  static const TextStyle _headerTextStyle = TextStyle(
-    color: Color(0xff464444),
-    fontSize: 30,
-    fontWeight: FontWeight.bold,
-  );
-  static const TextStyle _subHeaderTextStyle = TextStyle(
-    color: Color(0xff464444),
-    fontSize: 15,
-  );
+
 
   _ThirdFormularState({
     required String firstName,
@@ -79,119 +75,119 @@ class _ThirdFormularState extends State<ThirdFormular> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(height: 35),
-            Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                color: Color(0xff464444),
-              ),
-            ),
-            Text(
-              'Create your user',
-              style: _headerTextStyle,
-            ),
-            const SizedBox(height: 15),
-            const Text(
-              'Fill out the text fields below',
-              style: _subHeaderTextStyle,
-            ),
-            const SizedBox(height: 5),
-            const Image(
-              image: AssetImage('lib/assets/register/progress_formular_3outOf3.png'),
-              width: 350,
-              height: 100,
-              fit: BoxFit.contain,
-            ),
-            const SizedBox(height: 10),
-            _buildTextFieldWithIcon(Icons.person, _usernameController, 'Username'),
-            const SizedBox(height: 25),
-            _buildPasswordTextField(),
-            const SizedBox(height: 5),
-            _buildConfirmPasswordTextField(),
-            const SizedBox(height: 5),
-            Text(
-              _passwordErrorText,
-              style: TextStyle(
-                color: myRedColor,
-                fontSize: 16,
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.only(right: _screenPadding),
-                child: Row(
-                  children: [
-                    const SizedBox(width: 20),
-                    Checkbox(
-                      value: _isChecked,
-                      onChanged: (value) {
-                        setState(() {
-                          _isChecked = value!;
-                        });
-                      },
-                      fillColor: MaterialStateProperty.resolveWith<Color>(
-                            (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.selected)) {
-                            return myRedColor;
-                          }
-                          return myGreyColor;
-                        },
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      side: BorderSide(
-                        color: Colors.black12,
-                        width: 2.0,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    GestureDetector(
-                      onTap: () {},
-                      child: const Text(
-                        'I agree to the ',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Color(0xff464444),
-                        ),
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => TermsAndConditions()),
-                        );
-                      },
-                      child: const Text(
-                        'terms and conditions',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Color(0xff464444),
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ),
-                  ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(height: 35),
+              Align(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  color: Color(0xff464444),
                 ),
               ),
-            ),
-            const SizedBox(height: 5),
-            const Spacer(),
-            _buildFinishButton(context),
-            const SizedBox(height: 20),
-          ],
+              Text(
+                'Create your user',
+                style: headerTextStyle,
+              ),
+              const SizedBox(height: 15),
+              const Text(
+                'Fill out the text fields below',
+                style: subHeaderTextStyle,
+              ),
+              const SizedBox(height: 5),
+              const Image(
+                image: AssetImage('lib/assets/register/progress_formular_3outOf3.png'),
+                width: 350,
+                height: 100,
+                fit: BoxFit.contain,
+              ),
+              const SizedBox(height: 10),
+              _buildTextFieldWithIcon(Icons.person, _usernameController, 'Username'),
+              const SizedBox(height: 25),
+              _buildPasswordTextField(),
+              const SizedBox(height: 5),
+              _buildConfirmPasswordTextField(),
+              const SizedBox(height: 5),
+              Text(
+                _passwordErrorText,
+                style: TextStyle(
+                  color: myRedColor,
+                  fontSize: 16,
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: _screenPadding),
+                  child: Row(
+                    children: [
+                      const SizedBox(width: 20),
+                      Checkbox(
+                        value: _isChecked,
+                        onChanged: (value) {
+                          setState(() {
+                            _isChecked = value!;
+                          });
+                        },
+                        fillColor: MaterialStateProperty.resolveWith<Color>(
+                              (Set<MaterialState> states) {
+                            if (states.contains(MaterialState.selected)) {
+                              return myRedColor;
+                            }
+                            return myGreyColor;
+                          },
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        side: BorderSide(
+                          color: Colors.black12,
+                          width: 2.0,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      GestureDetector(
+                        onTap: () {},
+                        child: const Text(
+                          'I agree to the ',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Color(0xff464444),
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => TermsAndConditions()),
+                          );
+                        },
+                        child: const Text(
+                          'terms and conditions',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Color(0xff464444),
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
+              _buildFinishButton(context),
+            ],
+          ),
         ),
       ),
     );
@@ -355,20 +351,14 @@ class _ThirdFormularState extends State<ThirdFormular> {
       color: myRedColor,
       child: MaterialButton(
         onPressed: () {
-          if (_usernameController.text.isEmpty ||
-              _passwordController.text.isEmpty ||
-              _confirmPasswordController.text.isEmpty) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('All fields must be filled'),
-              ),
-            );
+          if (_usernameController.text.isEmpty || _passwordController.text.isEmpty || _confirmPasswordController.text.isEmpty) {
+
+            showErrorSnackbar(context, 'All fields must be filled');
+
           } else if (!_isChecked) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('You must agree to the terms and conditions'),
-              ),
-            );
+
+            showErrorSnackbar(context, 'You must agree to the terms and conditions');
+
           } else {
             String usernameError = _validateUsername(_usernameController.text);
             String passwordError = _validatePassword(_passwordController.text);
@@ -387,17 +377,16 @@ class _ThirdFormularState extends State<ThirdFormular> {
               });
             } else {
               User newUser = User(
-                id: 0,
                 username: _usernameController.text,
-                password: _passwordController.text,
                 firstName: _firstNameController.text,
                 lastName: _lastNameController.text,
                 email: _emailController.text,
                 bday: birthday,
-                // diese daten muss ich aus dem 2 Formular noch erhalten
-                sex: 'male',
-                language: userLanguage,
-                location: userLocation,
+                password: _passwordController.text,
+                gender: 1,
+                language: 1,
+                location: 1,
+                role: 1
               );
               createUserInAPI(context, newUser);
             }
@@ -457,14 +446,21 @@ Future<void> createUserInAPI(BuildContext context, User user) async {
       Uri.parse(apiUrl),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
-        'id': user.id,
+        //'id': user.id,
         'username': user.username,
-        'password': user.password,
+        'firstName': user.firstName,
+        'lastName': user.lastName,
         'email': user.email,
-        //
-        'birthdate': DateFormat('dd/MM/yyyy').format(user.bday),
-        'sex': user.sex,
-        'language': {
+        'birthdate': user.bday.toIso8601String(),
+        'hash': user.password,
+        'gender': 1,
+        'language': 1,
+        'location': 1,
+        'role': 1,
+
+
+        //'sex': user.sex,
+        /*'language': {
           'id': user.languageId,
           'name': user.languageName,
         },
@@ -474,31 +470,30 @@ Future<void> createUserInAPI(BuildContext context, User user) async {
           'city': user.city,
           'postalCode': user.postalCode,
         },
+        'settings': { },
+        'role': {
+          'id': user.role.id,
+          'name': user.role.name,
+        },*/
       }),
     );
 
-    if (response.statusCode == 201) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Benutzer erfolgreich erstellt'),
-        ),
-      );
+    if (response.statusCode == 200) {
+      showErrorSnackbar(context, 'Congratulations! You have successfully registered');
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => StartUI()),
+        );
       print('Benutzer erfolgreich erstellt');
+
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Fehler bei der Benutzererstellung: ${response.statusCode}'),
-        ),
-      );
+      showErrorSnackbar(context, 'Fehler bei der Benutzererstellung: ${response.statusCode}');
       print('Fehler bei der Benutzererstellung: ${response.statusCode}');
       print('API-Antwort: ${response.body}');
     }
   } catch (error) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Netzwerkfehler: $error'),
-      ),
-    );
+    showErrorSnackbar(context, 'Netzwerkfehler: $error');
     print('Netzwerkfehler: $error');
   }
 }

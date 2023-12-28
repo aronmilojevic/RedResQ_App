@@ -110,7 +110,7 @@ class GetStartedPage extends StatelessWidget {
                       side: BorderSide(color: Colors.white, width: 3),
                     ),
                     child: const Text(
-                      'Sign up',
+                      'Login',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 25,

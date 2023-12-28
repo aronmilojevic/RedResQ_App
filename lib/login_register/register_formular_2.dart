@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
+import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/register_formular_3.dart';
+import 'package:intl/intl.dart';
+import 'package:redresq_app/components/my_snackbars.dart';
+
 
 class SecondFormular extends StatefulWidget {
   final String firstName;
@@ -26,7 +30,7 @@ class _SecondFormularState extends State<SecondFormular> {
   TextEditingController _ortController = TextEditingController();
 
   String _selectedCountry = 'Select Country';
-  List<String> _euCountries = [
+  final List<String> _euCountries = [
     'Select Country',
     'Austria',
     'Belgium',
@@ -60,56 +64,50 @@ class _SecondFormularState extends State<SecondFormular> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(height: 35),
-            Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                color: Color(0xff464444),
-              ),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: 35),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    color: Color(0xff464444),
+                  ),
+                ),
+                const Text(
+                  'Few more steps',
+                  style: headerTextStyle,
+                ),
+                const SizedBox(height: 15),
+                const Text(
+                  'Fill out the text fields below',
+                  style: subHeaderTextStyle,
+                ),
+                const SizedBox(height: 5),
+                const Image(
+                  image: AssetImage('lib/assets/register/progress_formular_2outOf3.png'),
+                  width: 350,
+                  height: 100,
+                  fit: BoxFit.contain,
+                ),
+                const SizedBox(height: 10),
+                _buildDropdownMenu(),
+                const SizedBox(height: 10),
+                _buildTextFieldWithIcon(Icons.place, _adresseController, 'Address'),
+                const SizedBox(height: 10),
+                _buildCityAndOrtFields(),
+                const SizedBox(height: 30),
+                _buildNextButton(context),
+              ],
             ),
-            const Text(
-              'Few more steps',
-              style: TextStyle(
-                color: Color(0xff464444),
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 15),
-            const Text(
-              'Fill out the text fields below',
-              style: TextStyle(
-                color: Color(0xff464444),
-                fontSize: 15,
-              ),
-            ),
-            const SizedBox(height: 5),
-            const Image(
-              image: AssetImage('lib/assets/register/progress_formular_2outOf3.png'),
-              width: 350,
-              height: 100,
-              fit: BoxFit.contain,
-            ),
-            const SizedBox(height: 10),
-            _buildDropdownMenu(),
-            const SizedBox(height: 10),
-            _buildTextFieldWithIcon(Icons.place, _adresseController, 'Address'),
-            const SizedBox(height: 10),
-            _buildCityAndOrtFields(),
-            const Spacer(),
-            _buildNextButton(context),
-            const SizedBox(height: 20),
-          ],
-        ),
-      ),
+          ),
+        )
     );
   }
 
@@ -305,7 +303,7 @@ class _SecondFormularState extends State<SecondFormular> {
                   firstName: widget.firstName,
                   lastName: widget.lastName,
                   email: widget.email,
-                  bday: DateTime.parse(widget.bday),
+                  bday: DateFormat('dd/MM/yyyy').parse(widget.bday),
                   /*
                   address: _adresseController.text,
                   city: _stadtController.text,
@@ -316,11 +314,7 @@ class _SecondFormularState extends State<SecondFormular> {
               ),
             );
           } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('Please fill out all fields.'),
-              ),
-            );
+            showErrorSnackbar(context, 'Please fill out all fields');
           }
         },
         minWidth: 350,
