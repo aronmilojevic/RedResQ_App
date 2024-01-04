@@ -9,9 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 import 'package:redresq_app/login_register/Profile/userprofile_drawer.dart';
 
-
-
-/*
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -20,7 +17,9 @@ void main() async {
   String? savedPassword = prefs.getString('password');
   String? expirationDateString = prefs.getString('expirationDate');
 
-  if (savedUsername != null && savedPassword != null && expirationDateString != null) {
+  if (savedUsername != null &&
+      savedPassword != null &&
+      expirationDateString != null) {
     DateTime expirationDate = DateTime.parse(expirationDateString);
 
     // Schauen ob das Ablaufdatum noch nicht erreicht ist
@@ -42,9 +41,9 @@ void main() async {
   );
 }
 
-*/
 
-void main() {
+
+/*void main() {
   runApp(MyApp());
 }
 
@@ -81,8 +80,4 @@ class MyHomePage extends StatelessWidget {
       drawer: MyDrawer(),
     );
   }
-}
-
-
-
-
+}*/
