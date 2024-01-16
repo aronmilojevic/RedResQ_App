@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -437,29 +438,60 @@ class _ThirdFormularState extends State<ThirdFormular> {
   }
 }
 
-Future<void> createUserInAPI(BuildContext context, User user) async {
-  final apiUrl = 'https://api.redresq.at/session/register';
+Future<String?> fetchAuthToken() async {
+  final apiUrl = 'https://api.redresq.at/guest/request';
 
   try {
-    final response = await http.post(
+    final response = await http.get(
       Uri.parse(apiUrl),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        //'id': user.id,
-        'username': user.username,
-        'firstName': user.firstName,
-        'lastName': user.lastName,
-        'email': user.email,
-        'birthdate': user.bday.toIso8601String(),
-        'hash': user.password,
-        'gender': 1,
-        'language': 1,
-        'location': 1,
-        'role': 1,
+    );
+
+    if (response.statusCode == 200) {
+      final String authToken = response.body;
+      return authToken;
+    } else {
+      print('Fehler beim Abrufen des Authentifizierungstokens: ${response.statusCode}');
+      print('API-Antwort: ${response.body}');
+      return null;
+    }
+  } catch (error) {
+    print('Netzwerkfehler beim Abrufen des Authentifizierungstokens: $error');
+    return null;
+  }
+}
 
 
-        //'sex': user.sex,
-        /*'language': {
+
+Future<void> createUserInAPI(BuildContext context, User user) async {
+  try {
+    final String? token = await fetchAuthToken();
+
+    if (token != null) {
+      final apiUrl = 'https://api.redresq.at/auth/register';
+
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {
+          HttpHeaders.authorizationHeader:
+          "bearer $token",
+          HttpHeaders.contentTypeHeader: "application/json",
+        },
+        body: jsonEncode({
+          //'id': user.id,
+          'username': user.username,
+          'firstName': user.firstName,
+          'lastName': user.lastName,
+          'email': user.email,
+          'birthdate': user.bday.toIso8601String(),
+          'hash': user.password,
+          'gender': 1,
+          'language': 1,
+          'location': 1,
+          'role': 1,
+
+
+          //'sex': user.sex,
+          /*'language': {
           'id': user.languageId,
           'name': user.languageName,
         },
@@ -474,22 +506,24 @@ Future<void> createUserInAPI(BuildContext context, User user) async {
           'id': user.role.id,
           'name': user.role.name,
         },*/
-      }),
-    );
+        }),
+      );
 
-    if (response.statusCode == 200) {
-      showErrorSnackbar(context, 'Congratulations! You have successfully registered');
+      if (response.statusCode == 200) {
+        showErrorSnackbar(context, 'Congratulations! You have successfully registered');
 
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => StartUI()),
         );
-      print('Benutzer erfolgreich erstellt');
-
+        print('Benutzer erfolgreich erstellt');
+      } else {
+        showErrorSnackbar(context, 'Fehler bei der Benutzererstellung: ${response.statusCode}');
+        print('Fehler bei der Benutzererstellung: ${response.statusCode}');
+        print('API-Antwort: ${response.body}');
+      }
     } else {
-      showErrorSnackbar(context, 'Fehler bei der Benutzererstellung: ${response.statusCode}');
-      print('Fehler bei der Benutzererstellung: ${response.statusCode}');
-      print('API-Antwort: ${response.body}');
+      showErrorSnackbar(context, 'Fehler beim Abrufen des Authentifizierungstokens');
     }
   } catch (error) {
     showErrorSnackbar(context, 'Netzwerkfehler: $error');

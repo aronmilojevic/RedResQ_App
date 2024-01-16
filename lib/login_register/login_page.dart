@@ -7,6 +7,8 @@ import 'package:redresq_app/login_register/password_reset_1.dart';
 import 'package:redresq_app/login_register/register_formular_1.dart';
 import 'package:redresq_app/components/my_snackbars.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:io';
+
 
 
 
@@ -174,6 +176,7 @@ class _LoginPageState extends State<LoginPage> {
                     bool isAuthenticated = await authenticateUser(
                       _usernameController.text,
                       _passwordController.text,
+                      context,
                     );
                     if (isAuthenticated) {
                       Navigator.push(
@@ -235,22 +238,60 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-Future<bool> authenticateUser(String username, String password) async {
-  final response = await http.get(
-    Uri.parse('https://api.redresq.at/session/login?id=$username&secret=$password'),
-  );
 
-  if (response.statusCode == 200) {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('username', username);
-    prefs.setString('password', password);
+Future<String?> fetchAuthToken() async {
+  final apiUrl = 'https://api.redresq.at/guest/request';
 
-    DateTime expirationDate = DateTime.now().add(Duration(days: 30));
-    prefs.setString('expirationDate', expirationDate.toIso8601String());
+  try {
+    final response = await http.get(
+      Uri.parse(apiUrl),
+    );
 
-    return true;
-  } else {
+    if (response.statusCode == 200) {
+      final String authToken = response.body;
+      return authToken;
+    } else {
+      print('Fehler beim Abrufen des Authentifizierungstokens: ${response.statusCode}');
+      print('API-Antwort: ${response.body}');
+      return null;
+    }
+  } catch (error) {
+    print('Netzwerkfehler beim Abrufen des Authentifizierungstokens: $error');
+    return null;
+  }
+}
+
+Future<bool> authenticateUser(String username, String password, BuildContext context) async {
+  try {
+    final String? token = await fetchAuthToken();
+
+
+    final response = await http.get(
+      Uri.parse('https://api.redresq.at/auth/login?id=$username&secret=$password'),
+      headers: {
+        HttpHeaders.authorizationHeader:
+        "bearer $token",
+        HttpHeaders.contentTypeHeader: "application/json",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('username', username);
+      prefs.setString('password', password);
+
+      DateTime expirationDate = DateTime.now().add(Duration(days: 30));
+      prefs.setString('expirationDate', expirationDate.toIso8601String());
+
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    showErrorSnackbar(context, 'Netzwerkfehler: $error');
+    print('Netzwerkfehler: $error');
     return false;
   }
 }
+
 

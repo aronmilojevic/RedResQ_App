@@ -5,13 +5,11 @@ import 'package:redresq_app/login_register/start_page.dart';
 import 'package:redresq_app/components/phone_information.dart';
 import 'package:redresq_app/login_register/start_page_2.0.dart';
 import 'package:redresq_app/notifications/notification_helper_android.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
-import 'package:redresq_app/login_register/Profile/userprofile_drawer.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 
-
-/*
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -28,7 +26,8 @@ void main() async {
       // Benutzer automatisch anmelden
       runApp(
         MaterialApp(
-          home: StartUI(),
+          home: GetStartedPage2(),
+          //StartUI()
         ),
       );
       return;
@@ -41,48 +40,3 @@ void main() async {
     ),
   );
 }
-
-*/
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  // Erstelle eine GlobalKey für das Scaffold
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey, // Weise die GlobalKey dem Scaffold zu
-      appBar: AppBar(
-        title: Text('My App'),
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {
-            // Verwende die GlobalKey, um auf das ScaffoldState zuzugreifen
-            _scaffoldKey.currentState?.openDrawer();
-          },
-        ),
-      ),
-      body: Center(
-        child: Text('Dashboard'),
-      ),
-      drawer: MyDrawer(),
-    );
-  }
-}
-
-
-
-

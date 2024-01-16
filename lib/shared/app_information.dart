@@ -10,3 +10,6 @@ class AppInformation {
     silentModeEnabled = newValue;
   }
 }
+
+
+// token der für 30 Tage gültig ist wird gespeichert

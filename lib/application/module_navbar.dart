@@ -61,7 +61,6 @@ class _NavigationExampleState extends State<ModuleNavbarState> {
         ],
       ),
       bottomNavigationBar: Flexible(
-        flex: 1,
         child: Container(
           height: 90,
           padding: const EdgeInsets.only(
