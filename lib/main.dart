@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:http/http.dart' as http;
 import 'package:redresq_app/shared/app_information.dart';
+import 'package:redresq_app/login_register/Profile/userprofile_drawer.dart';
 
 void main() async {
 
@@ -25,6 +26,7 @@ void main() async {
     AppInformation.initialize();
     //Token erhalten
     String? token = AppInformation.getUserToken();
+
 
     //Prüfen ob der Token noch gültig ist
     if(checkUserToken(token)==true){
@@ -52,6 +54,7 @@ void main() async {
         home: StartUIOffline(),
         //
       ),
+
     );
   }
 
@@ -94,4 +97,3 @@ Future<bool> checkInternetConnection() async {
     return false;
   }
 }
-
