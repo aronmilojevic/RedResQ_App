@@ -4,6 +4,7 @@ import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/components/my_snackbars.dart';
 import 'package:redresq_app/login_register/password_reset_code_input.dart';
 import 'package:http/http.dart' as http;
+import 'dart:io';
 
 
 class ResetPasswordPage extends StatefulWidget {
@@ -122,11 +123,39 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   }
 }
 
+Future<String?> fetchAuthToken() async {
+  final apiUrl = 'https://api.redresq.at/guest/request';
+
+  try {
+    final response = await http.get(
+      Uri.parse(apiUrl),
+    );
+
+    if (response.statusCode == 200) {
+      final String authToken = response.body;
+      return authToken;
+    } else {
+      print('Fehler beim Abrufen des Authentifizierungstokens: ${response.statusCode}');
+      print('API-Antwort: ${response.body}');
+      return null;
+    }
+  } catch (error) {
+    print('Netzwerkfehler beim Abrufen des Authentifizierungstokens: $error');
+    return null;
+  }
+}
 
 Future<bool> resetPassword(String email) async {
   try {
+    final String? token = await fetchAuthToken();
+
     final response = await http.get(
       Uri.parse('https://api.redresq.at/reset/request?email=$email'),
+      headers: {
+        HttpHeaders.authorizationHeader:
+        "bearer $token",
+        HttpHeaders.contentTypeHeader: "application/json",
+      },
     );
 
     if (response.statusCode == 200) {
