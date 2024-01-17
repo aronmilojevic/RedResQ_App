@@ -7,10 +7,8 @@ import 'package:redresq_app/login_register/password_reset_1.dart';
 import 'package:redresq_app/login_register/register_formular_1.dart';
 import 'package:redresq_app/components/my_snackbars.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:redresq_app/shared/app_information.dart';
 import 'dart:io';
-
-
-
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -263,28 +261,28 @@ Future<String?> fetchAuthToken() async {
 
 Future<bool> authenticateUser(String username, String password, BuildContext context) async {
   try {
-    final String? token = await fetchAuthToken();
-
+    final String? guestToken = await fetchAuthToken();
 
     final response = await http.get(
       Uri.parse('https://api.redresq.at/auth/login?id=$username&secret=$password'),
       headers: {
         HttpHeaders.authorizationHeader:
-        "bearer $token",
+        "bearer $guestToken",
         HttpHeaders.contentTypeHeader: "application/json",
       },
+
     );
 
     if (response.statusCode == 200) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('username', username);
-      prefs.setString('password', password);
+      final String userToken = response.body;
 
-      DateTime expirationDate = DateTime.now().add(Duration(days: 30));
-      prefs.setString('expirationDate', expirationDate.toIso8601String());
+      AppInformation.initialize();
+      AppInformation.setUserToken(userToken);
 
       return true;
-    } else {
+    }
+    else
+    {
       return false;
     }
   } catch (error) {
