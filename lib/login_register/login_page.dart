@@ -22,8 +22,11 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -41,11 +44,10 @@ class _LoginPageState extends State<LoginPage> {
                   color: Color(0xff464444),
                 ),
               ),
-              const Image(
+              Image(
                 image: AssetImage('lib/assets/login/login_person_3.png'),
-                width: 350,
-                height: 200,
-                fit: BoxFit.contain,
+                width: screenWidth * 0.7,
+                fit: BoxFit.cover,
               ),
               const SizedBox(height: 30),
 
@@ -60,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 50),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
                 child: Material(
                   elevation: 5,
                   borderRadius: BorderRadius.circular(15),
@@ -94,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 10),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
                 child: Material(
                   elevation: 5,
                   borderRadius: BorderRadius.circular(15),
@@ -144,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
               Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 30.0),
+                  padding: EdgeInsets.only(right: screenWidth * 0.05),
                   child: TextButton(
                     onPressed: () {
                       Navigator.push(
@@ -167,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
 
               Material(
                 elevation: 10,
-                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                borderRadius: BorderRadius.all(Radius.circular(15)),
                 color: myRedColor,
                 child: MaterialButton(
                   onPressed: () async {
@@ -182,10 +184,10 @@ class _LoginPageState extends State<LoginPage> {
                         MaterialPageRoute(builder: (context) => StartUI()),
                       );
                     } else {
-                      showErrorSnackbar(context, 'username or password is incorrect');
+                      showErrorSnackbar(context, 'Username or password is incorrect');
                     }
                   },
-                  minWidth: 350,
+                  minWidth: screenWidth * 0.9,
                   height: 60,
                   child: const Text(
                     'Log in',
@@ -231,11 +233,10 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
-      )
+      ),
     );
   }
 }
-
 
 Future<String?> fetchAuthToken() async {
   final apiUrl = 'https://api.redresq.at/guest/request';
@@ -266,11 +267,9 @@ Future<bool> authenticateUser(String username, String password, BuildContext con
     final response = await http.get(
       Uri.parse('https://api.redresq.at/auth/login?id=$username&secret=$password'),
       headers: {
-        HttpHeaders.authorizationHeader:
-        "bearer $guestToken",
+        HttpHeaders.authorizationHeader: "bearer $guestToken",
         HttpHeaders.contentTypeHeader: "application/json",
       },
-
     );
 
     if (response.statusCode == 200) {
@@ -280,16 +279,13 @@ Future<bool> authenticateUser(String username, String password, BuildContext con
       AppInformation.setUserToken(userToken);
 
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
   } catch (error) {
-    showErrorSnackbar(context, 'Netzwerkfehler: $error');
-    print('Netzwerkfehler: $error');
+    showErrorSnackbar(context, 'Network error: $error');
+    print('Network error: $error');
     return false;
   }
 }
-
 
