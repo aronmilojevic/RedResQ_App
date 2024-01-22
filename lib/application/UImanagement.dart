@@ -9,6 +9,7 @@ class StartUI extends StatelessWidget {
     return const MaterialApp(
         home: NavBar(
       isOnline: true,
+      isRestricted: false,
     ));
   }
 }
@@ -21,6 +22,20 @@ class StartUIOffline extends StatelessWidget {
     return const MaterialApp(
         home: NavBar(
       isOnline: false,
+      isRestricted: false,
+    ));
+  }
+}
+
+class StartUIRestricted extends StatelessWidget {
+  const StartUIRestricted({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+        home: NavBar(
+      isOnline: true,
+      isRestricted: true,
     ));
   }
 }

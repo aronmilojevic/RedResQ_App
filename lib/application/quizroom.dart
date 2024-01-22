@@ -25,7 +25,7 @@ class QuizRoom extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     elevation: 5,
-                    color: myRedColor,
+                    color: myGreyColor,
                     child: Container(
                       alignment: Alignment.center,
                       child: Text(
@@ -36,7 +36,7 @@ class QuizRoom extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontSize: 27.5,
                             fontStyle: FontStyle.normal,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                     ),
                   ),
@@ -51,13 +51,13 @@ class QuizRoom extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           QuizCard(
-                              title: 'Category 1', myColors: Color(0xFF2196F3)),
+                              title: 'Earthquake', myColors: Color(0xCF945D61)),
                           QuizCard(
-                              title: 'Category 2', myColors: Color(0xFFFF5722)),
+                              title: 'Wildfire', myColors: Color(0xA9C9DBA6)),
                           QuizCard(
-                              title: 'Category 3', myColors: Color(0xFF4CAF50)),
+                              title: 'Tsunami', myColors: Color(0xB3D3F8)),
                           QuizCard(
-                              title: 'Category 4', myColors: Color(0xFFFFEB3B)),
+                              title: 'Biohazard', myColors: Color(0xBDBDBD)),
                         ],
                       ),
                     ),
@@ -66,13 +66,13 @@ class QuizRoom extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           QuizCard(
-                              title: 'Category 5', myColors: Color(0xFF9C27B0)),
+                              title: 'Floods', myColors: Color(0xFF9C27B0)),
                           QuizCard(
-                              title: 'Category 6', myColors: Color(0xFFFFC107)),
+                              title: 'Volcano', myColors: Color(0xFFFFC107)),
                           QuizCard(
-                              title: 'Category 7', myColors: Color(0xFF795548)),
+                              title: 'Tornado', myColors: Color(0xFF795548)),
                           QuizCard(
-                              title: 'Category 8', myColors: Color(0xFF607D8B)),
+                              title: 'Terrorist A', myColors: Color(0xFF607D8B)),
                         ],
                       ),
                     ),

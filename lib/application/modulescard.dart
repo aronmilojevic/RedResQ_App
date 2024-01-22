@@ -1,16 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/application/module_navbar.dart';
-import 'package:redresq_app/application/news.dart';
 import 'package:redresq_app/components/my_colors.dart';
-import 'package:redresq_app/application/tsunami_module.dart';
-import 'package:redresq_app/application/module_navbar.dart';
 
 class ModulesCard extends StatelessWidget {
   final String title;
-  final Color my_colors;
 
-  const ModulesCard({required this.title, required this.my_colors, Key? key})
-      : super(key: key);
+  const ModulesCard({required this.title, Key? key}) : super(key: key);
+
+  String getImagePath(String title) {
+    switch (title.toLowerCase()) {
+      case 'tsunami':
+        return 'lib/assets/learning_modules/tsunami.jpg'; // Replace with the actual path for tsunami
+      case 'biohazard':
+        return 'assets/biohazard_background.jpg'; // Replace with the actual path for biohazard
+      case 'tornado':
+        return 'assets/tornado_background.jpg'; // Replace with the actual path for tornado
+      case 'volcano':
+        return 'assets/volcano_background.jpg'; // Replace with the actual path for volcano
+      case 'earthquake':
+        return 'assets/earthquake_background.jpg'; // Replace with the actual path for earthquake
+      case 'terrorist attack':
+        return 'assets/terrorist_attack_background.jpg'; // Replace with the actual path for terrorist attack
+      case 'wildfire':
+        return 'assets/wildfire_background.jpg'; // Replace with the actual path for wildfire
+      case 'tsunami':
+        return 'assets/tsunami_background.jpg'; // Replace with the actual path for tsunami
+      case 'floods':
+        return 'assets/floods_background.jpg'; // Replace with the actual path for floods
+      default:
+        return 'assets/default_background.jpg'; // Replace with a default background image
+    }
+  }
 
   Widget _getModule() {
     switch (title.toLowerCase()) {
@@ -18,8 +38,6 @@ class ModulesCard extends StatelessWidget {
         return const ModuleNavbar(
           disasterType: 'tsunami',
         );
-      //case 'earthquake':
-      // return const EarthquakeModule();
       // Add more cases as needed for other titles
       default:
         // Return a default module or handle the case accordingly
@@ -48,18 +66,25 @@ class ModulesCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           elevation: 5,
-          color: my_colors,
+          color: Colors.transparent,
           child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                image: AssetImage(getImagePath(title)),
+                fit: BoxFit.cover,
+              ),
+            ),
             alignment: Alignment.center,
             child: Text(
               title,
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
+              style:  TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 23,
-                fontStyle: FontStyle.normal,
-                color: Color(0xff464444),
+                fontStyle: FontStyle.italic,
+                color: Colors.lime,
               ),
             ),
           ),

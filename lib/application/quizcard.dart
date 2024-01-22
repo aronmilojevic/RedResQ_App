@@ -9,31 +9,11 @@ class QuizCard extends StatelessWidget {
 
   const QuizCard({required this.title, required this.myColors, super.key});
 
-  Widget _getModule() {
-    switch (title.toLowerCase()) {
-      case 'tsunami':
-        return const TsunamiModule();
-      //case 'earthquake':
-      // return const EarthquakeModule();
-      // Add more cases as needed for other titles
-      default:
-        // Return a default module or handle the case accordingly
-        return Container();
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => _getModule(),
-          ),
-        );
-      },
-      child: AspectRatio(
+    return
+    AspectRatio(
         aspectRatio: 1.5,
         child: Card(
           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -57,7 +37,6 @@ class QuizCard extends StatelessWidget {
             ),
           ),
         ),
-      ),
     );
   }
 }

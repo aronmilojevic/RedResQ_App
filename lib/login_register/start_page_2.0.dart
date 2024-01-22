@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:redresq_app/application/UIManagement.dart';
+import 'package:redresq_app/application/UImanagement.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/components/offline_no_user.dart';
 import 'package:redresq_app/login_register/login_page.dart';
@@ -53,7 +53,8 @@ class GetStartedPage2 extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => StartUI()),
+                                    MaterialPageRoute(
+                                        builder: (context) => StartUI()),
                                   );
                                 },
                                 child: Text(
@@ -67,7 +68,8 @@ class GetStartedPage2 extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.0),
                             ),
-                            backgroundColor: Colors.white, // Ändere die Hintergrundfarbe nach Bedarf
+                            backgroundColor: Colors
+                                .white, // Ändere die Hintergrundfarbe nach Bedarf
                           );
                         },
                       );
@@ -204,4 +206,3 @@ class GetStartedPage2 extends StatelessWidget {
     );
   }
 }
-

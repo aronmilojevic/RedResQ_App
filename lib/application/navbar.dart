@@ -4,31 +4,48 @@ import 'package:redresq_app/application/modulesroom.dart';
 import 'package:redresq_app/application/news.dart';
 import 'package:redresq_app/application/newsroom.dart';
 import 'package:redresq_app/application/quizroom.dart';
+import 'package:redresq_app/components/offline_no_connection.dart';
+import 'package:redresq_app/components/offline_no_user.dart';
 
 class NavBar extends StatelessWidget {
   final bool isOnline;
+  final bool isRestricted;
 
-  const NavBar({Key? key, required this.isOnline}) : super(key: key);
+  const NavBar({Key? key, required this.isOnline, required this.isRestricted})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return NavigationExample(isOnline: isOnline);
+    return NavigationExample(
+      isOnline: isOnline,
+      isRestricted: isRestricted,
+    );
   }
 }
 
 class NavigationExample extends StatefulWidget {
   final bool isOnline;
+  final bool isRestricted;
 
-  const NavigationExample({Key? key, required this.isOnline}) : super(key: key);
+  const NavigationExample(
+      {Key? key, required this.isOnline, required this.isRestricted})
+      : super(key: key);
 
   @override
   State<NavigationExample> createState() => _NavigationExampleState();
 }
 
 class _NavigationExampleState extends State<NavigationExample> {
-  static int currentPageIndex = 2;
+  late int currentPageIndex = 2;
 
-  final PageController _pageController = PageController(initialPage: 2);
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    currentPageIndex = (widget.isOnline && !widget.isRestricted) ? 2 : 4;
+    _pageController = PageController(initialPage: currentPageIndex);
+  }
 
   void setCurrentPageIndex(int index) {
     setState(() {
@@ -47,10 +64,30 @@ class _NavigationExampleState extends State<NavigationExample> {
           });
         },
         children: [
-          if (widget.isOnline) const Newsroom() else BlankPage(),
-          if (widget.isOnline) const Newsroom() else BlankPage(),
-          if (widget.isOnline) const Dashboard() else BlankPage(),
-          if (widget.isOnline) const QuizRoom() else BlankPage(),
+          if (widget.isOnline && !widget.isRestricted)
+            const Newsroom()
+          else if (!widget.isOnline && !widget.isRestricted)
+            NoInternetConnection()
+          else if (widget.isOnline && widget.isRestricted)
+            NoUser(),
+          if (widget.isOnline && !widget.isRestricted)
+            const Newsroom()
+          else if (!widget.isOnline && !widget.isRestricted)
+            NoInternetConnection()
+          else if (widget.isOnline && widget.isRestricted)
+            NoUser(),
+          if (widget.isOnline && !widget.isRestricted)
+            const Dashboard()
+          else if (!widget.isOnline && !widget.isRestricted)
+            NoInternetConnection()
+          else if (widget.isOnline && widget.isRestricted)
+            NoUser(),
+          if (widget.isOnline && !widget.isRestricted)
+            const QuizRoom()
+          else if (!widget.isOnline && !widget.isRestricted)
+            NoInternetConnection()
+          else if (widget.isOnline && widget.isRestricted)
+            NoUser(),
           const ModulesRoom(),
         ],
       ),
