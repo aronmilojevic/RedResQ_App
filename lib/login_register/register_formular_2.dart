@@ -30,6 +30,7 @@ class _SecondFormularState extends State<SecondFormular> {
   TextEditingController _ortController = TextEditingController();
 
   String _selectedCountry = 'Select Country';
+  // Daten werden aus der API kommen
   final List<String> _euCountries = [
     'Select Country',
     'Austria',

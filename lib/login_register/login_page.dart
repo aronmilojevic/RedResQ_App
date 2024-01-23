@@ -6,7 +6,6 @@ import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/password_reset_1.dart';
 import 'package:redresq_app/login_register/register_formular_1.dart';
 import 'package:redresq_app/components/my_snackbars.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:redresq_app/shared/app_information.dart';
 import 'dart:io';
 
@@ -179,7 +178,7 @@ class _LoginPageState extends State<LoginPage> {
                       context,
                     );
                     if (isAuthenticated) {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => StartUI()),
                       );
@@ -280,6 +279,7 @@ Future<bool> authenticateUser(String username, String password, BuildContext con
 
       return true;
     } else {
+      print('Statuscode: $response.statusCode');
       return false;
     }
   } catch (error) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/application/UIManagement.dart';
 import 'package:redresq_app/components/my_colors.dart';
-import 'package:redresq_app/components/offline_no_user.dart';
 import 'package:redresq_app/login_register/login_page.dart';
 import 'package:redresq_app/login_register/register_formular_1.dart';
 

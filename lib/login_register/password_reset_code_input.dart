@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/components/my_headers.dart';
@@ -188,16 +187,12 @@ Future<String?> fetchAuthToken() async {
 Future<bool> isVerificationCode(String code, String email) async {
   final String? guestToken = await fetchAuthToken();
 
-  final response = await http.post(
-    Uri.parse('https://api.redresq.at/reset'),
+  final response = await http.get(
+    Uri.parse('https://api.redresq.at/reset/verify?code=${int.parse(code)}&email=$email'),
     headers: {
       HttpHeaders.authorizationHeader: "bearer $guestToken",
       HttpHeaders.contentTypeHeader: "application/json",
     },
-    body: jsonEncode({
-      'code': code,
-      'email': email,
-    }),
   );
 
   if (response.statusCode == 200) {
