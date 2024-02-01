@@ -1,3 +1,10 @@
+// Aktivität: IN VERWENDUNG
+// Responsive: JA
+// Status der Seite: Feinichkeiten zu Überarbeiten
+// API implementierung: FERTIG
+// Responsive: Annähernd fertig
+// Kommentar: Telefonnummer entweder entfernen oder nur Nummern erlauben
+
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/components/my_headers.dart';
@@ -29,7 +36,7 @@ class _FirstFormularState extends State<FirstFormular> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(height: 35),
+              SizedBox(height: screenWidth * 0.05),
               Align(
                 alignment: Alignment.topLeft,
                 child: IconButton(
@@ -40,33 +47,33 @@ class _FirstFormularState extends State<FirstFormular> {
                   color: Color(0xff464444),
                 ),
               ),
-              const Text(
+              Text(
                 'Create an Account',
                 style: headerTextStyle,
               ),
-              const SizedBox(height: 15),
-              const Text(
+              SizedBox(height: screenWidth * 0.01),
+              Text(
                 'Fill out the text fields below',
                 style: subHeaderTextStyle,
               ),
-              const SizedBox(height: 5),
+              SizedBox(height: screenWidth * 0.005),
               Image(
                 image: AssetImage('lib/assets/register/progress_formular_1outOf3.png'),
                 width: screenWidth * 0.9,
-                height: 100,
+                height: screenWidth * 0.2,
                 fit: BoxFit.contain,
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: screenWidth * 0.02),
               _buildTextFieldWithIcon(Icons.person, _firstNameController, 'First name', screenWidth),
-              const SizedBox(height: 10),
+              SizedBox(height: screenWidth * 0.02),
               _buildTextFieldWithIcon(Icons.person, _lastNameController, 'Last name', screenWidth),
-              const SizedBox(height: 10),
+              SizedBox(height: screenWidth * 0.02),
               _buildDateOfBirthTextField(screenWidth),
-              const SizedBox(height: 30),
+              SizedBox(height: screenWidth * 0.04),
               _buildTextFieldWithIcon(Icons.email, _emailController, 'E-Mail', isEmail: true, screenWidth),
-              const SizedBox(height: 10),
+              SizedBox(height: screenWidth * 0.02),
               _buildTextFieldWithIcon(Icons.phone, _mobileNumberController, 'Mobile number', screenWidth),
-              const SizedBox(height: 30),
+              SizedBox(height: screenWidth * 0.04),
               _buildNextButton(context, screenWidth),
               TextButton(
                 onPressed: () {
@@ -80,7 +87,7 @@ class _FirstFormularState extends State<FirstFormular> {
                   text: TextSpan(
                     text: 'Already have an account? ',
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: screenWidth * 0.04,
                       color: Color(0xff464444),
                       fontWeight: FontWeight.normal,
                     ),
@@ -88,7 +95,7 @@ class _FirstFormularState extends State<FirstFormular> {
                       TextSpan(
                         text: 'Login',
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: screenWidth * 0.04,
                           color: myRedColor,
                           fontWeight: FontWeight.bold,
                         ),
@@ -110,7 +117,7 @@ class _FirstFormularState extends State<FirstFormular> {
       child: Material(
         elevation: 5,
         borderRadius: BorderRadius.circular(15),
-        color: const Color(0xfff3f3f3),
+        color: Color(0xfff3f3f3),
         child: Row(
           children: [
             Padding(
@@ -159,7 +166,7 @@ class _FirstFormularState extends State<FirstFormular> {
       child: Material(
         elevation: 5,
         borderRadius: BorderRadius.circular(15),
-        color: const Color(0xfff3f3f3),
+        color: Color(0xfff3f3f3),
         child: Row(
           children: [
             Padding(
@@ -261,7 +268,7 @@ class _FirstFormularState extends State<FirstFormular> {
   Widget _buildNextButton(BuildContext context, double screenWidth) {
     return Material(
       elevation: 10,
-      borderRadius: const BorderRadius.all(Radius.circular(15)),
+      borderRadius: BorderRadius.all(Radius.circular(15)),
       color: myRedColor,
       child: MaterialButton(
         onPressed: () {
@@ -283,11 +290,11 @@ class _FirstFormularState extends State<FirstFormular> {
         },
         minWidth: screenWidth * 0.9,
         height: 60,
-        child: const Text(
+        child: Text(
           'Next',
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 25,
+            fontSize: screenWidth * 0.06,
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),

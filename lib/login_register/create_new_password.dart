@@ -229,6 +229,8 @@ Future<bool> resetPassword(String confirmationCode, String email, String passwor
     return true;
   } else {
     print('Fehler beim Zurücksetzen des Passworts: ${response.statusCode}');
+    print('Response body: ${response.body}');
+
     return false;
   }
 }
