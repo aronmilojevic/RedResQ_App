@@ -1,12 +1,15 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:redresq_app/application/dashboard.dart';
 import 'package:redresq_app/application/modulesroom.dart';
 import 'package:redresq_app/application/news.dart';
 import 'package:redresq_app/application/newsroom.dart';
 import 'package:redresq_app/application/quizroom.dart';
+import 'package:redresq_app/location/location_service.dart';
 
 class NavBar extends StatelessWidget {
   final bool isOnline;
+
 
   const NavBar({Key? key, required this.isOnline}) : super(key: key);
 
@@ -26,6 +29,8 @@ class NavigationExample extends StatefulWidget {
 }
 
 class _NavigationExampleState extends State<NavigationExample> {
+
+
   static int currentPageIndex = 2;
 
   final PageController _pageController = PageController(initialPage: 2);
@@ -132,3 +137,5 @@ class BlankPage extends StatelessWidget {
     );
   }
 }
+
+

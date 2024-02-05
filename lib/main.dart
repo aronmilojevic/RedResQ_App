@@ -26,11 +26,7 @@ void main() async {
 
   final notificationSettings = await FirebaseMessaging.instance.requestPermission(provisional: true);
 
-  var locService = LocationService();
-  final token = await FirebaseMessaging.instance.getToken();
-  var loc = await locService.getCurrentLocation();
 
-  locService.logLocation(loc.longitude, loc.latitude, token);
 
 
 /*

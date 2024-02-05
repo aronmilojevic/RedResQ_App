@@ -1,11 +1,12 @@
 import 'dart:convert';
-import 'dart:html';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:redresq_app/application/UIManagement.dart';
+import 'package:redresq_app/shared/app_information.dart';
+
 import 'package:redresq_app/components/my_snackbars.dart';
 
 class LocationService {
@@ -38,19 +39,20 @@ class LocationService {
 
   Future<void> logLocation(var longitude, var latitude, var notificationToken) async {
     try {
-      final String? token = await fetchAuthToken();
+      AppInformation.initialize();
+      final String? userToken = await AppInformation.getUserToken();
 
-      if (token != null) {
-        final apiUrl = 'https://api.redresq.at/auth/register?lon=$longitude&lat=$latitude';
+      if (userToken != null) {
+        final apiUrl = 'https://api.redresq.at/coordinates/log?lon=$longitude&lat=$latitude';
 
         final response = await http.post(
           Uri.parse(apiUrl),
           headers: {
             HttpHeaders.authorizationHeader:
-            "bearer $token",
+            "bearer $userToken",
             HttpHeaders.contentTypeHeader: "application/json",
           },
-          body: notificationToken,
+          body: jsonEncode(notificationToken),
         );
 
         if (response.statusCode == 200) {
@@ -65,26 +67,4 @@ class LocationService {
     }
   }
 
-
-  Future<String?> fetchAuthToken() async {
-    final apiUrl = 'https://api.redresq.at/guest/request';
-
-    try {
-      final response = await http.get(
-        Uri.parse(apiUrl),
-      );
-
-      if (response.statusCode == 200) {
-        final String authToken = response.body;
-        return authToken;
-      } else {
-        print('Fehler beim Abrufen des Authentifizierungstokens: ${response.statusCode}');
-        print('API-Antwort: ${response.body}');
-        return null;
-      }
-    } catch (error) {
-      print('Netzwerkfehler beim Abrufen des Authentifizierungstokens: $error');
-      return null;
-    }
-  }
 }

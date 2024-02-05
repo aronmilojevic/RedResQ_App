@@ -1,5 +1,7 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
+import 'package:redresq_app/location/location_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<void> main() async {
@@ -8,6 +10,7 @@ Future<void> main() async {
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
+
   final _name = 'Theo';
   _launchURL() async {
     Uri url = Uri.parse('https://www.roteskreuz.at/news');
@@ -254,3 +257,4 @@ class Dashboard extends StatelessWidget {
     );
   }
 }
+
