@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "540760260501",
+    "project_id": "redresq-87637",
+    "storage_bucket": "redresq-87637.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540760260501:android:7a68982c711fd880e3c09c",
+        "android_client_info": {
+          "package_name": "com.example.redresq_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhg0Dq0Yud7mp3tvhq7_19sjAw16kFw7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

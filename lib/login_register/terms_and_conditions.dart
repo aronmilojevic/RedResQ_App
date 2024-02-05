@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_headers.dart';
 
 class TermsAndConditions extends StatelessWidget {
-  const TermsAndConditions({Key? key}) : super(key: key);
+  const TermsAndConditions({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +17,11 @@ class TermsAndConditions extends StatelessWidget {
               Align(
                 alignment: Alignment.topLeft,
                 child: IconButton(
-                  icon: Icon(Icons.transit_enterexit),
+                  icon: const Icon(Icons.transit_enterexit),
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  color: Color(0xff464444),
+                  color: const Color(0xff464444),
                 ),
               ),
               const Text(

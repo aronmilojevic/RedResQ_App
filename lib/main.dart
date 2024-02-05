@@ -1,25 +1,37 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:connectivity/connectivity.dart';
-import 'package:redresq_app/application/UIManagement.dart';
-import 'package:redresq_app/login_register/start_page.dart';
-import 'package:redresq_app/components/phone_information.dart';
 import 'package:redresq_app/login_register/start_page_2.0.dart';
-import 'package:redresq_app/notifications/notification_helper_android.dart';
 import 'dart:io';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:http/http.dart' as http;
-import 'package:redresq_app/shared/app_information.dart';
-import 'package:redresq_app/login_register/Profile/userprofile_drawer.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:redresq_app/notifications/notification.dart';
+import 'package:redresq_app/location/location_service.dart';
 
 void main() async {
 
   runApp(
     MaterialApp(
       home: GetStartedPage2(),
-      //StartUI()
     ),
   );
+
+  // Firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  setup();
+
+  final notificationSettings = await FirebaseMessaging.instance.requestPermission(provisional: true);
+
+  var locService = LocationService();
+  final token = await FirebaseMessaging.instance.getToken();
+  var loc = await locService.getCurrentLocation();
+
+  locService.logLocation(loc.longitude, loc.latitude, token);
+
 
 /*
   if(checkInternetConnection()==true){

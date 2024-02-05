@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-void main() {
+Future<void> main() async {
   runApp(Dashboard());
 }
 

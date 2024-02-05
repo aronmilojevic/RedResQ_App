@@ -7,6 +7,9 @@ import 'package:redresq_app/login_register/password_reset_1.dart';
 import 'package:redresq_app/login_register/register_formular_1.dart';
 import 'package:redresq_app/components/my_snackbars.dart';
 import 'package:redresq_app/shared/app_information.dart';
+import 'package:redresq_app/notifications/notification.dart';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'dart:io';
 
 
@@ -18,6 +21,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
+
   bool _isPasswordVisible = false;
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -203,6 +210,10 @@ class _LoginPageState extends State<LoginPage> {
                     context,
                   );
                   if (isAuthenticated) {
+
+                    requestPermissions();
+
+                    // Request notification permissions
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => StartUI()),
@@ -261,6 +272,8 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 
+
+// fetchGuestToken
 Future<String?> fetchAuthToken() async {
   final apiUrl = 'https://api.redresq.at/guest/request';
 
