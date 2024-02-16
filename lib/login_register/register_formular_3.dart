@@ -1,15 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
 import 'package:redresq_app/application/UIManagement.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/components/my_headers.dart';
+import 'package:redresq_app/components/my_snackbars.dart';
 import 'package:redresq_app/login_register/terms_and_conditions.dart';
 import 'package:redresq_app/login_register/user.dart';
-import 'package:redresq_app/components/my_snackbars.dart';
-
 
 class ThirdFormular extends StatefulWidget {
   final String firstName;
@@ -48,14 +47,7 @@ class _ThirdFormularState extends State<ThirdFormular> {
   TextEditingController _dobController = TextEditingController();
 
   late DateTime birthday;
-  //Language userLanguage = Language(id: 1, name: "German");
-  //Location userLocation = Location(id: 1, country: "Germany", city: "Berlin", postalCode: "12345");
-  //Role userRole = Role(id: 0, name: 'user');
-
   String _passwordErrorText = '';
-
-  static const double _screenPadding = 30.0;
-
 
   _ThirdFormularState({
     required String firstName,
@@ -75,118 +67,57 @@ class _ThirdFormularState extends State<ThirdFormular> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(height: 35),
+              SizedBox(height: screenHeight * 0.04),
               Align(
                 alignment: Alignment.topLeft,
                 child: IconButton(
                   icon: Icon(Icons.arrow_back),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  color: Color(0xff464444),
+                  onPressed: () => Navigator.pop(context),
+                  color: myBlackColor,
                 ),
               ),
               Text(
                 'Create your user',
-                style: headerTextStyle,
+                style: headerTextStyle.copyWith(fontSize: screenHeight * 0.035),
               ),
-              const SizedBox(height: 15),
-              const Text(
+              SizedBox(height: screenHeight * 0.01),
+              Text(
                 'Fill out the text fields below',
-                style: subHeaderTextStyle,
+                style: subHeaderTextStyle.copyWith(fontSize: screenHeight * 0.02),
               ),
-              const SizedBox(height: 5),
-              const Image(
+              SizedBox(height: screenHeight * 0.02),
+              Image(
                 image: AssetImage('lib/assets/register/progress_formular_3outOf3.png'),
-                width: 350,
-                height: 100,
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.1,
                 fit: BoxFit.contain,
               ),
-              const SizedBox(height: 10),
-              _buildTextFieldWithIcon(Icons.person, _usernameController, 'Username'),
-              const SizedBox(height: 25),
-              _buildPasswordTextField(),
-              const SizedBox(height: 5),
-              _buildConfirmPasswordTextField(),
-              const SizedBox(height: 5),
+              SizedBox(height: screenHeight * 0.03),
+              _buildTextFieldWithIcon(Icons.person, _usernameController, 'Username', screenWidth, screenHeight),
+              SizedBox(height: screenHeight * 0.02),
+              _buildPasswordTextField(screenWidth, screenHeight),
+              SizedBox(height: screenHeight * 0.02),
+              _buildConfirmPasswordTextField(screenWidth, screenHeight),
+              SizedBox(height: screenHeight * 0.01),
               Text(
                 _passwordErrorText,
                 style: TextStyle(
                   color: myRedColor,
-                  fontSize: 16,
+                  fontSize: screenHeight * 0.02,
                 ),
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: _screenPadding),
-                  child: Row(
-                    children: [
-                      const SizedBox(width: 20),
-                      Checkbox(
-                        value: _isChecked,
-                        onChanged: (value) {
-                          setState(() {
-                            _isChecked = value!;
-                          });
-                        },
-                        fillColor: MaterialStateProperty.resolveWith<Color>(
-                              (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.selected)) {
-                              return myRedColor;
-                            }
-                            return myGreyColor;
-                          },
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                        side: BorderSide(
-                          color: Colors.black12,
-                          width: 2.0,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      GestureDetector(
-                        onTap: () {},
-                        child: const Text(
-                          'I agree to the ',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Color(0xff464444),
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => TermsAndConditions()),
-                          );
-                        },
-                        child: const Text(
-                          'terms and conditions',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Color(0xff464444),
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 30),
-              _buildFinishButton(context),
+              _buildAgreementCheckbox(screenWidth, screenHeight),
+              SizedBox(height: screenHeight * 0.03),
+              _buildFinishButton(context, screenWidth, screenHeight),
             ],
           ),
         ),
@@ -194,40 +125,32 @@ class _ThirdFormularState extends State<ThirdFormular> {
     );
   }
 
-  Widget _buildTextFieldWithIcon(
-      IconData icon, TextEditingController controller, String hintText) {
+  Widget _buildTextFieldWithIcon(IconData icon, TextEditingController controller, String hintText, double screenWidth, double screenHeight) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: _screenPadding),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
       child: Material(
-        elevation: 5,
-        borderRadius: BorderRadius.circular(15),
-        color: const Color(0xfff3f3f3),
+        elevation: screenHeight * 0.01,
+        borderRadius: BorderRadius.circular(screenHeight * 0.015),
+        color: myGreyColor,
         child: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(screenHeight * 0.02),
               child: Icon(
                 icon,
-                color: Color(0xff464444),
+                color: myBlackColor,
+                size: screenHeight * 0.03,
               ),
             ),
             Expanded(
               child: TextField(
                 controller: controller,
-                onChanged: (value) {
-                  setState(() {
-                    _passwordErrorText = _validateUsername(value);
-                  });
-                },
                 decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0x00000000)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0x00000000)),
-                  ),
                   hintText: hintText,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(fontSize: screenHeight * 0.02),
                 ),
+                style: TextStyle(fontSize: screenHeight * 0.02),
               ),
             ),
           ],
@@ -236,46 +159,40 @@ class _ThirdFormularState extends State<ThirdFormular> {
     );
   }
 
-  Widget _buildPasswordTextField() {
+  Widget _buildPasswordTextField(double screenWidth, double screenHeight) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: _screenPadding),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
       child: Material(
-        elevation: 5,
-        borderRadius: BorderRadius.circular(15),
-        color: const Color(0xfff3f3f3),
+        elevation: screenHeight * 0.01,
+        borderRadius: BorderRadius.circular(screenHeight * 0.015),
+        color: myGreyColor,
         child: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(screenHeight * 0.02),
               child: Icon(
                 Icons.lock,
-                color: Color(0xff464444),
+                color: myBlackColor,
+                size: screenHeight * 0.03,
               ),
             ),
             Expanded(
               child: TextField(
                 controller: _passwordController,
                 obscureText: !_isPasswordVisible,
-                onChanged: (value) {
-                  setState(() {
-                    _passwordErrorText = _validatePassword(value);
-                  });
-                },
                 decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0x00000000)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0x00000000)),
-                  ),
                   hintText: 'New password',
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(fontSize: screenHeight * 0.02),
                 ),
+                style: TextStyle(fontSize: screenHeight * 0.02),
               ),
             ),
             IconButton(
               icon: Icon(
                 _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
-                color: Color(0xff464444),
+                color: myBlackColor,
+                size: screenHeight * 0.03,
               ),
               onPressed: () {
                 setState(() {
@@ -289,48 +206,40 @@ class _ThirdFormularState extends State<ThirdFormular> {
     );
   }
 
-  Widget _buildConfirmPasswordTextField() {
+  Widget _buildConfirmPasswordTextField(double screenWidth, double screenHeight) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: _screenPadding),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
       child: Material(
-        elevation: 5,
-        borderRadius: BorderRadius.circular(15),
-        color: const Color(0xfff3f3f3),
+        elevation: screenHeight * 0.01,
+        borderRadius: BorderRadius.circular(screenHeight * 0.015),
+        color: myGreyColor,
         child: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(screenHeight * 0.02),
               child: Icon(
                 Icons.lock,
-                color: Color(0xff464444),
+                color: myBlackColor,
+                size: screenHeight * 0.03,
               ),
             ),
             Expanded(
               child: TextField(
                 controller: _confirmPasswordController,
                 obscureText: !_isConfirmPasswordVisible,
-                onChanged: (value) {
-                  setState(() {
-                    _passwordErrorText = '';
-                  });
-                },
                 decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0x00000000)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0x00000000)),
-                  ),
                   hintText: 'Confirm password',
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(fontSize: screenHeight * 0.02),
                 ),
+                style: TextStyle(fontSize: screenHeight * 0.02),
               ),
             ),
             IconButton(
               icon: Icon(
-                _isConfirmPasswordVisible
-                    ? Icons.visibility_off
-                    : Icons.visibility,
-                color: Color(0xff464444),
+                _isConfirmPasswordVisible ? Icons.visibility_off : Icons.visibility,
+                color: myBlackColor,
+                size: screenHeight * 0.03,
               ),
               onPressed: () {
                 setState(() {
@@ -344,12 +253,46 @@ class _ThirdFormularState extends State<ThirdFormular> {
     );
   }
 
-  Widget _buildFinishButton(BuildContext context) {
-    return Material(
-      elevation: 10,
-      borderRadius: const BorderRadius.all(Radius.circular(15)),
-      color: myRedColor,
+  Widget _buildAgreementCheckbox(double screenWidth, double screenHeight) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Checkbox(
+            value: _isChecked,
+            onChanged: (bool? value) {
+              setState(() {
+                _isChecked = value!;
+              });
+            },
+            fillColor: MaterialStateProperty.resolveWith<Color>(
+                  (Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  return myRedColor;
+                }
+                return myGreyColor;
+              },
+            ),
+          ),
+          GestureDetector(
+            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => TermsAndConditions())),
+            child: Text(
+              'I agree to the terms and conditions',
+              style: TextStyle(fontSize: screenHeight * 0.02, color: Color(0xff464444)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFinishButton(BuildContext context, double screenWidth, double screenHeight) {
+    return Container(
+      width: screenWidth * 0.9,
       child: MaterialButton(
+        elevation: screenHeight * 0.02,
+        color: myRedColor,
         onPressed: () {
           if (_usernameController.text.isEmpty || _passwordController.text.isEmpty || _confirmPasswordController.text.isEmpty) {
 
@@ -377,35 +320,31 @@ class _ThirdFormularState extends State<ThirdFormular> {
               });
             } else {
               User newUser = User(
-                username: _usernameController.text,
-                firstName: _firstNameController.text,
-                lastName: _lastNameController.text,
-                email: _emailController.text,
-                bday: birthday,
-                password: _passwordController.text,
-                gender: 1,
-                language: 1,
-                location: 1,
-                role: 1
+                  username: _usernameController.text,
+                  firstName: _firstNameController.text,
+                  lastName: _lastNameController.text,
+                  email: _emailController.text,
+                  bday: birthday,
+                  password: _passwordController.text,
+                  gender: 1,
+                  language: 1,
+                  location: 1,
+                  role: 1
               );
               createUserInAPI(context, newUser);
             }
           }
         },
-        minWidth: 350,
-        height: 60,
-        child: const Text(
+        child: Text(
           'Finish',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 25,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.white, fontSize: screenHeight * 0.025, fontWeight: FontWeight.bold),
         ),
+        padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(screenHeight * 0.015)),
       ),
     );
   }
+
 
   String _validateUsername(String username) {
     if (username.length < 6) {
@@ -438,8 +377,10 @@ class _ThirdFormularState extends State<ThirdFormular> {
   }
 }
 
+
 Future<String?> fetchAuthToken() async {
   final apiUrl = 'https://api.redresq.at/guest/request';
+
 
   try {
     final response = await http.get(
@@ -459,8 +400,6 @@ Future<String?> fetchAuthToken() async {
     return null;
   }
 }
-
-
 
 Future<void> createUserInAPI(BuildContext context, User user) async {
   try {
@@ -524,9 +463,12 @@ Future<void> createUserInAPI(BuildContext context, User user) async {
       }
     } else {
       showErrorSnackbar(context, 'Fehler beim Abrufen des Authentifizierungstokens');
+      print('Hier');
     }
   } catch (error) {
     showErrorSnackbar(context, 'Netzwerkfehler: $error');
     print('Netzwerkfehler: $error');
   }
 }
+
+

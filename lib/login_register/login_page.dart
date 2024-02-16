@@ -39,13 +39,22 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(height: screenHeight * 0.05),
+            SizedBox(height: screenHeight * 0.04),
+            Align(
+              alignment: Alignment.topLeft,
+              child: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () => Navigator.pop(context),
+                color: Color(0xff464444),
+              ),
+            ),
+            SizedBox(height: screenHeight * 0.01),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.15),
               child: Image(
                 image: AssetImage('lib/assets/login/login_person_3.png'),
-                width: screenWidth * 0.7,
-                height: screenHeight * 0.2,
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.3,
                 fit: BoxFit.contain,
               ),
             ),
@@ -54,26 +63,26 @@ class _LoginPageState extends State<LoginPage> {
               'Welcome back!',
               style: TextStyle(
                 color: myBlackColor,
-                fontSize: screenHeight * 0.025,
+                fontSize: screenHeight * 0.03,
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: screenHeight * 0.01),
             Text(
-              'Nice to see you again',
+              'Nice to see you',
               style: TextStyle(
                 color: myBlackColor,
-                fontSize: screenHeight * 0.012,
+                fontSize: screenHeight * 0.02,
                 fontWeight: FontWeight.normal,
               ),
             ),
-            SizedBox(height: screenHeight * 0.07),
+            SizedBox(height: screenHeight * 0.04),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
               child: Container(
                 width: screenWidth * 0.9,
                 child: Material(
-                  elevation: 5,
+                  elevation: screenHeight * 0.01,
                   borderRadius: BorderRadius.circular(screenHeight * 0.015),
                   color: myGreyColor,
                   child: Row(
@@ -91,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                           controller: _usernameController,
                           style: TextStyle(
                             color: myBlackColor,
-                            fontSize: screenHeight * 0.02,
+                            fontSize: screenHeight * 0.025,
                           ),
                           cursorColor: myRedColor,
                           decoration: InputDecoration(
@@ -113,13 +122,14 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            SizedBox(height: screenHeight * 0.01),
+            SizedBox(height: screenHeight * 0.02),
             Padding(
+
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
               child: Container(
                 width: screenWidth * 0.9,
                 child: Material(
-                  elevation: 5,
+                  elevation: screenHeight * 0.01,
                   borderRadius: BorderRadius.circular(screenHeight * 0.015),
                   color: const Color(0xfff3f3f3),
                   child: Row(
@@ -138,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                           obscureText: !_isPasswordVisible,
                           style: TextStyle(
                             color: myBlackColor,
-                            fontSize: screenHeight * 0.02,
+                            fontSize: screenHeight * 0.025,
                           ),
                           cursorColor: myRedColor,
                           decoration: InputDecoration(
@@ -191,7 +201,8 @@ class _LoginPageState extends State<LoginPage> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: screenHeight * 0.02,
-                      color: Color(0xff464444),
+                      color: myBlackColor,
+                      fontWeight: FontWeight.normal,
                     ),
                   ),
                 ),
@@ -199,7 +210,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: screenHeight * 0.005),
             Material(
-              elevation: 10,
+              elevation: screenHeight * 0.02,
               borderRadius: BorderRadius.all(Radius.circular(screenHeight * 0.015)),
               color: myRedColor,
               child: MaterialButton(
@@ -248,7 +259,7 @@ class _LoginPageState extends State<LoginPage> {
                   text: 'Don\'t have an account? ',
                   style: TextStyle(
                     fontSize: screenHeight * 0.02,
-                    color: Color(0xff464444),
+                    color: myBlackColor,
                     fontWeight: FontWeight.normal,
                   ),
                   children: [

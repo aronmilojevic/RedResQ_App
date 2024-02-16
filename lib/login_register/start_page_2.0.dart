@@ -31,6 +31,8 @@ class GetStartedPage2 extends StatelessWidget {
 
     // Get the screen width for responsive design
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
 
     // Build the main widget structure
     return Scaffold(
@@ -45,7 +47,7 @@ class GetStartedPage2 extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
 
-                    SizedBox(height: screenWidth * 0.02),
+                    SizedBox(height: screenHeight * 0.02),
 
                     Align(
                       alignment: Alignment.centerLeft,
@@ -106,18 +108,18 @@ class GetStartedPage2 extends StatelessWidget {
 
                         // Skip button styling
                         child: ConstrainedBox(
-                          constraints: BoxConstraints(maxWidth: screenWidth * 0.15),
+                          constraints: BoxConstraints(maxWidth: screenHeight * 0.07),
                           child: Row(
                             children: [
                               Icon(
                                 Icons.arrow_back_ios,
                                 color: Colors.white,
-                                size: screenWidth * 0.04,
+                                size: screenHeight * 0.02,
                               ),
                               Text(
                                 ' Skip',
                                 style: TextStyle(
-                                  fontSize: screenWidth * 0.04,
+                                  fontSize: screenHeight * 0.02,
                                   color: Colors.white,
                                 ),
                               ),
@@ -133,34 +135,34 @@ class GetStartedPage2 extends StatelessWidget {
                       ),
                     ),
 
-                    SizedBox(height: screenWidth * 0.02),
+                    SizedBox(height: screenHeight * 0.01),
 
                     // Display an image
                     Image(
                       image: AssetImage('lib/assets/start/get_started_img.png'),
-                      width: screenWidth * 0.8,
-                      fit: BoxFit.cover,
+                      width: screenWidth * 0.9,
+                      height: screenHeight * 0.4,
+                      fit: BoxFit.contain,
                     ),
 
-                    SizedBox(height: screenWidth * 0.05),
+                    SizedBox(height: screenHeight * 0.03),
 
                     // Display title and description
                     Text(
                       'Become a ResQer',
                       style: TextStyle(
                         color: myBlackColor,
-                        fontSize: screenWidth * 0.095,
+                        fontSize: screenHeight * 0.04,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
-                    SizedBox(height: screenWidth * 0.04),
+                    SizedBox(height: screenHeight * 0.02),
 
                     Text(
                       'Protect yourself and others around you!',
                       style: TextStyle(
                         color: myBlackColor,
-                        fontSize: screenWidth * 0.05,
+                        fontSize: screenHeight * 0.025,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -169,7 +171,7 @@ class GetStartedPage2 extends StatelessWidget {
                       'Our goal is saving lives through our',
                       style: TextStyle(
                         color: myBlackColor,
-                        fontSize: screenWidth * 0.05,
+                        fontSize: screenHeight * 0.025,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -178,80 +180,68 @@ class GetStartedPage2 extends StatelessWidget {
                       'developed IT system',
                       style: TextStyle(
                         color: myBlackColor,
-                        fontSize: screenWidth * 0.05,
+                        fontSize: screenHeight * 0.025,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
 
-                    SizedBox(height: screenWidth * 0.06),
+                    SizedBox(height: screenHeight * 0.04),
 
-                    // Display "Join Now" button
-                    Container(
-                      width: screenWidth * 0.9,
-                      padding: EdgeInsets.symmetric(horizontal: 5),
-                      child: Material(
-                        elevation: screenWidth * 0.03,
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
-                        color: myRedColor,
-                        child: MaterialButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => FirstFormular(),
-                              ),
-                            );
-                          },
-                          height: screenWidth * 0.15,
-                          child: Text(
-                            'Join Now',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: screenWidth * 0.06,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                    Material(
+                      elevation: screenHeight * 0.02,
+                      borderRadius: BorderRadius.all(Radius.circular(screenHeight * 0.015)),
+                      color: myRedColor,
+                      child: MaterialButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FirstFormular(),
                             ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: screenWidth * 0.02),
-
-                    // Display "Login" button
-                    Container(
-                      width: screenWidth * 0.9,
-                      padding: EdgeInsets.symmetric(horizontal: 5),
-                      child: Material(
-                        elevation: screenWidth * 0.01,
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
-                        color: myGreyColor,
-                        child: MaterialButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => LoginPage()),
-                            );
-                          },
-                          height: screenWidth * 0.15,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            side: BorderSide(color: myGreyColor, width: screenWidth * 0.003),
-                          ),
-                          child: Text(
-                            'Login',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: screenWidth * 0.06,
-                              color: myRedColor,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          );
+                        },
+                        minWidth: screenWidth * 0.9,
+                        height: screenHeight * 0.075,
+                        child: Text(
+                          'Join Now',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: screenHeight * 0.025,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                     ),
 
-                    SizedBox(height: screenWidth * 0.005),
+                    SizedBox(height: screenHeight * 0.01),
 
+                    Material(
+                      elevation: screenHeight * 0.02,
+                      borderRadius: BorderRadius.all(Radius.circular(screenHeight * 0.015)),
+                      color: myGreyColor,
+                      child: MaterialButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LoginPage()),
+                          );
+                        },
+                        minWidth: screenWidth * 0.9,
+                        height: screenHeight * 0.075,
+                        child: Text(
+                          'Login',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: screenHeight * 0.025,
+                            color: myRedColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(height: screenHeight * 0.02),
                   ],
                 ),
               ),

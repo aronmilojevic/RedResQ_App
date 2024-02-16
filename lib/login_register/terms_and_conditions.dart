@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/components/my_headers.dart';
 
 class TermsAndConditions extends StatelessWidget {
@@ -6,27 +7,32 @@ class TermsAndConditions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-
-              const SizedBox(height: 35),
+              SizedBox(height: screenHeight * 0.04),
               Align(
                 alignment: Alignment.topLeft,
                 child: IconButton(
-                  icon: const Icon(Icons.transit_enterexit),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  color: const Color(0xff464444),
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () => Navigator.pop(context),
+                  color: myBlackColor,
                 ),
               ),
-              const Text(
+              Text(
                 'Terms and Conditions',
-                style: headerTextStyle,
+                style: headerTextStyle.copyWith(fontSize: screenHeight * 0.035),
+              ),
+              SizedBox(height: screenHeight * 0.01),
+              Text(
+                'Read the text below',
+                style: subHeaderTextStyle.copyWith(fontSize: screenHeight * 0.02),
               ),
 
 

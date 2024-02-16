@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'package:redresq_app/notifications/notification.dart';
+import 'package:redresq_app/notifications/notification_handler.dart';
 import 'package:redresq_app/location/location_service.dart';
 
 void main() async {
@@ -22,7 +22,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  setup();
+  NotificationHandler().initNotifications();
 
   final notificationSettings = await FirebaseMessaging.instance.requestPermission(provisional: true);
 

@@ -64,13 +64,19 @@ class _SecondFormularState extends State<SecondFormular> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
+
     return Scaffold(
         body: SingleChildScrollView(
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const SizedBox(height: 35),
+
+                SizedBox(height: screenHeight * 0.04),
+
                 Align(
                   alignment: Alignment.topLeft,
                   child: IconButton(
@@ -78,32 +84,37 @@ class _SecondFormularState extends State<SecondFormular> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    color: Color(0xff464444),
+                    color: myBlackColor,
                   ),
                 ),
-                const Text(
+
+                Text(
                   'Few more steps',
-                  style: headerTextStyle,
+                  style: headerTextStyle.copyWith(fontSize: screenHeight * 0.035),
                 ),
-                const SizedBox(height: 15),
-                const Text(
+
+                SizedBox(height: screenHeight * 0.01),
+
+                Text(
                   'Fill out the text fields below',
-                  style: subHeaderTextStyle,
+                  style: subHeaderTextStyle.copyWith(fontSize: screenHeight * 0.02),
                 ),
-                const SizedBox(height: 5),
-                const Image(
+
+                SizedBox(height: screenHeight * 0.02),
+
+                Image(
                   image: AssetImage('lib/assets/register/progress_formular_2outOf3.png'),
-                  width: 350,
-                  height: 100,
+                  width: screenWidth * 0.9,
+                  height: screenHeight * 0.1,
                   fit: BoxFit.contain,
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: screenHeight * 0.03),
                 _buildDropdownMenu(),
-                const SizedBox(height: 10),
+                SizedBox(height: screenHeight * 0.02),
                 _buildTextFieldWithIcon(Icons.place, _adresseController, 'Address'),
-                const SizedBox(height: 10),
+                SizedBox(height: screenHeight * 0.02),
                 _buildCityAndOrtFields(),
-                const SizedBox(height: 30),
+                SizedBox(height: screenHeight * 0.04),
                 _buildNextButton(context),
               ],
             ),
@@ -113,30 +124,33 @@ class _SecondFormularState extends State<SecondFormular> {
   }
 
   Widget _buildDropdownMenu() {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
       child: Material(
-        elevation: 5,
-        borderRadius: BorderRadius.circular(15),
+        elevation: screenHeight * 0.008,
+        borderRadius: BorderRadius.circular(screenHeight * 0.015),
         color: const Color(0xfff3f3f3),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(screenHeight * 0.015),
           child: Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(screenHeight * 0.02),
                 child: Icon(
-                  Icons.place,
+                  Icons.flag_rounded,
                   color: Color(0xff464444),
                 ),
               ),
-              SizedBox(width: 10),
+
               Expanded(
                 child: InkWell(
                   onTap: () {
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 7),
+                    padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.015),
                     child: DropdownButton<String>(
                       value: _selectedCountry,
                       onChanged: (String? value) {
@@ -149,12 +163,13 @@ class _SecondFormularState extends State<SecondFormular> {
                           value: country,
                           child: Text(
                             country,
-                            style: TextStyle(color: Color(0xff70706c)),
+                            style: TextStyle(fontSize: screenHeight * 0.02),
+
                           ),
                         );
                       }).toList(),
                       icon: Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
+                        padding: EdgeInsets.only(right: 8.0),
                         child: Icon(Icons.arrow_drop_down),
                       ),
                       underline: Container(),
@@ -170,16 +185,19 @@ class _SecondFormularState extends State<SecondFormular> {
   }
 
   Widget _buildTextFieldWithIcon(IconData icon, TextEditingController controller, String hintText) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
       child: Material(
-        elevation: 5,
+        elevation: screenHeight * 0.01,
         borderRadius: BorderRadius.circular(15),
         color: const Color(0xfff3f3f3),
         child: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(screenHeight * 0.02),
               child: Icon(
                 icon,
                 color: Color(0xff464444),
@@ -187,6 +205,7 @@ class _SecondFormularState extends State<SecondFormular> {
             ),
             Expanded(
               child: TextField(
+                style: TextStyle(fontSize: screenHeight * 0.02),
                 controller: controller,
                 onChanged: (value) {
                   controller.text = value;
@@ -199,6 +218,7 @@ class _SecondFormularState extends State<SecondFormular> {
                     borderSide: BorderSide(color: Color(0x00000000)),
                   ),
                   hintText: hintText,
+                  hintStyle: TextStyle(fontSize: screenHeight * 0.02),
                 ),
               ),
             ),
@@ -209,19 +229,21 @@ class _SecondFormularState extends State<SecondFormular> {
   }
 
   Widget _buildCityAndOrtFields() {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
       child: Row(
         children: [
           Expanded(
             child: Material(
-              elevation: 5,
+              elevation: screenHeight * 0.01,
               borderRadius: BorderRadius.circular(15),
               color: const Color(0xfff3f3f3),
               child: Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(screenHeight * 0.02),
                     child: Icon(
                       Icons.place,
                       color: Color(0xff464444),
@@ -241,23 +263,26 @@ class _SecondFormularState extends State<SecondFormular> {
                           borderSide: BorderSide(color: Color(0x00000000)),
                         ),
                         hintText: 'City',
+                        hintStyle: TextStyle(fontSize: screenHeight * 0.02),
+
                       ),
+                      style: TextStyle(fontSize: screenHeight * 0.02 ),
                     ),
                   ),
                 ],
               ),
             ),
           ),
-          SizedBox(width: 16),
+          SizedBox(width: screenWidth * 0.05),
           Expanded(
             child: Material(
-              elevation: 5,
+              elevation: screenHeight * 0.01,
               borderRadius: BorderRadius.circular(15),
               color: const Color(0xfff3f3f3),
               child: Row(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(screenHeight * 0.02),
                     child: Icon(
                       Icons.place,
                       color: Color(0xff464444),
@@ -277,7 +302,11 @@ class _SecondFormularState extends State<SecondFormular> {
                           borderSide: BorderSide(color: Color(0x00000000)),
                         ),
                         hintText: 'Place',
+                        hintStyle: TextStyle(fontSize: screenHeight * 0.02),
+
                       ),
+                      style: TextStyle(fontSize: screenHeight * 0.02 ),
+
                     ),
                   ),
                 ],
@@ -289,12 +318,15 @@ class _SecondFormularState extends State<SecondFormular> {
     );
   }
 
-  Widget _buildNextButton(BuildContext context) {
-    return Material(
-      elevation: 10,
-      borderRadius: const BorderRadius.all(Radius.circular(15)),
-      color: myRedColor,
+  _buildNextButton(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    return Container(
+      width: screenWidth * 0.9,
       child: MaterialButton(
+        elevation: 10,
+        color: myRedColor,
         onPressed: () {
           if (_areAllFieldsFilled()) {
             Navigator.push(
@@ -318,17 +350,13 @@ class _SecondFormularState extends State<SecondFormular> {
             showErrorSnackbar(context, 'Please fill out all fields');
           }
         },
-        minWidth: 350,
-        height: 60,
-        child: const Text(
+
+        child: Text(
           'Next',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 25,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.white, fontSize: screenHeight * 0.0255, fontWeight: FontWeight.bold),
         ),
+        padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(screenHeight * 0.015)),
       ),
     );
   }

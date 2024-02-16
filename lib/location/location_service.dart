@@ -1,13 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-
-import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-import 'package:redresq_app/application/UIManagement.dart';
 import 'package:redresq_app/shared/app_information.dart';
-
-import 'package:redresq_app/components/my_snackbars.dart';
 
 class LocationService {
   Location location = Location();

@@ -40,6 +40,7 @@ class NotificationHelperAndroid {
     );
   }
 
+  // Wird nicht gebraucht wird vom Server ausgesendet
   // Für die einzelnen Katastrofen
   Future<void> showEarthquakeWarning() async {
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
