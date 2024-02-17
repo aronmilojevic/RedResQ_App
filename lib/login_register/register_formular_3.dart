@@ -15,6 +15,8 @@ class ThirdFormular extends StatefulWidget {
   final String lastName;
   final String email;
   final DateTime bday;
+  final int sex;
+  final int country;
 
   const ThirdFormular({
     Key? key,
@@ -22,6 +24,9 @@ class ThirdFormular extends StatefulWidget {
     required this.lastName,
     required this.email,
     required this.bday,
+    required this.sex,
+    required this.country,
+
   }) : super(key: key);
 
   @override
@@ -326,9 +331,9 @@ class _ThirdFormularState extends State<ThirdFormular> {
                   email: _emailController.text,
                   bday: birthday,
                   password: _passwordController.text,
-                  gender: 1,
+                  gender: widget.sex,
                   language: 1,
-                  location: 1,
+                  location: widget.country,
                   role: 1
               );
               createUserInAPI(context, newUser);

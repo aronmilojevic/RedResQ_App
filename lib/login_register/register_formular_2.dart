@@ -1,9 +1,13 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/register_formular_3.dart';
 import 'package:intl/intl.dart';
 import 'package:redresq_app/components/my_snackbars.dart';
+import 'package:http/http.dart' as http;
 
 
 class SecondFormular extends StatefulWidget {
@@ -11,6 +15,7 @@ class SecondFormular extends StatefulWidget {
   final String lastName;
   final String email;
   final String bday;
+  final int sex;
 
   const SecondFormular({
     Key? key,
@@ -18,6 +23,7 @@ class SecondFormular extends StatefulWidget {
     required this.lastName,
     required this.email,
     required this.bday,
+    required this.sex,
   }) : super(key: key);
 
   @override
@@ -29,38 +35,64 @@ class _SecondFormularState extends State<SecondFormular> {
   TextEditingController _stadtController = TextEditingController();
   TextEditingController _ortController = TextEditingController();
 
-  String _selectedCountry = 'Select Country';
-  // Daten werden aus der API kommen
-  final List<String> _euCountries = [
-    'Select Country',
-    'Austria',
-    'Belgium',
-    'Bulgaria',
-    'Croatia',
-    'Cyprus',
-    'Czech Republic',
-    'Denmark',
-    'Estonia',
-    'Finland',
-    'France',
-    'Germany',
-    'Greece',
-    'Hungary',
-    'Ireland',
-    'Italy',
-    'Latvia',
-    'Lithuania',
-    'Luxembourg',
-    'Malta',
-    'Netherlands',
-    'Poland',
-    'Portugal',
-    'Romania',
-    'Slovakia',
-    'Slovenia',
-    'Spain',
-    'Sweden',
-  ];
+  String? _selectedCountry;
+  List<Map<String, dynamic>> _countries = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchCountries();
+  }
+
+  Future<void> _fetchCountries() async {
+    try {
+      final String? guestToken = await fetchAuthToken();
+
+      final response = await http.get(
+        Uri.parse('https://api.redresq.at/country/fetch'),
+        headers: {
+          HttpHeaders.authorizationHeader: "bearer $guestToken",
+          HttpHeaders.contentTypeHeader: "application/json",
+        },
+      );
+
+      print(response.body);
+      if (response.statusCode == 200) {
+        final List<dynamic> data = json.decode(response.body);
+        setState(() {
+          _countries = data.map<Map<String, dynamic>>((dynamic item) {
+            return {'id': item['id'], 'countryName': item['countryName']};
+          }).toList();
+        });
+      } else {
+        throw Exception('Failed to fetch countries');
+      }
+    } catch (error) {
+      print('Error fetching countries: $error');
+    }
+  }
+
+  Future<String?> fetchAuthToken() async {
+    final apiUrl = 'https://api.redresq.at/guest/request';
+
+    try {
+      final response = await http.get(
+        Uri.parse(apiUrl),
+      );
+
+      if (response.statusCode == 200) {
+        final String authToken = response.body;
+        return authToken;
+      } else {
+        print('Fehler beim Abrufen des Authentifizierungstokens: ${response.statusCode}');
+        print('API-Antwort: ${response.body}');
+        return null;
+      }
+    } catch (error) {
+      print('Netzwerkfehler beim Abrufen des Authentifizierungstokens: $error');
+      return null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -140,39 +172,33 @@ class _SecondFormularState extends State<SecondFormular> {
               Padding(
                 padding: EdgeInsets.all(screenHeight * 0.02),
                 child: Icon(
-                  Icons.flag_rounded,
+                  Icons.location_on,
                   color: Color(0xff464444),
                 ),
               ),
-
               Expanded(
                 child: InkWell(
-                  onTap: () {
-                  },
+                  onTap: () {},
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.015),
-                    child: DropdownButton<String>(
+                    child: DropdownButtonFormField<String>(
                       value: _selectedCountry,
                       onChanged: (String? value) {
                         setState(() {
                           _selectedCountry = value!;
+                          print(value);
                         });
                       },
-                      items: _euCountries.map((String country) {
-                        return DropdownMenuItem<String>(
-                          value: country,
-                          child: Text(
-                            country,
-                            style: TextStyle(fontSize: screenHeight * 0.02),
-
-                          ),
-                        );
-                      }).toList(),
+                      items: _buildDropdownItems(),
                       icon: Padding(
                         padding: EdgeInsets.only(right: 8.0),
                         child: Icon(Icons.arrow_drop_down),
                       ),
-                      underline: Container(),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Select Country',
+                        hintStyle: TextStyle(fontSize: screenHeight * 0.02),
+                      ),
                     ),
                   ),
                 ),
@@ -183,6 +209,25 @@ class _SecondFormularState extends State<SecondFormular> {
       ),
     );
   }
+
+
+  List<DropdownMenuItem<String>> _buildDropdownItems() {
+    List<DropdownMenuItem<String>> items = [];
+
+    for (var country in _countries) {
+      String countryName = country['countryName'];
+      String countryId = country['id'].toString();
+      items.add(
+        DropdownMenuItem<String>(
+          value: countryId,
+          child: Text(countryName),
+        ),
+      );
+    }
+    return items;
+  }
+
+
 
   Widget _buildTextFieldWithIcon(IconData icon, TextEditingController controller, String hintText) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -337,12 +382,8 @@ class _SecondFormularState extends State<SecondFormular> {
                   lastName: widget.lastName,
                   email: widget.email,
                   bday: DateFormat('dd/MM/yyyy').parse(widget.bday),
-                  /*
-                  address: _adresseController.text,
-                  city: _stadtController.text,
-                  place: _ortController.text,
-                  country: _selectedCountry,
-                   */
+                  sex: widget.sex,
+                  country: int.parse(_selectedCountry!),
                 ),
               ),
             );
@@ -365,6 +406,6 @@ class _SecondFormularState extends State<SecondFormular> {
     return _adresseController.text.isNotEmpty &&
         _stadtController.text.isNotEmpty &&
         _ortController.text.isNotEmpty &&
-        _selectedCountry != 'Select Country';
+        _selectedCountry != null;
   }
 }
