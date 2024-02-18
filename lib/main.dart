@@ -8,9 +8,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:redresq_app/notifications/notification_handler.dart';
 import 'package:redresq_app/location/location_service.dart';
+import 'dart:ui' as ui;
+
 
 void main() async {
 
+  print(ui.window.locale.toString());
   runApp(
     MaterialApp(
       home: GetStartedPage2(),

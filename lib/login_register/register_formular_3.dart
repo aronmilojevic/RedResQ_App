@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
@@ -421,7 +422,6 @@ Future<void> createUserInAPI(BuildContext context, User user) async {
           HttpHeaders.contentTypeHeader: "application/json",
         },
         body: jsonEncode({
-          //'id': user.id,
           'username': user.username,
           'firstName': user.firstName,
           'lastName': user.lastName,
@@ -430,26 +430,8 @@ Future<void> createUserInAPI(BuildContext context, User user) async {
           'hash': user.password,
           'gender': 1,
           'language': 1,
-          'location': 1,
-          //'role': 1,
-
-
-          //'sex': user.sex,
-          /*'language': {
-          'id': user.languageId,
-          'name': user.languageName,
-        },
-        'location': {
-          'id': user.locationId,
-          'country': user.country,
-          'city': user.city,
-          'postalCode': user.postalCode,
-        },
-        'settings': { },
-        'role': {
-          'id': user.role.id,
-          'name': user.role.name,
-        },*/
+          //TODO: Sollte ein string sein dann könnte ich den SystemLanguageCode übergeben
+          'location': user.location,
         }),
       );
 
@@ -473,6 +455,15 @@ Future<void> createUserInAPI(BuildContext context, User user) async {
   } catch (error) {
     showErrorSnackbar(context, 'Netzwerkfehler: $error');
     print('Netzwerkfehler: $error');
+  }
+
+  String getSystemLanguageCode() {
+    Locale systemLocale = ui.window.locale;
+    return systemLocale.languageCode;
+  }
+
+  String getSystemLanguage() {
+    return ui.window.locale.toString();
   }
 }
 
