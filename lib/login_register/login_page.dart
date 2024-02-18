@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:redresq_app/application/UIManagement.dart';
 import 'package:redresq_app/components/my_colors.dart';
-import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/login_register/password_reset_1.dart';
 import 'package:redresq_app/login_register/register_formular_1.dart';
 import 'package:redresq_app/components/my_snackbars.dart';
 import 'package:redresq_app/shared/app_information.dart';
 import 'package:redresq_app/notifications/notification.dart';
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'dart:io';
 
@@ -39,7 +37,9 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+
             SizedBox(height: screenHeight * 0.04),
+
             Align(
               alignment: Alignment.topLeft,
               child: IconButton(
@@ -48,7 +48,9 @@ class _LoginPageState extends State<LoginPage> {
                 color: Color(0xff464444),
               ),
             ),
+
             SizedBox(height: screenHeight * 0.01),
+
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.15),
               child: Image(
@@ -58,7 +60,9 @@ class _LoginPageState extends State<LoginPage> {
                 fit: BoxFit.contain,
               ),
             ),
+
             SizedBox(height: screenHeight * 0.03),
+
             Text(
               'Welcome back!',
               style: TextStyle(
@@ -67,7 +71,9 @@ class _LoginPageState extends State<LoginPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+
             SizedBox(height: screenHeight * 0.01),
+
             Text(
               'Nice to see you',
               style: TextStyle(
@@ -76,7 +82,9 @@ class _LoginPageState extends State<LoginPage> {
                 fontWeight: FontWeight.normal,
               ),
             ),
+
             SizedBox(height: screenHeight * 0.04),
+
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
               child: Container(

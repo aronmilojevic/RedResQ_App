@@ -23,170 +23,202 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(height: 50),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(height: screenHeight * 0.06),
 
-              const Image(
-                image: AssetImage('lib/assets/reset/new_password.png'),
-                width: 650,
-                height: 250,
-                fit: BoxFit.contain,
-              ),
+                Image(
+                  image: AssetImage('lib/assets/reset/new_password.png'),
+                  width: screenWidth * 0.9,
+                  height: screenHeight * 0.3,
+                  fit: BoxFit.contain,
+                ),
 
-              SizedBox(height: 30),
+                SizedBox(height: screenHeight * 0.03),
 
-              const Text(
-                'Create new Password',
-                style: headerTextStyle,
-              ),
-              const SizedBox(height: 15),
-              const Text(
-                'Enter your new password below',
-                style: subHeaderTextStyle,
-              ),
-              const SizedBox(height: 50),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Material(
-                  elevation: 5,
-                  borderRadius: BorderRadius.circular(15),
-                  color: const Color(0xfff3f3f3),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.lock,
-                          color: Color(0xff464444),
-                        ),
-                      ),
-                      Expanded(
-                        child: TextField(
-                          controller: _passwordControllerOne,
-                          obscureText: !_isPasswordVisibleOne,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Color(0x00000000)),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Color(0x00000000)),
-                            ),
-                            hintText: 'New password',
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          _isPasswordVisibleOne
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: Color(0xff464444),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _isPasswordVisibleOne = !_isPasswordVisibleOne;
-                          });
-                        },
-                      ),
-                    ],
+                Text(
+                  'Create new Password',
+                  style: TextStyle(
+                    color: myBlackColor,
+                    fontSize: screenHeight * 0.03,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Material(
-                  elevation: 5,
-                  borderRadius: BorderRadius.circular(15),
-                  color: const Color(0xfff3f3f3),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.lock,
-                          color: Color(0xff464444),
-                        ),
-                      ),
-                      Expanded(
-                        child: TextField(
-                          controller: _passwordControllerTwo,
-                          obscureText: !_isPasswordVisibleTwo,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Color(0x00000000)),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Color(0x00000000)),
-                            ),
-                            hintText: 'Confirm password',
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          _isPasswordVisibleTwo
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: Color(0xff464444),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _isPasswordVisibleTwo = !_isPasswordVisibleTwo;
-                          });
-                        },
-                      ),
-                    ],
+
+                SizedBox(height: screenHeight * 0.01),
+
+                Text(
+                  'Enter your new password below',
+                  style: TextStyle(
+                    color: myBlackColor,
+                    fontSize: screenHeight * 0.02,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
-              ),
 
-              const SizedBox(height: 30),
+                SizedBox(height: screenHeight * 0.04),
 
-              Material(
-                elevation: 10,
-                borderRadius: const BorderRadius.all(Radius.circular(15)),
-                color: myRedColor,
-                child: MaterialButton(
-                  onPressed: () async {
-                    bool resetSuccess = await resetPassword(widget.confirmationCode, widget.email, _passwordControllerOne.text);
-
-                    if (resetSuccess) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => GetStartedPage2(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                  child: Material(
+                    elevation: 5,
+                    borderRadius: BorderRadius.circular(screenHeight * 0.015),
+                    color: const Color(0xfff3f3f3),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.lock,
+                            color: Color(0xff464444),
+                            size: screenHeight * 0.03,
+                          ),
                         ),
-                      );
-                    } else {
-                      showErrorSnackbar(context, 'Something went wrong');
-                      print('Fehler beim Zurücksetzen des Passworts');
-                    }
-                  },
-                  minWidth: 350,
-                  height: 60,
-                  child: const Text(
-                    'Confirm',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                        Expanded(
+                          child: TextField(
+                            style: TextStyle(
+                              color: myBlackColor,
+                              fontSize: screenHeight * 0.025,
+                            ),
+                            controller: _passwordControllerOne,
+                            obscureText: !_isPasswordVisibleOne,
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Color(0x00000000)),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Color(0x00000000)),
+                              ),
+                              hintText: 'New password',
+                              hintStyle: TextStyle(
+                                fontSize: screenHeight * 0.02,
+                              ),
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            _isPasswordVisibleOne
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: Color(0xff464444),
+                            size: screenHeight * 0.03,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isPasswordVisibleOne = !_isPasswordVisibleOne;
+                            });
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 10),
-            ],
+                const SizedBox(height: 10),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                  child: Material(
+                    elevation: 5,
+                    borderRadius: BorderRadius.circular(screenHeight * 0.015),
+                    color: const Color(0xfff3f3f3),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.lock,
+                            color: Color(0xff464444),
+                            size: screenHeight * 0.03,
+                          ),
+                        ),
+                        Expanded(
+                          child: TextField(
+                            style: TextStyle(
+                              color: myBlackColor,
+                              fontSize: screenHeight * 0.025,
+                            ),
+                            controller: _passwordControllerTwo,
+                            obscureText: !_isPasswordVisibleTwo,
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Color(0x00000000)),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Color(0x00000000)),
+                              ),
+                              hintText: 'Confirm password',
+                              hintStyle: TextStyle(
+                                fontSize: screenHeight * 0.02,
+                              ),
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            _isPasswordVisibleTwo
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: Color(0xff464444),
+                            size: screenHeight * 0.03,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isPasswordVisibleTwo = !_isPasswordVisibleTwo;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: screenHeight * 0.02),
+
+
+                Material(
+                  elevation: screenHeight * 0.02,
+                  borderRadius: BorderRadius.all(Radius.circular(screenHeight * 0.015)),
+                  color: myRedColor,
+                  child: MaterialButton(
+                    onPressed: () async {
+                      bool resetSuccess = await resetPassword(widget.confirmationCode, widget.email, _passwordControllerOne.text);
+
+                      if (resetSuccess) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => GetStartedPage2(),
+                          ),
+                        );
+                      } else {
+                        showErrorSnackbar(context, 'Something went wrong');
+                        print('Fehler beim Zurücksetzen des Passworts');
+                      }
+                    },
+                    minWidth: screenWidth * 0.9,
+                    height: screenHeight * 0.075,
+                    child: Text(
+                      'Confirm',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: screenHeight * 0.025,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      )
+        )
     );
   }
 }
