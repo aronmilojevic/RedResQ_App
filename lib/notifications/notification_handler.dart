@@ -24,7 +24,7 @@ class NotificationHandler {
 
   Future initLocalNotifications() async {
     const iOS = DarwinInitializationSettings();
-    const android = AndroidInitializationSettings('@drawable/ic_launcher');
+    const android = AndroidInitializationSettings('@drawable/launch_image');
     const settings = InitializationSettings(android: android, iOS: iOS);
 
     await _localNotifications.initialize(settings);
@@ -63,7 +63,7 @@ class NotificationHandler {
               _androidChannel.id,
               _androidChannel.name,
               channelDescription: _androidChannel.description,
-              icon: '@drawable/ic_launcher',
+              icon: '@drawable/launch_image',
             ),
           ),
           payload: jsonEncode(message.toMap())
