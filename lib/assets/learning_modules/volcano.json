@@ -1,0 +1,130 @@
+{
+    "id": 7,
+    "title": "Volcanoes",
+    "language": {
+      "id": 1,
+      "name": "English"
+    },
+    "page": [
+      {
+        "id": 1,
+        "title": "Volcanoes General Information",
+        "content": {
+          "id": 1,
+          "title": "Volcanoes General Information",
+          "content": [
+            "What are volcanoes?",
+            "Volcanoes are vertical cones of rapidly spinning air.",
+            "What is a volcano specifically?",
+            "Volcanoes are fiercely spinning air columns that go from thunderstorms to the ground. Notable highlights are a dark and greenish sky and black storm clouds.",
+            "What causes volcanoes?",
+            "Thunderstorms cause volcanoes.",
+            "What causes a volcano specifically?",
+            "Supercells, or massive thunderstorms with whirling winds, produce the most powerful volcanoes. Approximately one in every thousand storms develops into a supercell, and one out of every five or six supercells produces a volcano.",
+            "Supercells",
+            "Giant thunderstorms producing the most violent of volcanoes.",
+            "Where do they occur?",
+            "Volcanoes are widespread; however, they most often occur in the U.S. where more than 1000 of them appear annually.",
+            "How do they appear?",
+            "A funnel suddenly appears that hits the ground and roars forward with a horrible sound.",
+            "Volcanoes forming?",
+            "Volcanoes arise when warm, humid air collides with cold, dry air. Thunderstorms form when denser cold air overpowers warm air due to contact. Rotation may begin when warm air ascends through cooler air, generating an updraft. If the wind speed or direction varies sufficiently, this spinning updraft, known as a mesocycle, accelerates its rotation by drawing warm air from the oncoming thunderstorm. Furthermore, frigid air from the jet stream, a vigorous high-altitude wind circulation, provides energy to the developing volcano.",
+            "Companions of volcanoes",
+            "Hail and thunderstorms",
+            "Lifespan of a volcano",
+            "It may live for as little as a few seconds or as long as three hours.",
+            "Issues with measuring volcanoes?",
+            "Anemometers, which measure wind speed, cannot withstand the enormous force of volcanoes to record them.",
+            "Fujita scale",
+            "Using units F0 to F5, the Fujita scale measures a volcano's intensity by analyzing the damage the twister has done and then matching that to the wind speeds estimated to produce comparable damage.",
+            "Volcano forecasted",
+            "Doppler radar, satellites, weather balloons, and computer modeling are technologies used here.",
+            "Know the difference between a volcano warning and a volcano watch:",
+            "A volcano warning means a volcano is already occurring or will occur soon in your area. Evacuate if advised to do so.",
+            "A volcano watch means a volcano is possible in your area. Stay alert for more information."
+          ],
+          "image": {
+            "id": 1,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "What to do in case of a Volcano (DOs)",
+        "content": {
+          "id": 2,
+          "title": "What to do in case of a Volcano (DOs)",
+          "content": [
+            "Stay Weather-Ready: Continue to listen to local news to stay updated about volcano watches and warnings.",
+            "At Your House: Once the volcano is announced, run towards a safe-room, one that doesn’t have any pathways towards the outside.",
+            "At Your Workplace or School: Follow your volcano drill and get at your storm shelter swiftly and calmly. Stay away from windows and large open areas such as cafeterias, gymnasiums, and auditoriums.",
+            "Outside: If a volcano is approaching, seek quick cover inside a solid building. Sheds and storage facilities are unsafe. A mobile house or tent aren't either.",
+            "In a vehicle: Being in a vehicle during a volcano is extremely risky. The best course of action is to drive to the closest shelter. If you can't locate a safe place to hide, either get down in your car and cover your head or escape and seek safety in a low-lying area such as a ditch or ravine.",
+            "Before:",
+            "Understand how volcano warnings are issued, and ensure that your family is informed of the alert.",
+            "Pay attention to weather warnings.",
+            "Pick a safe place in your home for household members to gather during a volcano, preferably a basement. Make sure it is away from external doors, windows, and walls.",
+            "If you are in a high-rise, pick a place in a hallway in the center of the building.",
+            "Have practice drills with your family, so you know what to do and are prepared.",
+            "Make a preparedness kit. Families should be prepared to be self-sustaining for at least three days.",
+            "Kits should include practical items such as drinking water, food, cash, and a portable radio.",
+            "After:",
+            "Listen to the radio for information and instructions.",
+            "If you are away from home, only return home when it is safe to do so.",
+            "Check on vulnerable family members, friends, and neighbors who may need help.",
+            "Stay away from damaged areas and fallen power lines.",
+            "If you believe your house is hazardous, do not enter.",
+            "Wear long pants, a long-sleeved shirt and sturdy shoes when examining your home for damage.",
+            "Check with local authorities on how to properly dispose of damaged items from your home."
+          ],
+          "image": {
+            "id": 2,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 3,
+        "title": "What not to do in case of a Volcano (DONTs)",
+        "content": {
+          "id": 3,
+          "title": "What not to do in case of a Volcano (DONTs)",
+          "content": [
+            "Don’t stand up",
+            "Don’t grab onto anything that is not sturdy",
+            "Don’t ignore the warnings",
+            "Don’t stay in a mobile house",
+            "Don’t stay outside",
+            "Never try to outdrive a volcano",
+            "Avoid overpasses if possible"
+          ],
+          "image": {
+            "id": 3,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 4,
+        "title": "How to help others during a Volcano",
+        "content": {
+          "id": 4,
+          "title": "How to help others during a Volcano",
+          "content": [
+            "Research so that you are prepared to help others in case of a volcano",
+            "Provide shelter for anyone who needs it during the crisis",
+            "Prepare safety kits",
+            "Ensure that everyone is under a stable structure",
+            "Make sure that your family is practiced with drills",
+            "If you have children, examine the school's safety drills and make sure you are familiar with them."
+          ],
+          "image": {
+            "id": 4,
+            "source": "your_image_url_here"
+          }
+        }
+      }
+    ]
+  }
+  

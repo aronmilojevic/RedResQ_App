@@ -10,14 +10,12 @@ class ModulesRoom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ScrollController _scrollController = ScrollController();
+    double cardWidth = MediaQuery.of(context).size.width * 0.8;
 
     return Scaffold(
       body: ListView(
         controller: _scrollController,
         children: [
-          SizedBox(
-            height: 20,
-          ),
           AspectRatio(
             aspectRatio: 2.75,
             child: Card(
@@ -33,9 +31,9 @@ class ModulesRoom extends StatelessWidget {
                   'Modules',
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 27.5,
+                    fontSize: cardWidth*0.1,
                     fontStyle: FontStyle.normal,
                     color: Colors.black,
                   ),
@@ -47,16 +45,16 @@ class ModulesRoom extends StatelessWidget {
             title: 'Earthquake',
           ),
           ModulesCard(
-            title: 'Floods',
+            title: 'Biohazard',
           ),
           ModulesCard(
             title: 'Tsunami',
           ),
           ModulesCard(
-            title: 'Volcano',
+            title: 'Wildfire',
           ),
           ModulesCard(
-            title: 'Biohazard',
+            title: 'Floods',
           ),
           ModulesCard(
             title: 'Terrorist Attack',
@@ -65,7 +63,7 @@ class ModulesRoom extends StatelessWidget {
             title: 'Tornado',
           ),
           ModulesCard(
-            title: 'Wildfire',
+            title: 'Volcano',
           ),
         ],
       ),

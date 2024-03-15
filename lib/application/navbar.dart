@@ -16,9 +16,13 @@ class NavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double bottomNavBarHeight = MediaQuery.of(context).size.height * 0.12;
+    double iconSize = bottomNavBarHeight * 0.6;
+
     return NavigationExample(
       isOnline: isOnline,
       isRestricted: isRestricted,
+      iconSize: iconSize,
     );
   }
 }
@@ -26,10 +30,14 @@ class NavBar extends StatelessWidget {
 class NavigationExample extends StatefulWidget {
   final bool isOnline;
   final bool isRestricted;
+  final double iconSize;
 
-  const NavigationExample(
-      {Key? key, required this.isOnline, required this.isRestricted})
-      : super(key: key);
+  const NavigationExample({
+    Key? key,
+    required this.isOnline,
+    required this.isRestricted,
+    required this.iconSize,
+  }) : super(key: key);
 
   @override
   State<NavigationExample> createState() => _NavigationExampleState();
@@ -55,6 +63,8 @@ class _NavigationExampleState extends State<NavigationExample> {
 
   @override
   Widget build(BuildContext context) {
+    double bottomNavBarHeight = MediaQuery.of(context).size.height * 0.12;
+
     return Scaffold(
       body: PageView(
         controller: _pageController,
@@ -92,6 +102,7 @@ class _NavigationExampleState extends State<NavigationExample> {
         ],
       ),
       bottomNavigationBar: Container(
+        height: bottomNavBarHeight,
         padding: const EdgeInsets.only(
           left: 10,
           right: 10,
@@ -99,8 +110,6 @@ class _NavigationExampleState extends State<NavigationExample> {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(23.0),
-          /*border: Border.all(
-                  width: 2.5, color: const Color.fromRGBO(168, 39, 28, 1))*/
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(23.0),
@@ -117,55 +126,28 @@ class _NavigationExampleState extends State<NavigationExample> {
               );
             },
             currentIndex: currentPageIndex,
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.emoji_events,
-                  color: Colors.white,
-                ),
-                label: 'Emoji Events',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.description,
-                  color: Colors.white,
-                ),
-                label: 'Description',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                  color: Colors.white,
-                ),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.menu_book,
-                  color: Colors.white,
-                ),
-                label: 'Menu Book',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.lightbulb,
-                  color: Colors.white,
-                ),
-                label: 'Light Bulb',
-              ),
+            items: [
+              _buildNavItem(Icons.emoji_events),
+              _buildNavItem(Icons.description),
+              _buildNavItem(Icons.home),
+              _buildNavItem(Icons.menu_book),
+              _buildNavItem(Icons.lightbulb),
             ],
+            elevation: 4,
           ),
         ),
       ),
     );
   }
-}
 
-class BlankPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(), // Blank page
+  BottomNavigationBarItem _buildNavItem(IconData icon) {
+    return BottomNavigationBarItem(
+      icon: Icon(
+        icon,
+        color: Colors.white,
+        size: MediaQuery.of(context).size.height * 0.036,
+      ),
+      label: '',
     );
   }
 }

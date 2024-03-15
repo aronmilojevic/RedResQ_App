@@ -10,6 +10,8 @@ class News extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double cardWidth = MediaQuery.of(context).size.width * 0.8;
+
     return Scaffold(
       body: Column(children: [
         AspectRatio(
@@ -41,7 +43,7 @@ class News extends StatelessWidget {
                       softWrap: true,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: cardWidth * 0.075,
                         fontStyle: FontStyle.normal,
                         color: Color(0xff464444),
                       ),
@@ -70,9 +72,9 @@ class News extends StatelessWidget {
                   Text(content,
                       textAlign: TextAlign.center,
                       softWrap: true,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.normal,
-                        fontSize: 14,
+                        fontSize: cardWidth * 0.05,
                         fontStyle: FontStyle.normal,
                         color: myBlackColor,
                       ))

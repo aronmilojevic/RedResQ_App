@@ -10,21 +10,19 @@ class ModulesCard extends StatelessWidget {
   String getImagePath(String title) {
     switch (title.toLowerCase()) {
       case 'tsunami':
-        return 'lib/assets/learning_modules/tsunami.jpg'; // Replace with the actual path for tsunami
+        return 'lib/assets/learning_modules/tsunami.PNG'; // Replace with the actual path for tsunami
       case 'biohazard':
-        return 'assets/biohazard_background.jpg'; // Replace with the actual path for biohazard
+        return 'lib/assets/learning_modules/biohazard.PNG'; // Replace with the actual path for biohazard
       case 'tornado':
         return 'assets/tornado_background.jpg'; // Replace with the actual path for tornado
       case 'volcano':
         return 'assets/volcano_background.jpg'; // Replace with the actual path for volcano
       case 'earthquake':
-        return 'assets/earthquake_background.jpg'; // Replace with the actual path for earthquake
+        return 'lib/assets/learning_modules/earthquake.PNG'; // Replace with the actual path for earthquake
       case 'terrorist attack':
         return 'assets/terrorist_attack_background.jpg'; // Replace with the actual path for terrorist attack
       case 'wildfire':
-        return 'assets/wildfire_background.jpg'; // Replace with the actual path for wildfire
-      case 'tsunami':
-        return 'assets/tsunami_background.jpg'; // Replace with the actual path for tsunami
+        return 'lib/assets/learning_modules/wildfire.PNG'; // Replace with the actual path for wildfire
       case 'floods':
         return 'assets/floods_background.jpg'; // Replace with the actual path for floods
       default:
@@ -38,17 +36,57 @@ class ModulesCard extends StatelessWidget {
         return const ModuleNavbar(
           disasterType: 'tsunami',
         );
+      case 'volcano':
+        return const ModuleNavbar(
+          disasterType: 'volcano',
+        );
+      case 'wildfire':
+        return const ModuleNavbar(
+          disasterType: 'wildfire',
+        );
+      case 'biohazard':
+        return const ModuleNavbar(
+          disasterType: 'biohazard',
+        );
+      case 'terrorist_attack':
+        return const ModuleNavbar(
+          disasterType: 'terrorist_attack',
+        );
+      case 'earthquake':
+        return const ModuleNavbar(
+          disasterType: 'earthquake',
+        );
+      case 'floods':
+        return const ModuleNavbar(
+          disasterType: 'floods',
+        );
+      case 'tornado':
+        return const ModuleNavbar(
+          disasterType: 'tornado',
+        );
       // Add more cases as needed for other titles
       default:
         // Return a default module or handle the case accordingly
         return ModuleNavbar(
-          disasterType: 'Tsunami',
+          disasterType: 'terrorist_attack',
         );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: MediaQuery.of(context).size.width * 0.8*0.1,
+      /*shadows: [
+        Shadow(
+          color: myRedColor,
+          blurRadius: 5,
+          offset: const Offset(0, 0),
+        )
+      ],*/
+      color: Colors.black,
+    );
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -76,17 +114,25 @@ class ModulesCard extends StatelessWidget {
               ),
             ),
             alignment: Alignment.center,
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              style:  TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 23,
-                fontStyle: FontStyle.italic,
-                color: Colors.lime,
+            child: Stack(alignment: Alignment.center, children: [
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: MediaQuery.of(context).size.width * 0.8*0.1,
+                  foreground: Paint()
+                    ..color = Colors.white
+                    ..strokeWidth = 8
+                    ..style = PaintingStyle.stroke,
+                ),
               ),
-            ),
+              Text(
+                title,
+                style: textStyle,
+              )
+            ]),
           ),
         ),
       ),
