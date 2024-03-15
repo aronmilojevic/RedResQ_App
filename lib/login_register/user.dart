@@ -1,18 +1,3 @@
-/*class Language {
-  final int id;
-  final String name;
-
-  Language({required this.id, required this.name});
-}
-
-class Role {
-  final int id;
-  final String name;
-
-  Role({required this.id, required this.name});
-}*/
-
-
 class Location {
   final int id;
   final String country;
@@ -40,14 +25,9 @@ class User {
   final int language;
   final int location;
   final int role;
-  //final Language language;
-  //final Location location;
-  // Leeres Objekt
-  //final Map<String, dynamic> setting;
-  //final Role role;
+
 
   User({
-    //required this.id,
     required this.username,
     required this.password,
     required this.firstName,
@@ -58,19 +38,6 @@ class User {
     required this.language,
     required this.location,
     required this.role,
-    //required this.language,
-    //required this.location,
-    //required this.setting,
-    //required this.role,
   });
-
-  /*
-  int get languageId => language.id;
-  String get languageName => language.name;
-  int get locationId => location.id;
-  String get country => location.country;
-  String get city => location.city;
-  String get postalCode => location.postalCode;
-  */
 }
 

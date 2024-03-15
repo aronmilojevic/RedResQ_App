@@ -10,7 +10,7 @@ class GetStartedPage2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16.0), // Adjust the padding as needed
+        padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Center(
             child: Column(

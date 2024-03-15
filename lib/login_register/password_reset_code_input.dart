@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/components/my_headers.dart';
@@ -58,7 +60,11 @@ class _ResetCodeInputState extends State<ResetCodeInput> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'A 6 digits code has been sent to \n ${widget.email}',
+                  'A 6 digits code has been sent to',
+                  style: subHeaderTextStyle,
+                ),
+                Text(
+                  '${widget.email}',
                   style: subHeaderTextStyle,
                 ),
                 const SizedBox(height: 10),
@@ -155,10 +161,43 @@ class _ResetCodeInputState extends State<ResetCodeInput> {
   }
 }
 
+
+Future<String?> fetchAuthToken() async {
+  final apiUrl = 'https://api.redresq.at/guest/request';
+
+  try {
+    final response = await http.get(
+      Uri.parse(apiUrl),
+    );
+
+    if (response.statusCode == 200) {
+      final String authToken = response.body;
+      return authToken;
+    } else {
+      print('Fehler beim Abrufen des Authentifizierungstokens: ${response.statusCode}');
+      print('API-Antwort: ${response.body}');
+      return null;
+    }
+  } catch (error) {
+    print('Netzwerkfehler beim Abrufen des Authentifizierungstokens: $error');
+    return null;
+  }
+}
+
+
 Future<bool> isVerificationCode(String code, String email) async {
+  final String? guestToken = await fetchAuthToken();
+
   final response = await http.post(
     Uri.parse('https://api.redresq.at/reset'),
-    body: {'code': code, 'email': email},
+    headers: {
+      HttpHeaders.authorizationHeader: "bearer $guestToken",
+      HttpHeaders.contentTypeHeader: "application/json",
+    },
+    body: jsonEncode({
+      'code': code,
+      'email': email,
+    }),
   );
 
   if (response.statusCode == 200) {
@@ -168,3 +207,4 @@ Future<bool> isVerificationCode(String code, String email) async {
     return false;
   }
 }
+
