@@ -1,0 +1,130 @@
+{
+    "id": 3,
+    "title": "Tornadoes",
+    "language": {
+      "id": 1,
+      "name": "English"
+    },
+    "page": [
+      {
+        "id": 1,
+        "title": "Tornadoes General Information",
+        "content": {
+          "id": 1,
+          "title": "Tornadoes General Information",
+          "content": [
+            "What are tornadoes?",
+            "Tornadoes are vertical cones of rapidly spinning air",
+            "What is a tornado specifically?",
+            "Tornadoes are fiercely spinning air columns that go from thunderstorms to the ground. Notable highlights are: a dark and greenish sky and black storm clouds",
+            "What causes tornadoes?",
+            "Thunderstorms cause tornadoes",
+            "What causes a tornado specifically?",
+            "Supercells, or massive thunderstorms with whirling winds, produce the most powerful tornadoes. Approximately one in every thousand storms develops into a supercell, and one out of every five or six supercells produces a tornado.",
+            "Supercells",
+            "Giant thunderstorms producing the most violent of tornadoes",
+            "Where do they occur?",
+            "Tornadoes are widespread, however, they most often occur in the U.S. where more than 1000 of them appear annually",
+            "How do they appear?",
+            "A funnel suddenly appears that hits the ground and roars forward with a horrible sound.",
+            "Tornadoes forming?",
+            "Tornados arise when warm, humid air collides with cold, dry air. Thunderstorms form when denser cold air overpowers warm air due to contact. Rotation may begin when warm air ascends through cooler air, generating an updraft, if the wind speed or direction varies sufficiently. This spinning updraft, known as a mesocycle, accelerates its rotation by drawing warm air from the oncoming thunderstorm. Furthermore, frigid air from the jet stream, a vigorous high-altitude wind circulation, provides energy to the developing tornado.",
+            "Companions of tornadoes",
+            "Hail and thunderstorms",
+            "Lifespan of a tornado",
+            "It may live for as little as a few seconds or as long as three hours.",
+            "Issues with measuring tornadoes?",
+            "Anemometers, which measure wind speed, cannot withstand the enormous force of tornadoes to record them.",
+            "Fujita scale",
+            "Using units F0 to F5, the Fujita scale measures a tornado's intensity by analyzing the damage the twister has done and then matching that to the wind speeds estimated to produce comparable damage.",
+            "Tornado forecasted",
+            "Doppler radar, satellites, weather balloons, and computer modeling are technologies used here.",
+            "Know the difference between a tornado warning and a tornado watch:",
+            "A tornado warning means a tornado is already occurring or will occur soon in your area. Evacuate if advised to do so.",
+            "A tornado watch means a tornado is possible in your area. Stay alert for more information."
+          ],
+          "image": {
+            "id": 1,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "What to do in case of a tornado (DOs)",
+        "content": {
+          "id": 2,
+          "title": "What to do in case of a tornado (DOs)",
+          "content": [
+            "Stay Weather-Ready: Continue to listen to local news to stay updated about tornado watches and warnings.",
+            "At Your House: Once the tornado is announced, run towards a safe-room, one that doesn’t have any pathways towards the outside.",
+            "At Your Workplace or School: Follow your tornado drill and get at your storm shelter swiftly and calmly. Stay away from windows and large open areas such as cafeterias, gymnasiums, and auditoriums.",
+            "Outside: If a tornado is approaching, seek quick cover inside a solid building. Sheds and storage facilities are unsafe. A mobile house or tent aren't either.",
+            "In a vehicle: Being in a vehicle during a tornado is extremely risky. The best course of action is to drive to the closest shelter. If you can't locate a safe place to hide, either get down in your car and cover your head, or escape and seek safety in a low-lying area such as a ditch or ravine.",
+            "Before:",
+            "Understand how tornado warnings are issued, and ensure that your family is informed of the alert.",
+            "Pay attention to weather warnings.",
+            "Pick a safe place in your home for household members to gather during a tornado, preferably a basement. Make sure it is away from external doors, windows, and walls.",
+            "If you are in a highrise, pick a place in a hallway in the centre of the building.",
+            "Have practice drills with your family so you know what to do and are prepared.",
+            "Make a preparedness kit. Families should be prepared to be self-sustaining for at least three days.",
+            "Kits should include practical items such as drinking water, food, cash, and a portable radio.",
+            "After:",
+            "Listen to the radio for information and instructions.",
+            "If you are away from home, only return home when it is safe to do so.",
+            "Check on vulnerable family members, friends, and neighbours who may need help.",
+            "Stay away from damaged areas and fallen power lines.",
+            "If you believe your house is hazardous, do not enter.",
+            "Wear long pants, a long-sleeved shirt and sturdy shoes when examining your home for damage.",
+            "Check with local authorities on how to properly dispose of damaged items from your home."
+          ],
+          "image": {
+            "id": 2,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 3,
+        "title": "What not to do in case of a tornado (DONTs)",
+        "content": {
+          "id": 3,
+          "title": "What not to do in case of a tornado (DONTs)",
+          "content": [
+            "Don’t stand up",
+            "Don’t grab onto anything that is not sturdy",
+            "Don’t ignore the warnings",
+            "Don’t stay in a mobile house",
+            "Don’t stay outside",
+            "Never try to outdrive a tornado",
+            "Avoid overpasses if possible"
+          ],
+          "image": {
+            "id": 3,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 4,
+        "title": "How to help others during a tornado",
+        "content": {
+          "id": 4,
+          "title": "How to help others during a tornado",
+          "content": [
+            "Research so that you are prepared to help others in case of a tornado",
+            "Provide shelter for anyone who needs it during the crisis",
+            "Prepare safety kits",
+            "Ensure that everyone is under a stable structure",
+            "Make sure that your family is practised with drills",
+            "If you have children, examine the school's safety drills and make sure you are familiar with them."
+          ],
+          "image": {
+            "id": 4,
+            "source": "your_image_url_here"
+          }
+        }
+      }
+    ]
+  }
+  

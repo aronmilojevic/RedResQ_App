@@ -1,4 +1,4 @@
-import 'package:redresq_app/API_Ressources/location.dart';
+import 'package:redresq_app/API_Ressources/country.dart';
 import 'package:redresq_app/API_Ressources/image.dart';
 import 'package:redresq_app/API_Ressources/language.dart';
 
@@ -10,7 +10,7 @@ class Article {
   DateTime date;
   Language language;
   ImageModel image;
-  Location location;
+  Country country;
 
   Article({
     required this.id,
@@ -20,7 +20,7 @@ class Article {
     required this.date,
     required this.language,
     required this.image,
-    required this.location,
+    required this.country,
   });
 
   factory Article.fromJson(Map<String, dynamic> json) {
@@ -32,7 +32,7 @@ class Article {
       date: DateTime.parse(json['date'] as String),
       language: Language.fromJson(json['language']),
       image: ImageModel.fromJson(json['image']),
-      location: Location.fromJson(json['location']),
+      country: Country.fromJson(json['country']),
     );
   }
 }

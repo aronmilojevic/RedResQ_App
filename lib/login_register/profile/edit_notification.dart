@@ -38,9 +38,11 @@ class _NotificationSettingsState extends State<NotificationSettings> {
                 style: headerTextStyle,
               ),
               const SizedBox(height: 20),
-              buildSwitchListTile('Push Notifications', _pushNotificationsEnabled),
-              buildSwitchListTile('Silent Mode', AppInformation.getSilentModeEnabled()),
-              const SizedBox(height: 20),
+              buildSwitchListTile(
+                  'Push Notifications', _pushNotificationsEnabled),
+              //buildSwitchListTile(
+              //'Silent Mode', AppInformation.getSilentModeEnabled()),
+              // const SizedBox(height: 20),
             ],
           ),
         ),
@@ -58,14 +60,14 @@ class _NotificationSettingsState extends State<NotificationSettings> {
             case 'Push Notifications':
               _pushNotificationsEnabled = newValue;
               if (newValue) {
-                AppInformation.setSilentModeEnabled(false);
+                //AppInformation.setSilentModeEnabled(false);
               }
               break;
             case 'Silent Mode':
               if (newValue) {
                 _pushNotificationsEnabled = false;
               }
-              AppInformation.setSilentModeEnabled(newValue);
+              //AppInformation.setSilentModeEnabled(newValue);
               break;
           }
         });

@@ -1,0 +1,140 @@
+{
+    "id": 2,
+    "title": "Floods",
+    "language": {
+      "id": 1,
+      "name": "English"
+    },
+    "page": [
+      {
+        "id": 1,
+        "title": "Floods General Information",
+        "content": {
+          "id": 1,
+          "title": "Floods General Information",
+          "content": [
+            "How does a flood happen?",
+            "A flood happens when water overflows or soaks land that is usually dry.",
+            "How long does a flood need to appear?",
+            "Floods can take hours or even days to develop, giving affected people time to prepare.",
+            "Less often, floods develop quickly and with little warning.",
+            "Riverine floods",
+            "This occurs when rivers overflow their banks",
+            "Reasons why rivers may overflow and flood include: Heavy rain, a damaged dam, quick ice melt in the mountains, or a beaver dam.",
+            "The affected land along the river is termed a floodplain.",
+            "Coastal floods",
+            "When a tsunami or a storm causes the sea to rush inland",
+            "Effects of floods",
+            "Once the flood is gone there is usually mood leftover",
+            "The dirt that is left behind is valuable to farmers since it is nutrient-rich.",
+            "Damage of a flood",
+            "Floods are dangerous and can cause many damages like the flood in Bangladesh that happened in 2007, damaging over a million homes",
+            "Floods may create greater harm as the water recedes. The water and environment might be polluted with dangerous elements, such as sharp debris, pesticides, fuel, and untreated sewage.",
+            "Diseases",
+            "Floods can carry deadly diseases like typhoid, malaria, hepatitis A, and cholera. That's because flood water is impure and dirty, prime conditions for diseases to flourish.",
+            "Natural causes",
+            "Floods occur naturally. They are part of the water cycle, and the ecology is prepared for flooding. Wetlands near riverbanks, lakes, and estuaries absorb floodwaters. Wetland vegetation, including trees, grasses, and sedges, slows flood waters and distributes their energy more evenly.",
+            "Vulnerable Regions",
+            "The most vulnerable regions are the ones that have not experienced a flood in a long time.",
+            "Artificial causes",
+            "Floods can also have artificial sources. Many man-made floods are intentional and controlled.",
+            "Rice farmers rely on flooded fields.",
+            "Engineers may also intentionally flood areas to prevent the possibility of worse flooding.",
+            "Not all man-made floods are intentional, however.",
+            "Classifications",
+            "Floods are classified by how likely they will happen.",
+            "The most common classifications include 10, 50 and 100-year floods.",
+            "100-year floods are considered rare and occur once in a century, but it also means that 1% of them occur in a given year",
+            "Flash-Floods",
+            "Sudden, short, and heavy flow of water.",
+            "Flash floods develop within hours of heavy rainfall.",
+            "Most deaths from flooding occur as a result of flash floods.",
+            "Predicting floods",
+            "Today, hydrologists study past flood patterns to help predict where and when floods will happen in the future.",
+            "However, as with all predictions, they are only estimates",
+            "Preventing floods",
+            "Civilizations have tried to prevent floods for thousands of years",
+            "Floods are not always preventable, although they may frequently be minimized.",
+            "Structures around rivers, lakes, and the sea can contain flood waters. Levees, runoff canals, and reservoirs can stop water from overflowing."
+          ],
+          "image": {
+            "id": 1,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "What to do in case of a flood (DOs)",
+        "content": {
+          "id": 2,
+          "title": "What to do in case of a flood (DOs)",
+          "content": [
+            "Before a flood",
+            "Find safe shelter and hide there.",
+            "Do not walk, swim, or drive across floodwaters. Turn around and don't drown!",
+            "Stay off bridges.",
+            "Depending on the type of flooding:",
+            "Evacuate if told to do so.",
+            "Move to higher ground or a higher floor.",
+            "Stay where you are.",
+            "During a flood",
+            "Do not walk, swim, or drive through the water. Do not drown!",
+            "If you are advised to evacuate, do so!",
+            "Stay inside your car if it is trapped in rapidly moving water. Get on the roof if water is rising inside the car.",
+            "If you're imprisoned within a building, get to the topmost floor. Do not ascend into a closed attic to prevent being trapped by rising floodwater.",
+            "After a flood",
+            "Pay attention to authorities for information and instructions. Return home only when authorities say it is safe.",
+            "Avoid driving except in emergencies.",
+            "Be mindful of the dangers of electrocution. Do not touch wet electrical equipment or stand in water. Turn off the electricity if it is safe to do so."
+          ],
+          "image": {
+            "id": 2,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 3,
+        "title": "What not to do in case of a flood (DONTs)",
+        "content": {
+          "id": 3,
+          "title": "What not to do in case of a flood (DONTs)",
+          "content": [
+            "Don’t drive in flooded areas",
+            "Don’t allow waterlogging for long, as it leads to rotting and development of diseases.",
+            "Don’t ignore evacuation warnings",
+            "Don’t risk electrocution",
+            "Don’t stay on low ground",
+            "Don’t interact with wildlife"
+          ],
+          "image": {
+            "id": 3,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 4,
+        "title": "How to help others in case of a flood",
+        "content": {
+          "id": 4,
+          "title": "How to help others in case of a flood",
+          "content": [
+            "Prepare safety supplies for the family",
+            "Ensure that no one comes into touch with flood water, as it might lead to sickness.",
+            "If clothes do come in contact with flood water wash them",
+            "If skin comes in contact with flood water disinfect it and wash it",
+            "Ensure that no one comes in contact with mold",
+            "Teach friends and families about the disasters of floods and ensure they know how to behave in case of one",
+            "Stay calm and be prepared for someone else to panic"
+          ],
+          "image": {
+            "id": 4,
+            "source": "your_image_url_here"
+          }
+        }
+      }
+    ]
+  }
+  

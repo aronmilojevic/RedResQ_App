@@ -1,16 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/application/module_navbar.dart';
-import 'package:redresq_app/application/news.dart';
 import 'package:redresq_app/components/my_colors.dart';
-import 'package:redresq_app/application/tsunami_module.dart';
-import 'package:redresq_app/application/module_navbar.dart';
 
 class ModulesCard extends StatelessWidget {
   final String title;
-  final Color my_colors;
 
-  const ModulesCard({required this.title, required this.my_colors, Key? key})
-      : super(key: key);
+  const ModulesCard({required this.title, Key? key}) : super(key: key);
+
+  String getImagePath(String title) {
+    switch (title.toLowerCase()) {
+      case 'tsunami':
+        return 'lib/assets/learning_modules/tsunami.PNG'; // Replace with the actual path for tsunami
+      case 'biohazard':
+        return 'lib/assets/learning_modules/biohazard.PNG'; // Replace with the actual path for biohazard
+      case 'tornado':
+        return 'assets/tornado_background.jpg'; // Replace with the actual path for tornado
+      case 'volcano':
+        return 'assets/volcano_background.jpg'; // Replace with the actual path for volcano
+      case 'earthquake':
+        return 'lib/assets/learning_modules/earthquake.PNG'; // Replace with the actual path for earthquake
+      case 'terrorist attack':
+        return 'assets/terrorist_attack_background.jpg'; // Replace with the actual path for terrorist attack
+      case 'wildfire':
+        return 'lib/assets/learning_modules/wildfire.PNG'; // Replace with the actual path for wildfire
+      case 'floods':
+        return 'assets/floods_background.jpg'; // Replace with the actual path for floods
+      default:
+        return 'assets/default_background.jpg'; // Replace with a default background image
+    }
+  }
 
   Widget _getModule() {
     switch (title.toLowerCase()) {
@@ -18,19 +36,57 @@ class ModulesCard extends StatelessWidget {
         return const ModuleNavbar(
           disasterType: 'tsunami',
         );
-      //case 'earthquake':
-      // return const EarthquakeModule();
+      case 'volcano':
+        return const ModuleNavbar(
+          disasterType: 'volcano',
+        );
+      case 'wildfire':
+        return const ModuleNavbar(
+          disasterType: 'wildfire',
+        );
+      case 'biohazard':
+        return const ModuleNavbar(
+          disasterType: 'biohazard',
+        );
+      case 'terrorist_attack':
+        return const ModuleNavbar(
+          disasterType: 'terrorist_attack',
+        );
+      case 'earthquake':
+        return const ModuleNavbar(
+          disasterType: 'earthquake',
+        );
+      case 'floods':
+        return const ModuleNavbar(
+          disasterType: 'floods',
+        );
+      case 'tornado':
+        return const ModuleNavbar(
+          disasterType: 'tornado',
+        );
       // Add more cases as needed for other titles
       default:
         // Return a default module or handle the case accordingly
         return ModuleNavbar(
-          disasterType: 'Tsunami',
+          disasterType: 'terrorist_attack',
         );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: MediaQuery.of(context).size.width * 0.8*0.1,
+      /*shadows: [
+        Shadow(
+          color: myRedColor,
+          blurRadius: 5,
+          offset: const Offset(0, 0),
+        )
+      ],*/
+      color: Colors.black,
+    );
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -48,20 +104,35 @@ class ModulesCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           elevation: 5,
-          color: my_colors,
+          color: Colors.transparent,
           child: Container(
-            alignment: Alignment.center,
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 23,
-                fontStyle: FontStyle.normal,
-                color: Color(0xff464444),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                image: AssetImage(getImagePath(title)),
+                fit: BoxFit.cover,
               ),
             ),
+            alignment: Alignment.center,
+            child: Stack(alignment: Alignment.center, children: [
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: MediaQuery.of(context).size.width * 0.8*0.1,
+                  foreground: Paint()
+                    ..color = Colors.white
+                    ..strokeWidth = 8
+                    ..style = PaintingStyle.stroke,
+                ),
+              ),
+              Text(
+                title,
+                style: textStyle,
+              )
+            ]),
           ),
         ),
       ),

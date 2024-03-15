@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/application/news.dart';
+import 'package:redresq_app/application/quiz_test.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/application/tsunami_module.dart';
 
@@ -9,28 +10,16 @@ class QuizCard extends StatelessWidget {
 
   const QuizCard({required this.title, required this.myColors, super.key});
 
-  Widget _getModule() {
-    switch (title.toLowerCase()) {
-      case 'tsunami':
-        return const TsunamiModule();
-      //case 'earthquake':
-      // return const EarthquakeModule();
-      // Add more cases as needed for other titles
-      default:
-        // Return a default module or handle the case accordingly
-        return Container();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    double cardWidth = MediaQuery.of(context).size.width * 0.8;
+
+    return GestureDetector(
       onTap: () {
+        // Navigate to the desired screen when the card is tapped
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => _getModule(),
-          ),
+          MaterialPageRoute(builder: (context) => QuizTest()),
         );
       },
       child: AspectRatio(
@@ -40,19 +29,18 @@ class QuizCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          elevation: 5,
           color: myColors,
+          elevation: 4.5,
           child: Container(
             alignment: Alignment.center,
             child: Text(
               title,
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
+              style:  TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 23,
+                fontSize: cardWidth*0.075,
                 fontStyle: FontStyle.normal,
-                color: Color(0xff464444),
               ),
             ),
           ),
@@ -61,3 +49,5 @@ class QuizCard extends StatelessWidget {
     );
   }
 }
+
+
