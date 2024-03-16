@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 class EarthquakeGeneralInformation extends StatelessWidget {
   const EarthquakeGeneralInformation({Key? key}) : super(key: key);

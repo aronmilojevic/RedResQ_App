@@ -10,7 +10,6 @@ import 'package:redresq_app/API_Ressources/Quizzes/question.dart';
 import 'package:redresq_app/API_Ressources/Quizzes/quiz.dart';
 import 'package:redresq_app/API_Ressources/Quizzes/question.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_svg/flutter_svg.dart';
 
 class QuestionPage extends StatefulWidget {
   final String title;
@@ -32,7 +31,12 @@ class _QuestionPageState extends State<QuestionPage> {
   late Future<List<Quiz>> _quizzesFuture;
   late PageController _pageController;
   int _currentPageIndex = 0;
-  late List<GivenAnswer> givenAnswers;
+  late List<GivenAnswer> givenAnswers = new List.empty();
+  var backgroundImage = DecorationImage(
+      fit: BoxFit.fill,
+      image: AssetImage(
+        "lib/assets/quiz/Quiz_Erdbeben_Verloren.png",
+      ));
 
   @override
   void initState() {
@@ -47,7 +51,7 @@ class _QuestionPageState extends State<QuestionPage> {
         Uri.parse('https://api.redresq.at/quiz/get/?id=${widget.id}'),
         headers: {
           HttpHeaders.authorizationHeader:
-              'bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3ZlcnNpb24iOiJVc2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9leHBpcmF0aW9uIjoiNjM4NDYxMDI3MDAwNzkzNTA3IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIzIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6InRvZG9yIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoidG9kb3JsYW5rb3ZzenVAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMiIsImV4cCI6MTcxMDUwNTkwMH0.trDsfNCN77PbZnrEWKstxMhnUBGbLmIFlZWpds9K4OMfdOJ4W2-aXYmQAjMveWjyJpnvc1D-ZDhe-Kkr6oqYgQ',
+              'bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3ZlcnNpb24iOiJVc2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9leHBpcmF0aW9uIjoiNjM4NDg3ODQwNzQzNjM0MDE3IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIzIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6InRvZG9yIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoidG9kb3JsYW5rb3ZzenVAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMiIsImV4cCI6MTcxMzE4NzI3NH0.XUQyx9eRGVN1UPMv72ON_S3e_sAgxzriDeft4uEvUGNsh8FxmuSBMBhzCsOX_r0oev60lj_HiLy-heZCSTi8GQ',
         },
       );
 
@@ -129,11 +133,7 @@ class _QuestionPageState extends State<QuestionPage> {
                 if (index < snapshot.data![0].questions.length) {
                   var question = snapshot.data![0].questions[index];
                   return Container(
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(
-                                "lib/assets/quiz/Quiz_Erdbeben_Verloren.png"),
-                            fit: BoxFit.fill)),
+                    decoration: BoxDecoration(image: backgroundImage),
                     child: Column(
                       children: [
                         AspectRatio(
@@ -165,11 +165,16 @@ class _QuestionPageState extends State<QuestionPage> {
                         for (var answer in question.answers)
                           AnswerCard(
                             title: answer.text,
-                            onPressed: () {
-                              _handleAnswerSelection(question, answer.isTrue,
-                                  snapshot.data, answer.id);
-                            },
                             isCorrect: answer.isTrue,
+                            onPressed: () {
+                              _handleAnswerSelection(
+                                question,
+                                answer.isTrue,
+                                snapshot.data,
+                                answer.id,
+                              );
+                            },
+                            onAnswer: _handleAnswer,
                           ),
                       ],
                     ),
@@ -185,5 +190,15 @@ class _QuestionPageState extends State<QuestionPage> {
         },
       ),
     );
+  }
+
+  void _handleAnswer(bool isCorrect) {
+    setState(() {
+      if (!isCorrect) {
+        backgroundImage = DecorationImage(
+            fit: BoxFit.fill,
+            image: AssetImage("lib/assets/quiz/Quiz_Tsunami_3Versuche.png"));
+      }
+    });
   }
 }
