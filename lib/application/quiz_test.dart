@@ -74,9 +74,11 @@ class QuizTest extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => QuestionPage(
-                                title: quiz.questions.toString(),
-                                cardColor: Color(0xFFB3D3F8),
-                                id: quiz.id),
+                              title: quiz.questions.toString(),
+                              cardColor: Color(0xFFB3D3F8),
+                              id: quiz.id,
+                              type: quiz.type.name,
+                            ),
                           ),
                         );
                       }),

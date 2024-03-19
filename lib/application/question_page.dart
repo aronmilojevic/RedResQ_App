@@ -15,12 +15,14 @@ class QuestionPage extends StatefulWidget {
   final String title;
   final Color cardColor;
   final int id;
+  final String type;
 
   const QuestionPage(
       {Key? key,
       required this.title,
       required this.cardColor,
-      required this.id})
+      required this.id,
+      required this.type})
       : super(key: key);
 
   @override
@@ -35,7 +37,7 @@ class _QuestionPageState extends State<QuestionPage> {
   var backgroundImage = DecorationImage(
       fit: BoxFit.fill,
       image: AssetImage(
-        "lib/assets/quiz/Quiz_Erdbeben_Verloren.png",
+        "lib/assets/quiz/test.png",
       ));
 
   @override
@@ -150,7 +152,7 @@ class _QuestionPageState extends State<QuestionPage> {
                               color: Colors.transparent,
                               alignment: Alignment.center,
                               child: Text(
-                                question.text,
+                                widget.type,
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -197,7 +199,7 @@ class _QuestionPageState extends State<QuestionPage> {
       if (!isCorrect) {
         backgroundImage = DecorationImage(
             fit: BoxFit.fill,
-            image: AssetImage("lib/assets/quiz/Quiz_Tsunami_3Versuche.png"));
+            image: AssetImage("lib/assets/quiz/Quiz_Erdbeben_Verloren.png"));
       }
     });
   }
