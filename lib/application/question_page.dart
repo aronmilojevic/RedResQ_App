@@ -90,6 +90,7 @@ class _QuestionPageState extends State<QuestionPage> {
         _currentPageIndex++;
 
         if (_currentPageIndex >= quizzes![0].questions.length) {
+          _sendAttemptsToAPI(givenAnswers);
           Navigator.pop(context);
         } else {
           _pageController.nextPage(
@@ -101,6 +102,33 @@ class _QuestionPageState extends State<QuestionPage> {
         }
       });
     });
+  }
+
+  void _sendAttemptsToAPI(List<GivenAnswer> attempts) async {
+    try {
+      final response = await http.post(
+        Uri.parse('https://api.redresq.at/attempt/submit'),
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+          HttpHeaders.authorizationHeader:
+              'bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3ZlcnNpb24iOiJVc2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9leHBpcmF0aW9uIjoiNjM4NDg3ODQwNzQzNjM0MDE3IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIzIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6InRvZG9yIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoidG9kb3JsYW5rb3ZzenVAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMiIsImV4cCI6MTcxMzE4NzI3NH0.XUQyx9eRGVN1UPMv72ON_S3e_sAgxzriDeft4uEvUGNsh8FxmuSBMBhzCsOX_r0oev60lj_HiLy-heZCSTi8GQ',
+        },
+        body: jsonEncode({
+          'attempts': attempts.map((attempt) => attempt.toJson()).toList(),
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        // Store the response somewhere if needed
+        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        print('Response from API: $jsonResponse');
+      } else {
+        throw Exception(
+            'Failed to send attempts to API. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error sending attempts to API: $e');
+    }
   }
 
   void _handleGivenAnswer(GivenAnswer gg) {
