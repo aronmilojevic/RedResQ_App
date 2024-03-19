@@ -8,6 +8,7 @@ import 'package:redresq_app/application/dashboard_card_news.dart';
 import 'package:redresq_app/application/newscard.dart'; // Import NewsCard widget
 import 'package:redresq_app/API_Ressources/article.dart';
 import 'package:http/http.dart' as http;
+import 'package:redresq_app/login_register/profile/userprofile_drawer.dart';
 
 Future<List<Article>> fetchArticle() async {
   final response =
@@ -52,6 +53,13 @@ class _DashboardState extends State<Dashboard> {
     articles = fetchArticle();
   }
 
+  void _openUserProfile() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MyDrawer()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double cardWidth = MediaQuery.of(context).size.width * 0.8;
@@ -71,56 +79,6 @@ class _DashboardState extends State<Dashboard> {
     double appBarHeight = MediaQuery.of(context).size.height * 0.175;
 
     return Scaffold(
-      /*appBar: PreferredSize(
-        preferredSize: Size.fromHeight(appBarHeight),
-        child: AppBar(
-          actions: [
-            Icon(
-              Icons.account_circle_rounded,
-              color: Colors.white,
-              size: MediaQuery.of(context).size.height * 0.05,
-            ),
-          ],
-          title: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Text(
-                    'Good Day $_name!',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: MediaQuery.of(context).size.height * 0.05,
-                        foreground: Paint()
-                          ..color = myBlackColor
-                          ..strokeWidth = 6
-                          ..style = PaintingStyle.stroke),
-                  ),
-                  Text(
-                    'Good Day $_name!',
-                    style: textStyle,
-                  )
-                ],
-              ),
-            ],
-          ),
-          centerTitle: true,
-          /*flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  myRedColor, // Dark Red
-                  Colors.white, // Crimson
-                ],
-              ),
-            ),
-          ),*/
-        ),
-      ),*/
       body: Column(
         children: [
           SizedBox(
@@ -135,10 +93,13 @@ class _DashboardState extends State<Dashboard> {
               ),
               elevation: cardWidth * 0.025,
               color: myGreyColor,
-              child: Container(
-                color: Colors.transparent,
-                alignment: Alignment.center,
-                child: Text(
+              child:
+                  Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                IconButton(
+                  icon: Icon(Icons.account_circle_rounded),
+                  onPressed: _openUserProfile,
+                ),
+                Text(
                   'Good Day $_name!',
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
@@ -148,7 +109,7 @@ class _DashboardState extends State<Dashboard> {
                     color: Colors.black,
                   ),
                 ),
-              ),
+              ]),
             ),
           ),
           Row(

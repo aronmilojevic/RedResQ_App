@@ -138,6 +138,9 @@ class _QuestionPageState extends State<QuestionPage> {
                     decoration: BoxDecoration(image: backgroundImage),
                     child: Column(
                       children: [
+                        SizedBox(
+                          height: 20,
+                        ),
                         AspectRatio(
                           aspectRatio: 2.75,
                           child: Card(
@@ -164,20 +167,48 @@ class _QuestionPageState extends State<QuestionPage> {
                             ),
                           ),
                         ),
-                        for (var answer in question.answers)
-                          AnswerCard(
-                            title: answer.text,
-                            isCorrect: answer.isTrue,
-                            onPressed: () {
-                              _handleAnswerSelection(
-                                question,
-                                answer.isTrue,
-                                snapshot.data,
-                                answer.id,
-                              );
-                            },
-                            onAnswer: _handleAnswer,
-                          ),
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              for (var i = 0;
+                                  i < question.answers.length;
+                                  i += 2)
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    if (i < question.answers.length)
+                                      AnswerCard(
+                                        title: question.answers[i].text,
+                                        isCorrect: question.answers[i].isTrue,
+                                        onPressed: () {
+                                          _handleAnswerSelection(
+                                            question,
+                                            question.answers[i].isTrue,
+                                            snapshot.data,
+                                            question.answers[i].id,
+                                          );
+                                        },
+                                        onAnswer: _handleAnswer,
+                                      ),
+                                    if (i + 1 < question.answers.length)
+                                      AnswerCard(
+                                        title: question.answers[i + 1].text,
+                                        isCorrect:
+                                            question.answers[i + 1].isTrue,
+                                        onPressed: () {
+                                          _handleAnswerSelection(
+                                            question,
+                                            question.answers[i + 1].isTrue,
+                                            snapshot.data,
+                                            question.answers[i + 1].id,
+                                          );
+                                        },
+                                        onAnswer: _handleAnswer,
+                                      ),
+                                  ],
+                                ),
+                            ]),
                       ],
                     ),
                   );
