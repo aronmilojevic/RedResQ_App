@@ -20,8 +20,7 @@ class QuizRoom extends StatelessWidget {
                 AspectRatio(
                   aspectRatio: 2.75,
                   child: Card(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 15, vertical: 20),
+                    margin: const EdgeInsets.fromLTRB(10, 20, 10, 10),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),

@@ -63,7 +63,7 @@ class _DynamicDisasterPageState extends State<DynamicDisasterPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 15,
+            height: 20,
           ),
           Flexible(
             flex: 1,

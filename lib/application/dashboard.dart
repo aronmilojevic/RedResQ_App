@@ -83,7 +83,7 @@ class _DashboardState extends State<Dashboard> {
           AspectRatio(
             aspectRatio: 2.75,
             child: Card(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              margin: const EdgeInsets.fromLTRB(20, 20, 20, 10),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
