@@ -16,31 +16,33 @@ class QuizCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        // Navigate to the desired screen when the card is tapped
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => QuizTest()),
+          MaterialPageRoute(builder: (context) => QuizTest(quizType: title)),
         );
       },
       child: AspectRatio(
         aspectRatio: 1.5,
         child: Card(
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
           color: myColors,
           elevation: 4.5,
-          child: Container(
-            alignment: Alignment.center,
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              style:  TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: cardWidth*0.075,
-                fontStyle: FontStyle.normal,
+          child: Padding(
+            padding: EdgeInsets.all(15),
+            child: Container(
+              alignment: Alignment.center,
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.visible,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: cardWidth * 0.075,
+                  fontStyle: FontStyle.normal,
+                ),
               ),
             ),
           ),
@@ -49,5 +51,3 @@ class QuizCard extends StatelessWidget {
     );
   }
 }
-
-

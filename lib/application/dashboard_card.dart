@@ -4,10 +4,14 @@ import 'package:redresq_app/components/my_colors.dart';
 class DashboardCard extends StatelessWidget {
   final String title;
   final String content;
+  final double card1;
+  final double card2;
 
   const DashboardCard({
     required this.title,
     required this.content,
+    required this.card1,
+    required this.card2,
     Key? key,
   }) : super(key: key);
 
@@ -18,7 +22,7 @@ class DashboardCard extends StatelessWidget {
     return Expanded(
       child: Card(
         elevation: 5,
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        margin: EdgeInsets.fromLTRB(card1, 0, card2, 10),
         child: ClipRRect(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(5),

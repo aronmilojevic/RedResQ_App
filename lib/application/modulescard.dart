@@ -77,14 +77,7 @@ class ModulesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final textStyle = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: MediaQuery.of(context).size.width * 0.8*0.1,
-      /*shadows: [
-        Shadow(
-          color: myRedColor,
-          blurRadius: 5,
-          offset: const Offset(0, 0),
-        )
-      ],*/
+      fontSize: MediaQuery.of(context).size.width * 0.8 * 0.1,
       color: Colors.black,
     );
     return InkWell(
@@ -99,7 +92,7 @@ class ModulesCard extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 2.75,
         child: Card(
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -121,7 +114,7 @@ class ModulesCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: MediaQuery.of(context).size.width * 0.8*0.1,
+                  fontSize: MediaQuery.of(context).size.width * 0.8 * 0.1,
                   foreground: Paint()
                     ..color = Colors.white
                     ..strokeWidth = 8

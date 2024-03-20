@@ -94,7 +94,7 @@ class _QuestionPageState extends State<QuestionPage> {
           Navigator.pop(context);
         } else {
           _pageController.nextPage(
-            duration: Duration(milliseconds: 600),
+            duration: Duration(milliseconds: 300),
             curve: Curves.easeInOut,
           );
           _handleGivenAnswer(

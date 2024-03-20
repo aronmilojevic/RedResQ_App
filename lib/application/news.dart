@@ -23,7 +23,7 @@ class News extends StatelessWidget {
             ),
             elevation: 3,
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.fromLTRB(16, 16, 50, 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -42,11 +42,11 @@ class News extends StatelessWidget {
                       textAlign: TextAlign.center,
                       softWrap: true,
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: cardWidth * 0.075,
-                        fontStyle: FontStyle.normal,
-                        color: Color(0xff464444),
-                      ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: cardWidth * 0.075,
+                          fontStyle: FontStyle.normal,
+                          color: Color(0xff464444),
+                          overflow: TextOverflow.visible),
                     ),
                   ),
                 ],

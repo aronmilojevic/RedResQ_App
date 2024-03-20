@@ -3,6 +3,7 @@ import 'package:redresq_app/application/dashboard.dart';
 import 'package:redresq_app/application/modulesroom.dart';
 import 'package:redresq_app/application/news.dart';
 import 'package:redresq_app/application/newsroom.dart';
+import 'package:redresq_app/application/quiz_rank_page.dart';
 import 'package:redresq_app/application/quizroom.dart';
 import 'package:redresq_app/components/offline_no_connection.dart';
 import 'package:redresq_app/components/offline_no_user.dart';
@@ -63,7 +64,7 @@ class _NavigationExampleState extends State<NavigationExample> {
 
   @override
   Widget build(BuildContext context) {
-    double bottomNavBarHeight = MediaQuery.of(context).size.height * 0.12;
+    double bottomNavBarHeight = MediaQuery.of(context).size.height * 0.1;
 
     return Scaffold(
       body: PageView(
@@ -75,7 +76,7 @@ class _NavigationExampleState extends State<NavigationExample> {
         },
         children: [
           if (widget.isOnline && !widget.isRestricted)
-            const Newsroom()
+            RankingComingSoonPage()
           else if (!widget.isOnline && !widget.isRestricted)
             NoInternetConnection()
           else if (widget.isOnline && widget.isRestricted)

@@ -21,7 +21,7 @@ class QuizRoom extends StatelessWidget {
                   aspectRatio: 2.75,
                   child: Card(
                     margin: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
+                        horizontal: 15, vertical: 20),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -33,9 +33,9 @@ class QuizRoom extends StatelessWidget {
                         'Quizroom',
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
-                        style:  TextStyle(
+                        style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: cardWidth*0.1,
+                            fontSize: cardWidth * 0.1,
                             fontStyle: FontStyle.normal,
                             color: Colors.black),
                       ),
@@ -52,11 +52,11 @@ class QuizRoom extends StatelessWidget {
                           QuizCard(
                               title: 'Earthquake', myColors: Color(0xFFCF945D)),
                           QuizCard(
-                              title: 'Wildfire', myColors: Color(0xFFA9C9DB)),
+                              title: 'Wildfire', myColors: Color(0xFF84306a)),
                           QuizCard(
-                              title: 'Tsunami', myColors: Color(0xFFB3D3F8)),
+                              title: 'Tsunami', myColors: Color(0xFF582b39)),
                           QuizCard(
-                              title: 'Biohazard', myColors: Color(0xFFBDBD)),
+                              title: 'Biohazard', myColors: Color(0xFFa21a47)),
                         ],
                       ),
                     ),
@@ -65,14 +65,14 @@ class QuizRoom extends StatelessWidget {
                         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           QuizCard(
-                              title: 'Floods', myColors: Color(0xFF049BF04D)),
+                              title: 'Floods', myColors: Color(0xFF5db6d6)),
                           QuizCard(
-                              title: 'Volcano', myColors: Color(0xFFFFC107)),
+                              title: 'Volcano', myColors: Color(0xFFbf1f5a)),
                           QuizCard(
                               title: 'Tornado', myColors: Color(0xFF795548)),
                           QuizCard(
-                              title: 'Terrorist A',
-                              myColors: Color(0xFF607D8B)),
+                              title: 'Terrorist Attack',
+                              myColors: Color(0xFF5a4277)),
                         ],
                       ),
                     ),
