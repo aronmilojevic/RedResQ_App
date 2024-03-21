@@ -1,4 +1,13 @@
 // ist nicht mehr in verwendung
+
+
+
+
+
+
+
+
+
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/components/my_headers.dart';
@@ -9,12 +18,17 @@ class SecondReset extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(height: 60),
+
+            SizedBox(height: screenHeight * 0.04),
+
             const Text(
               'You\'ve got mail!',
               style: headerTextStyle,

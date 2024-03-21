@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/components/my_headers.dart';
@@ -38,6 +37,9 @@ class _ResetCodeInputState extends State<ResetCodeInput> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -46,37 +48,58 @@ class _ResetCodeInputState extends State<ResetCodeInput> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(height: 25),
-                const Image(
+
+                SizedBox(height: screenHeight * 0.04),
+
+                 Image(
                   image: AssetImage('lib/assets/reset/code.png'),
-                  width: 650,
-                  height: 250,
-                  fit: BoxFit.contain,
+                   width: screenWidth * 0.9,
+                   height: screenHeight * 0.3,
+                   fit: BoxFit.contain,
                 ),
-                SizedBox(height: 30),
-                const Text(
+
+                SizedBox(height: screenHeight * 0.03),
+
+                Text(
                   'Enter the code',
-                  style: headerTextStyle,
+                  style: TextStyle(
+                    color: myBlackColor,
+                    fontSize: screenHeight * 0.03,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                SizedBox(height: 10),
+
+                SizedBox(height: screenHeight * 0.01),
+
                 Text(
                   'A 6 digits code has been sent to',
-                  style: subHeaderTextStyle,
+                  style: TextStyle(
+                    color: myBlackColor,
+                    fontSize: screenHeight * 0.02,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
+
                 Text(
                   '${widget.email}',
-                  style: subHeaderTextStyle,
+                  style: TextStyle(
+                    color: myBlackColor,
+                    fontSize: screenHeight * 0.02,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
-                const SizedBox(height: 10),
+
+                SizedBox(height: screenHeight * 0.04),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: List.generate(
                     6,
                         (index) => SizedBox(
-                      width: 50,
+                      width: screenWidth * 0.11,
                       child: Material(
-                        elevation: 5,
-                        borderRadius: BorderRadius.circular(15),
+                        elevation: screenHeight * 0.01,
+                        borderRadius: BorderRadius.circular(screenHeight * 0.015),
                         color: Color(0xfff3f3f3),
                         child: TextField(
                           controller: textControllers[index],
@@ -93,7 +116,7 @@ class _ResetCodeInputState extends State<ResetCodeInput> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                            fontSize: screenHeight * 0.03,
                             color: myRedColor,
                           ),
                           decoration: InputDecoration(
@@ -113,11 +136,11 @@ class _ResetCodeInputState extends State<ResetCodeInput> {
                   ),
                 ),
 
-                const SizedBox(height: 30),
+                SizedBox(height: screenHeight * 0.03),
 
                 Material(
-                  elevation: 5,
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  elevation: screenHeight * 0.02,
+                  borderRadius: BorderRadius.all(Radius.circular(screenHeight * 0.015)),
                   color: myRedColor,
                   child: MaterialButton(
                     onPressed: () async {
@@ -139,13 +162,13 @@ class _ResetCodeInputState extends State<ResetCodeInput> {
                         print('Fehler beim Zurücksetzen des Passworts');
                       }
                     },
-                    minWidth: 350,
-                    height: 60,
+                    minWidth: screenWidth * 0.9,
+                    height: screenHeight * 0.075,
                     child: Text(
                       'Send',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 25,
+                        fontSize: screenHeight * 0.025,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
@@ -188,16 +211,12 @@ Future<String?> fetchAuthToken() async {
 Future<bool> isVerificationCode(String code, String email) async {
   final String? guestToken = await fetchAuthToken();
 
-  final response = await http.post(
-    Uri.parse('https://api.redresq.at/reset'),
+  final response = await http.get(
+    Uri.parse('https://api.redresq.at/reset/verify?code=${int.parse(code)}&email=$email'),
     headers: {
       HttpHeaders.authorizationHeader: "bearer $guestToken",
       HttpHeaders.contentTypeHeader: "application/json",
     },
-    body: jsonEncode({
-      'code': code,
-      'email': email,
-    }),
   );
 
   if (response.statusCode == 200) {

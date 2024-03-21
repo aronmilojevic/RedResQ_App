@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
-import 'package:redresq_app/components/my_headers.dart';
 import 'package:redresq_app/components/my_snackbars.dart';
 import 'package:redresq_app/login_register/password_reset_code_input.dart';
 import 'package:http/http.dart' as http;
@@ -18,73 +17,114 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final TextEditingController emailController = TextEditingController();
   String userEmail = "";
 
+
+
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: 35),
+
+              SizedBox(height: screenHeight * 0.04),
+
               Align(
                 alignment: Alignment.topLeft,
                 child: IconButton(
                   icon: Icon(Icons.arrow_back),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
+                  onPressed: () => Navigator.pop(context),
                   color: Color(0xff464444),
                 ),
               ),
-              const Image(
+
+              SizedBox(height: screenHeight * 0.01),
+
+              Image(
                 image: AssetImage('lib/assets/reset/forget_password.png'),
-                width: 550,
-                height: 200,
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.3,
                 fit: BoxFit.contain,
               ),
-              SizedBox(height: 30),
+
+              SizedBox(height: screenHeight * 0.03),
+
               Text(
                 'Reset password',
-                style: headerTextStyle,
+                style: TextStyle(
+                  color: myBlackColor,
+                  fontSize: screenHeight * 0.03,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              SizedBox(height: 10),
+
+              SizedBox(height: screenHeight * 0.01),
+
               Text(
                 'Don’t worry! It happens. Please enter the \n address associated with your account.',
-                style: subHeaderTextStyle,
+                style: TextStyle(
+                  color: myBlackColor,
+                  fontSize: screenHeight * 0.02,
+                  fontWeight: FontWeight.normal,
+                ),
               ),
-              SizedBox(height: 50),
+
+              SizedBox(height: screenHeight * 0.04),
+
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30.0),
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
                 child: Material(
-                  elevation: 5,
+                  elevation: screenHeight * 0.01,
                   borderRadius: BorderRadius.circular(15),
-                  color: Color(0xfff3f3f3),
-                  child: TextField(
-                    controller: emailController,
-                    onChanged: (value) {
-                      setState(() {
-                        userEmail = value;
-                      });
-                    },
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0x00000000)),
+                  color: const Color(0xfff3f3f3),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(screenHeight * 0.02),
+                        child: Icon(
+                          Icons.email,
+                          color: Color(0xff464444),
+                          size: screenHeight * 0.03,
+                        ),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Color(0x00000000)),
+                      Expanded(
+                        child: TextField(
+                          style: TextStyle(
+                            color: myBlackColor,
+                            fontSize: screenHeight * 0.025,
+                          ),
+                          controller: emailController,
+                          onChanged: (value) {
+                            setState(() {
+                              userEmail = value;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0x00000000)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0x00000000)),
+                            ),
+                            hintText: 'E-Mail',
+                            hintStyle: TextStyle(fontSize: screenHeight * 0.02),
+                          ),
+                        ),
                       ),
-                      hintText: 'E-Mail',
-                      prefixIcon: Icon(Icons.email, color: Color(0xff464444)),
-                      fillColor: Color(0xfff3f3f3),
-                    ),
+                    ],
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+
+              SizedBox(height: screenHeight * 0.02),
+
               Material(
-                elevation: 5,
-                borderRadius: BorderRadius.all(Radius.circular(15)),
+                elevation: screenHeight * 0.02,
+                borderRadius: BorderRadius.all(Radius.circular(screenHeight * 0.015)),
                 color: myRedColor,
                 child: MaterialButton(
                   onPressed: () async {
@@ -102,13 +142,13 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       print('Fehler beim Zurücksetzen des Passworts');
                     }
                   },
-                  minWidth: 350,
-                  height: 60,
+                  minWidth: screenWidth * 0.9,
+                  height: screenHeight * 0.075,
                   child: Text(
                     'Reset',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize: screenHeight * 0.025,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
