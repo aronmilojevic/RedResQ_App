@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:redresq_app/application/navbar.dart';
 import 'package:redresq_app/application/question_page.dart';
 import 'package:redresq_app/components/my_colors.dart';
 import 'package:redresq_app/API_Ressources/Quizzes/quiz.dart';
@@ -98,7 +99,12 @@ class QuizTest extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: myGreyColor,
         onPressed: () {
-          Navigator.pop(context);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => NavBar(isOnline: true, isRestricted: false),
+            ),
+          );
         },
         child: Icon(Icons.arrow_back),
       ),

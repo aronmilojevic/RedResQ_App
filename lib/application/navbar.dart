@@ -64,7 +64,7 @@ class _NavigationExampleState extends State<NavigationExample> {
 
   @override
   Widget build(BuildContext context) {
-    double bottomNavBarHeight = MediaQuery.of(context).size.height * 0.0975;
+    double bottomNavBarHeight = MediaQuery.of(context).size.height * 0.12;
 
     return Scaffold(
       body: PageView(

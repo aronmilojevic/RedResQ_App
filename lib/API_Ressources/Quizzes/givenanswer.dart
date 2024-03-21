@@ -15,8 +15,8 @@ class GivenAnswer {
   }
   Map<String, dynamic> toJson() {
     return {
-      'QuestionId': questionId,
-      'AnswerId': answerId,
+      'questionId': questionId,
+      'answerId': answerId,
     };
   }
 }
