@@ -119,7 +119,6 @@ class _QuestionPageState extends State<QuestionPage> {
       );
 
       if (response.statusCode == 200) {
-        // Store the response somewhere if needed
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
         print('Response from API: $jsonResponse');
       } else {

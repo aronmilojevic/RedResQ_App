@@ -41,7 +41,7 @@ class DashboardCard extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
-                      fontSize: cardWidth * 0.07, // Adjust the factor as needed
+                      fontSize: cardWidth * 0.07,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -53,7 +53,7 @@ class DashboardCard extends StatelessWidget {
                     content,
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: cardWidth * 0.5, // Adjust the factor as needed
+                      fontSize: cardWidth * 0.5,
                     ),
                     textAlign: TextAlign.center,
                   ),

@@ -8,7 +8,7 @@ import 'package:redresq_app/API_Ressources/Moduless/book.dart';
 
 class DynamicDisasterPage extends StatefulWidget {
   final String disasterType;
-  final int pageIndex; // Add this parameter
+  final int pageIndex;
 
   DynamicDisasterPage({
     Key? key,

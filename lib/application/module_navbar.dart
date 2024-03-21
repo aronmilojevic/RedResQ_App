@@ -134,7 +134,7 @@ class BlankPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(), // Blank page
+      body: Container(),
     );
   }
 }

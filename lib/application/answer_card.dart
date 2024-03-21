@@ -5,13 +5,13 @@ class AnswerCard extends StatefulWidget {
   final String title;
   final bool isCorrect;
   final VoidCallback onPressed;
-  final Function(bool) onAnswer; // Define the callback function here
+  final Function(bool) onAnswer;
 
   AnswerCard({
     required this.title,
     required this.isCorrect,
     required this.onPressed,
-    required this.onAnswer, // Add this line
+    required this.onAnswer,
     Key? key,
   }) : super(key: key);
 

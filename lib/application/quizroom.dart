@@ -49,29 +49,28 @@ class QuizRoom extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           QuizCard(
-                              title: 'Earthquake', myColors: Color(0xFFCF945D)),
+                              title: 'Earthquake', myColors: Color(0xFFEDD6C1)),
                           QuizCard(
-                              title: 'Wildfire', myColors: Color(0xFF84306a)),
+                              title: 'Wildfire', myColors: Color(0xFFC7CDE8)),
                           QuizCard(
-                              title: 'Tsunami', myColors: Color(0xFF582b39)),
+                              title: 'Tsunami', myColors: Color(0xFFCCE1FA)),
                           QuizCard(
-                              title: 'Biohazard', myColors: Color(0xFFa21a47)),
+                              title: 'Biohazard', myColors: Color(0xFFC4C4C4)),
                         ],
                       ),
                     ),
                     Expanded(
                       child: Column(
-                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           QuizCard(
                               title: 'Floods', myColors: Color(0xFF5db6d6)),
                           QuizCard(
-                              title: 'Volcano', myColors: Color(0xFFbf1f5a)),
+                              title: 'Volcano', myColors: Color(0xFFCF945D)),
                           QuizCard(
                               title: 'Tornado', myColors: Color(0xFF795548)),
                           QuizCard(
                               title: 'Terrorist Attack',
-                              myColors: Color(0xFF5a4277)),
+                              myColors: Color(0xFFA9C9DB)),
                         ],
                       ),
                     ),

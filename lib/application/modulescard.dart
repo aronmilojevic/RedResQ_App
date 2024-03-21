@@ -10,23 +10,23 @@ class ModulesCard extends StatelessWidget {
   String getImagePath(String title) {
     switch (title.toLowerCase()) {
       case 'tsunami':
-        return 'lib/assets/learning_modules/tsunami.PNG'; // Replace with the actual path for tsunami
+        return 'lib/assets/learning_modules/tsunami.PNG';
       case 'biohazard':
-        return 'lib/assets/learning_modules/biohazard.PNG'; // Replace with the actual path for biohazard
+        return 'lib/assets/learning_modules/biohazard.PNG';
       case 'tornado':
-        return 'assets/tornado_background.jpg'; // Replace with the actual path for tornado
+        return 'assets/tornado_background.jpg';
       case 'volcano':
-        return 'assets/volcano_background.jpg'; // Replace with the actual path for volcano
+        return 'assets/volcano_background.jpg';
       case 'earthquake':
-        return 'lib/assets/learning_modules/earthquake.PNG'; // Replace with the actual path for earthquake
+        return 'lib/assets/learning_modules/earthquake.PNG';
       case 'terrorist attack':
-        return 'assets/terrorist_attack_background.jpg'; // Replace with the actual path for terrorist attack
+        return 'assets/terrorist_attack_background.jpg';
       case 'wildfire':
-        return 'lib/assets/learning_modules/wildfire.PNG'; // Replace with the actual path for wildfire
+        return 'lib/assets/learning_modules/wildfire.PNG';
       case 'floods':
-        return 'assets/floods_background.jpg'; // Replace with the actual path for floods
+        return 'assets/floods_background.jpg';
       default:
-        return 'assets/default_background.jpg'; // Replace with a default background image
+        return 'assets/default_background.jpg';
     }
   }
 
@@ -64,9 +64,7 @@ class ModulesCard extends StatelessWidget {
         return const ModuleNavbar(
           disasterType: 'tornado',
         );
-      // Add more cases as needed for other titles
       default:
-        // Return a default module or handle the case accordingly
         return ModuleNavbar(
           disasterType: 'terrorist_attack',
         );
