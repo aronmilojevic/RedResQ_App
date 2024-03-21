@@ -430,7 +430,6 @@ Future<void> createUserInAPI(BuildContext context, User user) async {
           'hash': user.password,
           'gender': 1,
           'language': 1,
-          //TODO: Sollte ein string sein dann könnte ich den SystemLanguageCode übergeben
           'location': user.location,
         }),
       );
