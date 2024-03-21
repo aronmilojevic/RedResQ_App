@@ -7,6 +7,7 @@ class QuizRoom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double cardWidth = MediaQuery.of(context).size.width * 0.8;
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -25,54 +26,53 @@ class QuizRoom extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     elevation: 5,
-                    color: myRedColor,
+                    color: myGreyColor,
                     child: Container(
                       alignment: Alignment.center,
                       child: Text(
                         'Quizroom',
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
+                        style:  TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 27.5,
+                            fontSize: cardWidth*0.1,
                             fontStyle: FontStyle.normal,
-                            color: Colors.white),
+                            color: Colors.black),
                       ),
                     ),
                   ),
                 ),
-                // Empty space
                 SizedBox(height: constraints.maxHeight * 0.00005),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           QuizCard(
-                              title: 'Category 1', myColors: Color(0xFF2196F3)),
+                              title: 'Earthquake', myColors: Color(0xFFCF945D)),
                           QuizCard(
-                              title: 'Category 2', myColors: Color(0xFFFF5722)),
+                              title: 'Wildfire', myColors: Color(0xFFA9C9DB)),
                           QuizCard(
-                              title: 'Category 3', myColors: Color(0xFF4CAF50)),
+                              title: 'Tsunami', myColors: Color(0xFFB3D3F8)),
                           QuizCard(
-                              title: 'Category 4', myColors: Color(0xFFFFEB3B)),
+                              title: 'Biohazard', myColors: Color(0xFFBDBD)),
                         ],
                       ),
                     ),
                     Expanded(
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           QuizCard(
-                              title: 'Category 5', myColors: Color(0xFF9C27B0)),
+                              title: 'Floods', myColors: Color(0xFF049BF04D)),
                           QuizCard(
-                              title: 'Category 6', myColors: Color(0xFFFFC107)),
+                              title: 'Volcano', myColors: Color(0xFFFFC107)),
                           QuizCard(
-                              title: 'Category 7', myColors: Color(0xFF795548)),
+                              title: 'Tornado', myColors: Color(0xFF795548)),
                           QuizCard(
-                              title: 'Category 8', myColors: Color(0xFF607D8B)),
+                              title: 'Terrorist A',
+                              myColors: Color(0xFF607D8B)),
                         ],
                       ),
                     ),

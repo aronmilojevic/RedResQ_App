@@ -41,6 +41,7 @@ class _NotificationSettingsState extends State<NotificationSettings> {
               buildSwitchListTile('Push Notifications', _pushNotificationsEnabled),
               //buildSwitchListTile('Silent Mode', AppInformation.getSilentModeEnabled()),
               const SizedBox(height: 20),
+
             ],
           ),
         ),

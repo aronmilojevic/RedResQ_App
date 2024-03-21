@@ -1,0 +1,117 @@
+{
+    "id": 6,
+    "title": "Terrorist Attacks",
+    "language": {
+      "id": 1,
+      "name": "English"
+    },
+    "page": [
+      {
+        "id": 1,
+        "title": "Terrorist Attacks General Information",
+        "content": {
+          "id": 1,
+          "title": "Terrorist Attacks General Information",
+          "content": [
+            "International terrorism:",
+            "Violent, criminal acts committed by individuals and/or groups who are inspired by, or associated with, designated foreign terrorist organizations.",
+            "Domestic terrorism:",
+            "Violent, criminal acts committed by individuals and/or groups driven by influences within the country, like political, religious, social, racial, or environmental factors.",
+            "Lone offenders:",
+            "These individuals often radicalize online and mobilize to violence quickly. Lone offenders, who lack evident group links or supervision, are difficult to identify, investigate, and arrest.",
+            "The Internet as a tool",
+            "International and domestic violent extremists have established a strong online presence through chat systems, as well as online photos, videos, and publications. These enable the groups to radicalize and attract those who are open to extremist preaching.",
+            "Social media",
+            "Social media has also provided foreign and domestic terrorists with unparalleled virtual access to individuals, allowing them to carry out atrocities.",
+            "Revolutionary terrorism",
+            "Practitioners of this sort of terrorism want to completely demolish a political system and replace it with new structures. Modern examples of similar behavior include campaigns by the Italian Red Brigades and the German Red Army Faction (Baader-Meinhof Gang).",
+            "Deadliest terrorist attacks",
+            "The deadliest terrorist strikes to date were the September 11 attacks (2001), in which suicide terrorists associated with al-Qaeda hijacked four commercial aeroplanes, crashing two of them into the twin towers of the World Trade Center complex in New York City and the third into the Pentagon building near Washington, D.C.; the fourth plane crashed near Pittsburgh, Pennsylvania. The crashes destroyed much of the World Trade Center complex and a large portion of one side of the Pentagon and killed more than 3,000 people."
+          ],
+          "image": {
+            "id": 1,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "What to do in case of a terrorist attack (DOs)",
+        "content": {
+          "id": 2,
+          "title": "What to do in case of a terrorist attack (DOs)",
+          "content": [
+            "Before",
+            "Assemble an emergency kit.",
+            "Create and review your family emergency plan.",
+            "Be informed by receiving alerts, warnings, and public safety information before, during, and after emergencies.",
+            "Be aware of your surroundings. If you see something, say something to public safety officials or the police.",
+            "Locate emergency exits at public buildings and venues, and know at least two routes to leave a building in the event of an emergency.",
+            "Be cautious when travelling. Do not leave your own luggage unattended.",
+            "During",
+            "Follow instructions from public safety officials.",
+            "Continue to check the media for further information.",
+            "Call 9-1-1 to report emergencies.",
+            "If you get a bomb threat, gather as much information as possible from the caller and document what they say.",
+            "Do not touch any suspicious packages.",
+            "In an active shooter situation, Run, Hide, and Fight.",
+            "After",
+            "Continue to check the media for emergency information.",
+            "Follow instructions from public safety officials.",
+            "Check with the elderly, relatives, and neighbors who may require extra support to guarantee their safety."
+          ],
+          "image": {
+            "id": 2,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 3,
+        "title": "What not to do in case of a terrorist attack (DONTs)",
+        "content": {
+          "id": 3,
+          "title": "What not to do in case of a terrorist attack (DONTs)",
+          "content": [
+            "Don’t be negligent of the terrorist attack, stay vigilant",
+            "Don’t be scared to report suspicious people",
+            "Don’t walk, RUN",
+            "If there is an explosion do not run in its direction",
+            "If there is a fire don’t use doors, look for fire exits",
+            "Don’t make calls during an attack, text only",
+            "Don’t leave your phone on loud mode",
+            "If you are taken hostage do not panic stay calm!",
+            "Do not disobey instructions",
+            "After the attack do not bottom up, try and talk about your experience",
+            "Do not think you can treat your own severe wounds, visit a doctor",
+            "Do not engage in contact willingly with the attackers"
+          ],
+          "image": {
+            "id": 3,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 4,
+        "title": "How to help others during a terrorist attack",
+        "content": {
+          "id": 4,
+          "title": "How to help others during a terrorist attack",
+          "content": [
+            "As an employer be sure to have up-to-date medical needs of your workers and ensure that they have at least one emergency contact listed",
+            "If told to do so evacuate your home together with your family, ensuring no one is missing",
+            "Create emergency plans and ensure that the people involved know them",
+            "Establish a meeting place in order to strategize or escape the building",
+            "Have emergency and safety kits prepared for your home or workplace to have a fast getaway.",
+            "Check the school emergency plan of your kid and ensure that you have learned it by heart"
+          ],
+          "image": {
+            "id": 4,
+            "source": "your_image_url_here"
+          }
+        }
+      }
+    ]
+  }
+  

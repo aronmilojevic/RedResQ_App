@@ -1,0 +1,118 @@
+{
+    "id": 1,
+    "title": "Tsunami",
+    "language": {
+      "id": 1,
+      "name": "English"
+    },
+    "page": [
+      {
+        "id": 1,
+        "title": "Tsunami General Information",
+        "content": {
+          "id": 1,
+          "title": "Tsunami General Information",
+          "content": [
+            "What is a tsunami?",
+            "A big wave that is created by the motions in the Earth's outer layer, or crust, that transports ocean water.",
+            "Characteristics tsunami:",
+            "A tsunami travels outward from the source region as a series of waves.",
+            "Its speed and height depend upon the depth of the water",
+            "In the deep ocean, tsunamis travel between 500 and 1000 km/h",
+            "Tsunamis have periods that range between a couple of minutes to as much as an hour",
+            "Damage and destruction is caused by three factors: flooding, wave impact on structures",
+            "Secondary damage is common",
+            "Historical tsunami",
+            "A tsunami that is documented by eyewitness accounts or instrumental observations in the historical record.",
+            "Local tsunami",
+            "A local tsunami is a tsunami that originates from within 200 km of the coast, or within 1 hour tsunami travel time. It is usually caused by an earthquake, but can also be caused by a landslide or a volcanic eruption. Local tsunamis cause 90% of tsunami casualties.",
+            "Microtsunami",
+            "A tsunami of such a small scale that it is not easily detected visually.",
+            "Ocean-wide tsunami",
+            "A tsunami may cause enormous harm across the ocean, not only in its local area of origin. All ocean-wide tsunamis are caused by large earthquakes. Synonym for teletsunami and faraway tsunami.",
+            "Regional tsunami",
+            "A tsunami capable of destruction in a particular geographic region, generally within 1,000 km or 1-3 hours tsunami travel time from its source.",
+            "Teletsunami",
+            "A tsunami that is more than 1,000 kilometres away or takes more than three hours to reach a shore. While more catastrophic than a regional tsunami, it is less common.",
+            "Tsunami meaning",
+            "Japanese term meaning wave (“nami”) in a harbour (“tsu”).",
+            "The misleading term tidal waves",
+            "The popular term tidal waves is entirely misleading as tsunamis have nothing in common with tides."
+          ],
+          "image": {
+            "id": 1,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "What to do in case of a tsunami (/DOs)",
+        "content": {
+          "id": 2,
+          "title": "What to do in case of a tsunami (/DOs)",
+          "content": [
+            "During a tsunami",
+            "If there is an earthquake and you are in a tsunami area, protect yourself from the earthquake first. Drop, Cover, and Hold On. Drop to your hands and knees. Cover your head and neck with your arms. Hold on to any sturdy furniture until the shaking stops. Crawl only if you can reach a better cover, but do not go through an area with more debris.",
+            "Get to high ground as far inland as possible",
+            "Listen to emergency information and alerts.",
+            "If you are in the water, then grab onto something that floats, such as a raft or tree trunk.",
+            "If you are in a boat, face the direction of the waves and head out to sea. If you are in a harbor, go inland.",
+            "After a tsunami",
+            "Be mindful of the dangers of electrocution. Underground or downed power lines can electrically charge water. Do not touch wet electrical equipment or stand in water.",
+            "Stay away from damaged buildings, roads and bridges.",
+            "Avoid floodwater, as it can contain dangerous debris and be deeper than it appears"
+          ],
+          "image": {
+            "id": 2,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 3,
+        "title": "What not to do in case of a tsunami",
+        "content": {
+          "id": 3,
+          "title": "What not to do in case of a tsunami",
+          "content": [
+            "Do not stay in low-lying coastal areas after a strong earthquake has been felt.",
+            "Do not wait for an official notice to evacuate; authorities may not have enough time to issue a Tsunami notice.",
+            "If a Tsunami Warning is issued, never go down to the beach to watch the waves come in.",
+            "Do not try to surf the tsunami.",
+            "If you are aboard a ship in the deep ocean and a tsunami warning is issued, do not return to port. Vessels are safer against tsunami damage in the deep ocean (>200 fathoms, 1200 ft, 400 m).",
+            "Don't wait! Leave as soon as you notice any natural signals of a tsunami or receive an official tsunami warning."
+          ],
+          "image": {
+            "id": 3,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 4,
+        "title": "How to help others",
+        "content": {
+          "id": 4,
+          "title": "How to help others",
+          "content": [
+            "Before a tsunami",
+            "Raise awareness about tsunamis, while still explaining that they are natural events that cannot be blamed on anyone",
+            "Identify hazard areas. Ensure that you know whether your immediate surroundings as well as the city you live in, are in danger of tsunamis",
+            "Learn about evacuation plans. If your child’s school or childcare centre is in a tsunami zone, find out how its emergency plan addresses tsunamis. Find out what its evacuation plans are and if you would be required to pick up your children from the site or from another location.",
+            "Stay informed: Regularly listen to a local news station and ensure that you have a reliable source for tsunami warnings and if you yourself spot a tsunami report it!",
+            "Practice evacuation drills. Practice family evacuation plans so that, in a tsunami situation, children can evacuate quickly and safely. If possible, pick evacuation areas 30 meters above sea level or go as far as three kilometers inland, away from the coastline.",
+            "During a tsunami",
+            "Know that earthquakes can cause tsunamis. First, shelter yourself from the earthquake. Once the shaking stops, collect family members and rapidly travel to higher ground away from the shore.",
+            "When shaking stops, evacuate, even if an official order has not yet been given or an alert siren has not sounded.",
+            "Expect aftershocks. If the earthquake was powerful enough, it may cause numerous aftershocks, perhaps resulting in more tsunamis."
+          ],
+          "image": {
+            "id": 3,
+            "source": "your_image_url_here"
+          }
+        }
+      }
+    ]
+  }
+  

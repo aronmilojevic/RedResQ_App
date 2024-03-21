@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  responsive_framework: ^1.1.1
   get: ^4.6.1
   flutter:
     sdk: flutter
@@ -47,13 +48,18 @@ dependencies:
   flutter_linkify: ^6.0.0
   firebase_core: ^2.24.2
   firebase_messaging: ^14.7.10
+  responsive_grid: ^2.4.4
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  flutter_svg: ^2.0.9
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   #flutter_launcher_icons: ^0.13.1
 
-#flutter_icons:
+  #flutter_icons:
   #image_path: "lib/assets/logos/logo_1.0.png"
   #image_path_android:
   #image_path_ios:

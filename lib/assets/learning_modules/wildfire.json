@@ -1,0 +1,121 @@
+{
+    "id": 4,
+    "title": "Wildfires",
+    "language": {
+      "id": 1,
+      "name": "English"
+    },
+    "page": [
+      {
+        "id": 1,
+        "title": "Wildfires General Information",
+        "content": {
+          "id": 1,
+          "title": "Wildfires General Information",
+          "content": [
+            "What is wildfire?",
+            "A wildfire is an uncontrolled fire that starts in wildland vegetation, typically in rural settings.",
+            "Where do wildfires burn?",
+            "Wildfires may occur in forests, grasslands, savannas, and other ecosystems and have done so for hundreds of millions of years.",
+            "Ground fires",
+            "Ground fires are a form of wildfire that usually starts in soil rich in organic debris that may fuel the flames, such as plant roots. These fires can burn slowly, producing smoke but no flames for an extended period.",
+            "Surface fires",
+            "Surface fires burn in dead or dry vegetation that is lying or growing just above the ground. These types of fires are fueled by dead leaves",
+            "Crown fires",
+            "Crown fires burn in the leaves of trees and bushes.",
+            "Wildfire combination",
+            "These three types of wildfires combine to form wildfires together, more often surface- and crown fires.",
+            "How do wildfires start?",
+            "Natural Occurrences such as Lightning strikes or human-made sparks.",
+            "How do wildfires grow?",
+            "Weather conditions are the main benefactor to whether an area is in danger of wildfires. For example, rain, winds, and extreme weather conditions can leave an area very dry and thus in high danger of a wildfire.",
+            "The productive side of wildfires",
+            "Wildfires are necessary for the survival of several plant species. For example, certain tree cones must be heated before they open and release their seeds.",
+            "Wildfires also assist in maintaining ecological health. They may eradicate insects and illnesses that threaten trees. Fires can remove scrub and underbrush, allowing for new grasses, herbs, and shrubs to give food and habitat for animals and birds.",
+            "Climate change and wildfires",
+            "Climate change has left some ecosystems more endangered by flames. Warmer temperatures have intensified drought and dried out forests."
+          ],
+          "image": {
+            "id": 1,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "What to do in case of a wildfire (DOs)",
+        "content": {
+          "id": 2,
+          "title": "What to do in case of a wildfire (DOs)",
+          "content": [
+            "Before a wildfire:",
+            "Make a wildfire plan. This plan should contain an evacuation strategy, a communication plan, and a plan for dealing with your pets and animals.",
+            "Make sure your home is defensible. This means clearing away flammable vegetation from around your home, creating defensible space, and making sure your home is up to code.",
+            "Assemble an emergency kit. This kit should include food, water, first aid supplies, and other essential items.",
+            "Stay informed on wildfire conditions. You may accomplish this by listening to the radio, following the news, or signing up for wildfire warnings.",
+            "During a wildfire:",
+            "If you are told to evacuate, do so immediately.",
+            "If you are unable to flee, find a safe spot indoors. Close all windows and doors, and turn off fans and air conditioners.",
+            "If you are caught in a wildfire, try to stay in a low area and avoid dense vegetation.",
+            "If you see smoke or flames, report them immediately to the authorities.",
+            "After a wildfire:",
+            "Be careful when returning to your home. There may be hidden dangers, such as downed power lines or falling debris.",
+            "Wear a mask to protect yourself from smoke and ash.",
+            "Do not drink contaminated water.",
+            "Avoid entering burned areas.",
+            "Help your neighbors and community recover from the wildfire."
+          ],
+          "image": {
+            "id": 2,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 3,
+        "title": "What not to do in case of a wildfire (DONTs)",
+        "content": {
+          "id": 3,
+          "title": "What not to do in case of a wildfire (DONTs)",
+          "content": [
+            "Don't ignore evacuation orders. If you are told to evacuate, do so immediately.",
+            "Don't try to fight the fire yourself. Leave firefighting to the professionals.",
+            "Do not drive into a wildfire. Smoke may obscure your vision and imprison you.",
+            "Do not return to your house until it is safe to do so. Wait until the authorities give the all-clear.",
+            "Don't open windows or doors. This can let smoke and ash into your home.",
+            "Don't drink contaminated water. Boil water or use bottled water.",
+            "Don't eat food that has been exposed to smoke or ash. Throw it away.",
+            "Do not enter burning areas. There might be hidden risks, such as fallen power wires or falling debris.",
+            "Don't try to clean up ash yourself. Leave it to the professionals."
+          ],
+          "image": {
+            "id": 3,
+            "source": "your_image_url_here"
+          }
+        }
+      },
+      {
+        "id": 4,
+        "title": "How to help others in case of a wildfire",
+        "content": {
+          "id": 4,
+          "title": "How to help others in case of a wildfire",
+          "content": [
+            "Before a wildfire:",
+            "Get prepared yourself, by ensuring that you have a plan for yourself and your family in case of a wildfire.",
+            "Volunteer your time. Many organizations need help preparing for and responding to wildfires.",
+            "During a wildfire:",
+            "Help evacuate those who need assistance. This may include people who are elderly, disabled, or who have small children.",
+            "Volunteer your time. There are several ways to assist during a wildfire, including distributing food and water, caring for animals, and providing childcare.",
+            "After a wildfire:",
+            "Continue to check on your neighbors. They may require assistance with tasks such as cleaning their houses, doing repairs, and submitting insurance claims."
+          ],
+          "image": {
+            "id": 4,
+            "source": "your_image_url_here"
+          }
+        }
+      }
+    ]
+  }
+  

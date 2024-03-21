@@ -1,0 +1,130 @@
+{
+    "id": 1,
+    "title": "Earthquake",
+    "language": {
+              "id": 1,
+              "name": "English"          
+    },
+    "page": [{
+        
+            "id": 1,
+            "title": "Earthquake General Information",
+            "content": {
+                
+                    "id": 1,
+                    "title": "Earthquake General Information",
+                    "content": [
+                      "Background Information",
+                      "The surface of the Earth is made up of tectonic plates that lie beneath both the land and oceans of our planet.",
+                      "Earthquakes are caused when these plates crash into each other",
+                
+                      "Frequency of Earthquakes",
+                      "Some places on Earth are experiencing more regular earthquakes due to their positioning being on top of meeting points of tectonic plates",
+                      "Small earthquakes (tremors) occur more than thousands of times a day, nevertheless, thanks to their insignificant impact we do not feel them",
+                      "Approximately 80% of the world's earthquakes occur in the Pacific Ocean's rim, known as the \"Ring of Fire\".",
+                
+                      "Tectonic plates",
+                      "Immense stress can build up between plates.",
+                      "When this stress is suddenly released, huge vibrations, known as seismic waves, travel hundreds of kilometres through to the surface.",
+                      "Other earthquakes can occur further from fault zones (where tectonic plates collide) when plates are stretched or compressed.",
+                
+                      "Fault types (Meeting points of tectonic plates)",
+                      "Strike-Slip",
+                      "Strike-slip fault zones occur when parts of the earth's crust move “sideways” resulting in a horizontal motion.",
+                      "Dip-Slip",
+                      "Dip-slip fault zones are the product of the ground above the fault zone either descending (normal fault) or pushing up (reverse fault). A normal fault arises when the deeper layer of the crust pulls away from the upper part. The reverse is called a reverse fault",
+                      "Oblique",
+                      "The combination of the previous two fault zones is referred to by scientists as an Obliqe Fault Zone.",
+                
+                      "Measuring Earthquakes",
+                      "Scientists grade earthquakes based on the intensity and duration of their seismic waves.",
+                      "An earthquake measuring 3 to 4.9 is considered minor or light; 5 to 6.9 is moderate to strong; 7 to 7.9 is major; and 8 or more is great.",
+                
+                      "Aftershocks",
+                      "Earthquakes are always followed by aftershocks, which are smaller earthquakes that might persist for weeks.",
+                
+                      "The most destructive Earthquake measured",
+                      "The strongest earthquake ever recorded had a magnitude of 9.5. It was an earthquake that struck southern Chile in 1960. The Valdivia earthquake killed about 1,655 people and left more than two million homeless.",
+                
+                      "Earthquake Damage",
+                      "Every year, an earthquake of a magnitude of 8 strikes someplace, and around 10,000 people die from earthquakes annually.",
+                      "The great majority of people are killed when structures collapse, although the damage is usually worsened by mud slides, fires, floods, or tsunamis. Smaller tremors, which generally occur in the days after a major earthquake, might impede rescue efforts and result in further death and destruction."
+                    ],
+                        "image": {
+                          "id": 1,
+                          "source": "your_image_url_here"
+                        }
+                      
+                      
+                  }
+    },{
+        "id": 2,
+        "title": "How to Protect Yourself (DOs) - Earthquake",
+        "content": {
+            "id": 2,
+            "title": "How to Protect Yourself (DOs) - Earthquake",
+            "content": [
+                "Before an Earthquake",
+                "- Try to prepare your home: Examine each section of your house to discover objects that may fall or shatter in the case of an earthquake. Consider reorganizing the area by shifting heavy items to lower shelves.",
+                "- Fix and latch furniture onto the wall, which may be more tedious but can pay off in the end.",
+                "- Prepare an emergency kit: Include food and water for 72 hours!!",
+    
+                "During an Earthquake",
+                "- Drop: Get down on your hands and knees to protect yourself from being knocked over. This puts you in an ideal position to crawl for shelter.",
+                "- Cover: Place an arm and hand over your head and neck to shield them from debris. Head for any nearby tables to shelter under until the shaking stops. If a table isn’t in sight, sidle up to one of your home’s interior walls away from tall objects and furniture that might topple.",
+                "- Hold: Stay put until the shaking stops. If you’re under a shelter like a table, keep hold of it with one hand. If you’re out in the open, continue to shield your head and neck with your arms.",
+                "- If you are in a wheelchair, lock the wheels and then lean over to protect your vital organs, covering your head and neck with your arms.",
+    
+                "After an Earthquake",
+                "- Be aware of aftershocks, aka the smaller earthquakes.",
+                "- Check for injuries.",
+                "- If you're entrapped, keep cool. Protect your mouth, nose, and eyes from the dust, then phone or text for assistance. To gain the attention of the responders, make noise by whistling or screaming.",
+                "- Keep an eye out for hazards like fallen electrical lines, ruptured gas pipes, or precarious structures."
+            ],
+            "image": {
+                "id": 2,
+                "source": "your_image_url_here"
+            }
+        }
+    }, {
+        "id": 3,
+        "title": "DON'Ts - Earthquake",
+        "content": {
+            "id": 3,
+            "title": "DON'Ts - Earthquake",
+            "content": [
+                "DO NOT touch any of your gas appliances; let the professionals handle that.",
+                "DO NOT use matches, lighters, camp stoves, grills, electrical equipment, or appliances until you have established that there are no gas leaks. Using these objects may produce sparks that ignite any leaking gas, posing an explosion and fire threat.",
+                "DO NOT use your mobile phone, except for a medical or fire emergency.",
+                "DO NOT expect firefighters, police, or paramedics to help you. They may not be available."
+            ],
+            "image": {
+                "id": 3,
+                "source": "your_image_url_here"
+            }
+        }
+    },{
+        "id": 4,
+        "title": "How to Help Others During an Earthquake",
+        "content": {
+            "id": 4,
+            "title": "How to Help Others During an Earthquake",
+            "content": [
+                "Check for injuries.",
+                "Prepare a safe kit for the entire family.",
+                "Help others get outside of heavily damaged buildings.",
+                "Call the local authorities for help if you find someone struggling and are doubting whether you can help them directly.",
+                "Prepare your house, meaning ensure that the equipment inside of your house is shaking-resistant, especially if you have children.",
+                "Be cautious even after the earthquake for other potential damages."
+            ],
+            "image": {
+                "id": 4,
+                "source": "your_image_url_here"
+            }
+        }
+    }
+    
+    
+    ]
+  }
+  

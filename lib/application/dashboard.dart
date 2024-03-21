@@ -1,27 +1,127 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:redresq_app/components/my_colors.dart';
-import 'package:redresq_app/location/location_service.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:redresq_app/application/dashboard_card.dart';
+import 'package:redresq_app/application/dashboard_card_news.dart';
+import 'package:redresq_app/application/newscard.dart'; // Import NewsCard widget
+import 'package:redresq_app/API_Ressources/article.dart';
+import 'package:http/http.dart' as http;
+
+Future<List<Article>> fetchArticle() async {
+  final response =
+      await http.get(Uri.parse('https://api.redresq.at/news/fetch'),
+          // Send authorization headers to the backend.
+          headers: {
+        HttpHeaders.authorizationHeader:
+            "bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3ZlcnNpb24iOiJVc2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9leHBpcmF0aW9uIjoiNjM4NDQyNzczMjY4MjMxNzY2IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIzIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6InRvZG9yIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoidG9kb3JsYW5rb3ZzenVAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMiIsImV4cCI6MTcwODY4MDUyNn0.ub8F27nFcGOJvDbZojC6Xun1JDriLgXtpoVHGZ-c59VTYoqVh1TAu7S7ZCK2XOjX3vY1CzWBv0Or89SdPCUwBA.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3ZlcnNpb24iOiJHdWVzdCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvZXhwaXJhdGlvbiI6IjYzODQxNjg1OTM1MTU3MzQ4MiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IjEiLCJleHAiOjE3MDYwODkxMzV9.OIeY9jVp5r_hseTCYaLjdlIm9CqiwrThS00hytvdsWDrjkCPHIUyC_SnK6ide9SfEm8ozSJcPRlyk6OkMxMNJg",
+      });
+
+  if (response.statusCode == 200) {
+    print('JSON Response: ${response.body}');
+
+    final List<dynamic> jsonList = jsonDecode(response.body);
+    return jsonList.map((json) => Article.fromJson(json)).toList();
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load articles');
+  }
+}
 
 Future<void> main() async {
   runApp(Dashboard());
 }
 
-class Dashboard extends StatelessWidget {
-  const Dashboard({super.key});
 
+class Dashboard extends StatefulWidget {
+  const Dashboard({Key? key}) : super(key: key);
+
+  @override
+  _DashboardState createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
   final _name = 'Theo';
-  _launchURL() async {
-    Uri url = Uri.parse('https://www.roteskreuz.at/news');
-    if (!await launchUrl(url)) {
-      throw 'Could not launch $url';
-    }
+
+  late Future<List<Article>> articles;
+
+  @override
+  void initState() {
+    super.initState();
+    articles = fetchArticle();
   }
 
   @override
   Widget build(BuildContext context) {
+    double cardWidth = MediaQuery.of(context).size.width * 0.8;
+
+    final textStyle = TextStyle(
+      shadows: [
+        Shadow(
+          color: myRedColor,
+          blurRadius: 5,
+          offset: const Offset(0, 0),
+        )
+      ],
+      color: Colors.white,
+      fontSize: MediaQuery.of(context).size.height * 0.05,
+      fontWeight: FontWeight.bold,
+    );
+    double appBarHeight = MediaQuery.of(context).size.height * 0.175;
+
     return Scaffold(
+      /*appBar: PreferredSize(
+        preferredSize: Size.fromHeight(appBarHeight),
+        child: AppBar(
+          actions: [
+            Icon(
+              Icons.account_circle_rounded,
+              color: Colors.white,
+              size: MediaQuery.of(context).size.height * 0.05,
+            ),
+          ],
+          title: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Text(
+                    'Good Day $_name!',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: MediaQuery.of(context).size.height * 0.05,
+                        foreground: Paint()
+                          ..color = myBlackColor
+                          ..strokeWidth = 6
+                          ..style = PaintingStyle.stroke),
+                  ),
+                  Text(
+                    'Good Day $_name!',
+                    style: textStyle,
+                  )
+                ],
+              ),
+            ],
+          ),
+          centerTitle: true,
+          /*flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  myRedColor, // Dark Red
+                  Colors.white, // Crimson
+                ],
+              ),
+            ),
+          ),*/
+        ),
+      ),*/
       body: Column(
         children: [
           SizedBox(
@@ -34,222 +134,72 @@ class Dashboard extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              elevation: 5,
-              color: myRedColor,
+              elevation: cardWidth * 0.025,
+              color: myGreyColor,
               child: Container(
+                color: Colors.transparent,
                 alignment: Alignment.center,
                 child: Text(
                   'Good Day $_name!',
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 27.5,
-                      fontStyle: FontStyle.normal,
-                      color: Colors.white),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: cardWidth * 0.1,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
           ),
+          Row(
+            children: [
+              DashboardCard(title: 'Ranking', content: 'Your current rank: 1'),
+              DashboardCard(
+                  title: 'Contacts', content: 'Emergency: 112 or 911'),
+            ],
+          ),
+          /*FutureBuilder<List<Article>>(
+                  future: articles,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return Text('No articles available.');
+                    }
+
+                    // Use the fetched articles data
+                    final articles = snapshot.data!;
+                    if (articles.length >= 2) {
+                      return Row(
+                        children: [
+                          DashboardCardNews(
+                            title: 'News 1',
+                            content: articles[0].content,
+                          ),
+                          DashboardCardNews(
+                            title: 'News 2',
+                            content: articles[0].content,
+                          ),
+                        ],
+                      );
+                    } else {
+                      return Text('Not enough articles available.');
+                    }
+                  },
+                ),*/
+
           Flexible(
-            flex: 1,
-            fit: FlexFit.loose,
-            child: Container(
-              margin: const EdgeInsets.only(bottom: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      Flexible(
-                        flex: 1,
-                        fit: FlexFit.tight,
-                        child: AspectRatio(
-                          aspectRatio: 0.8,
-                          child: Card(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            elevation: 5,
-                            color: myGreyColor,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: RichText(
-                                    text: const TextSpan(children: [
-                                      TextSpan(
-                                          text:
-                                              'Wildfires in \n Lower Austria \n',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18,
-                                              fontStyle: FontStyle.normal)),
-                                      TextSpan(
-                                          text:
-                                              '\n Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 12,
-                                              fontStyle: FontStyle.normal)),
-                                    ]),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: _launchURL,
-                                  child: const Text(
-                                    'continue reading...',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.red,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Flexible(
-                        flex: 1,
-                        fit: FlexFit.tight,
-                        child: AspectRatio(
-                          aspectRatio: 0.85,
-                          child: Card(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 25, vertical: 15),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            elevation: 5,
-                            color: myGreyColor,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: RichText(
-                                text: const TextSpan(children: [
-                                  TextSpan(
-                                      text: 'Contacts',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                          fontStyle: FontStyle.normal)),
-                                  TextSpan(
-                                      text:
-                                          '\n \n  Ambulane: 144 \n \n  Fire Department: 122 \n  \n Mountain Rescue: 140 ',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontStyle: FontStyle.normal)),
-                                ]),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Flexible(
-                        fit: FlexFit.tight,
-                        flex: 3,
-                        child: AspectRatio(
-                          aspectRatio: 0.5,
-                          child: Card(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            elevation: 5,
-                            color: myGreyColor,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: RichText(
-                                text: const TextSpan(children: [
-                                  TextSpan(
-                                      text: 'Wildfires in \n Lower Austria \n',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                          fontStyle: FontStyle.normal)),
-                                  TextSpan(
-                                      text:
-                                          '\n Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et.',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontStyle: FontStyle.normal)),
-                                ]),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Flexible(
-                        flex: 1,
-                        fit: FlexFit.tight,
-                        child: AspectRatio(
-                          aspectRatio: 1.5,
-                          child: Card(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 15),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            elevation: 5,
-                            color: myGreyColor,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: RichText(
-                                text: const TextSpan(children: [
-                                  TextSpan(
-                                      text: 'Ranking \n',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                          fontStyle: FontStyle.normal)),
-                                  WidgetSpan(
-                                      child: SizedBox(
-                                    height: 20,
-                                  )),
-                                  TextSpan(
-                                      text: ' Worlwide: 144 \n',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontStyle: FontStyle.normal)),
-                                  WidgetSpan(
-                                      child: SizedBox(
-                                    height: 20,
-                                  )),
-                                  TextSpan(
-                                      text: '  Countrywide: 1',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontStyle: FontStyle.normal))
-                                ]),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            flex: 4,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                DashboardCardNews(title: 'News 19090', content: 'lorem'),
+                DashboardCardNews(title: 'News 29090', content: 'lorem'),
+              ],
             ),
           ),
         ],

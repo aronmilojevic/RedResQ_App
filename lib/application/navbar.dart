@@ -5,24 +5,40 @@ import 'package:redresq_app/application/modulesroom.dart';
 import 'package:redresq_app/application/news.dart';
 import 'package:redresq_app/application/newsroom.dart';
 import 'package:redresq_app/application/quizroom.dart';
-import 'package:redresq_app/location/location_service.dart';
+import 'package:redresq_app/components/offline_no_connection.dart';
+import 'package:redresq_app/components/offline_no_user.dart';
 
 class NavBar extends StatelessWidget {
   final bool isOnline;
+  final bool isRestricted;
 
-
-  const NavBar({Key? key, required this.isOnline}) : super(key: key);
+  const NavBar({Key? key, required this.isOnline, required this.isRestricted})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return NavigationExample(isOnline: isOnline);
+    double bottomNavBarHeight = MediaQuery.of(context).size.height * 0.12;
+    double iconSize = bottomNavBarHeight * 0.6;
+
+    return NavigationExample(
+      isOnline: isOnline,
+      isRestricted: isRestricted,
+      iconSize: iconSize,
+    );
   }
 }
 
 class NavigationExample extends StatefulWidget {
   final bool isOnline;
+  final bool isRestricted;
+  final double iconSize;
 
-  const NavigationExample({Key? key, required this.isOnline}) : super(key: key);
+  const NavigationExample({
+    Key? key,
+    required this.isOnline,
+    required this.isRestricted,
+    required this.iconSize,
+  }) : super(key: key);
 
   @override
   State<NavigationExample> createState() => _NavigationExampleState();
@@ -30,10 +46,16 @@ class NavigationExample extends StatefulWidget {
 
 class _NavigationExampleState extends State<NavigationExample> {
 
+  late int currentPageIndex = 2;
 
-  static int currentPageIndex = 2;
+  late PageController _pageController;
 
-  final PageController _pageController = PageController(initialPage: 2);
+  @override
+  void initState() {
+    super.initState();
+    currentPageIndex = (widget.isOnline && !widget.isRestricted) ? 2 : 4;
+    _pageController = PageController(initialPage: currentPageIndex);
+  }
 
   void setCurrentPageIndex(int index) {
     setState(() {
@@ -43,6 +65,8 @@ class _NavigationExampleState extends State<NavigationExample> {
 
   @override
   Widget build(BuildContext context) {
+    double bottomNavBarHeight = MediaQuery.of(context).size.height * 0.12;
+
     return Scaffold(
       body: PageView(
         controller: _pageController,
@@ -52,14 +76,35 @@ class _NavigationExampleState extends State<NavigationExample> {
           });
         },
         children: [
-          if (widget.isOnline) const Newsroom() else BlankPage(),
-          if (widget.isOnline) const Newsroom() else BlankPage(),
-          if (widget.isOnline) const Dashboard() else BlankPage(),
-          if (widget.isOnline) const QuizRoom() else BlankPage(),
+          if (widget.isOnline && !widget.isRestricted)
+            const Newsroom()
+          else if (!widget.isOnline && !widget.isRestricted)
+            NoInternetConnection()
+          else if (widget.isOnline && widget.isRestricted)
+            NoUser(),
+          if (widget.isOnline && !widget.isRestricted)
+            const Newsroom()
+          else if (!widget.isOnline && !widget.isRestricted)
+            NoInternetConnection()
+          else if (widget.isOnline && widget.isRestricted)
+            NoUser(),
+          if (widget.isOnline && !widget.isRestricted)
+            const Dashboard()
+          else if (!widget.isOnline && !widget.isRestricted)
+            NoInternetConnection()
+          else if (widget.isOnline && widget.isRestricted)
+            NoUser(),
+          if (widget.isOnline && !widget.isRestricted)
+            const QuizRoom()
+          else if (!widget.isOnline && !widget.isRestricted)
+            NoInternetConnection()
+          else if (widget.isOnline && widget.isRestricted)
+            NoUser(),
           const ModulesRoom(),
         ],
       ),
       bottomNavigationBar: Container(
+        height: bottomNavBarHeight,
         padding: const EdgeInsets.only(
           left: 10,
           right: 10,
@@ -67,8 +112,6 @@ class _NavigationExampleState extends State<NavigationExample> {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(23.0),
-          /*border: Border.all(
-                  width: 2.5, color: const Color.fromRGBO(168, 39, 28, 1))*/
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(23.0),
@@ -85,55 +128,28 @@ class _NavigationExampleState extends State<NavigationExample> {
               );
             },
             currentIndex: currentPageIndex,
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.emoji_events,
-                  color: Colors.white,
-                ),
-                label: 'Emoji Events',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.description,
-                  color: Colors.white,
-                ),
-                label: 'Description',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                  color: Colors.white,
-                ),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.menu_book,
-                  color: Colors.white,
-                ),
-                label: 'Menu Book',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.lightbulb,
-                  color: Colors.white,
-                ),
-                label: 'Light Bulb',
-              ),
+            items: [
+              _buildNavItem(Icons.emoji_events),
+              _buildNavItem(Icons.description),
+              _buildNavItem(Icons.home),
+              _buildNavItem(Icons.menu_book),
+              _buildNavItem(Icons.lightbulb),
             ],
+            elevation: 4,
           ),
         ),
       ),
     );
   }
-}
 
-class BlankPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(), // Blank page
+  BottomNavigationBarItem _buildNavItem(IconData icon) {
+    return BottomNavigationBarItem(
+      icon: Icon(
+        icon,
+        color: Colors.white,
+        size: MediaQuery.of(context).size.height * 0.036,
+      ),
+      label: '',
     );
   }
 }
