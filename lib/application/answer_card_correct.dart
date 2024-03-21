@@ -3,7 +3,7 @@ import 'package:redresq_app/components/my_colors.dart';
 
 class AnswerCardCorrect extends StatelessWidget {
   final String title;
-  final bool isCorrect; // New property
+  final bool isCorrect;
   final VoidCallback onPressed;
 
   const AnswerCardCorrect({

@@ -13,4 +13,10 @@ class GivenAnswer {
       answerId: json['name'] as int,
     );
   }
+  Map<String, dynamic> toJson() {
+    return {
+      'questionId': questionId,
+      'answerId': answerId,
+    };
+  }
 }

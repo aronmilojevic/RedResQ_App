@@ -19,7 +19,7 @@ class ModulesRoom extends StatelessWidget {
           AspectRatio(
             aspectRatio: 2.75,
             child: Card(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
@@ -31,9 +31,9 @@ class ModulesRoom extends StatelessWidget {
                   'Modules',
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
-                  style:  TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: cardWidth*0.1,
+                    fontSize: cardWidth * 0.1,
                     fontStyle: FontStyle.normal,
                     color: Colors.black,
                   ),

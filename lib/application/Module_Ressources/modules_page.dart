@@ -8,7 +8,7 @@ import 'package:redresq_app/API_Ressources/Moduless/book.dart';
 
 class DynamicDisasterPage extends StatefulWidget {
   final String disasterType;
-  final int pageIndex; // Add this parameter
+  final int pageIndex;
 
   DynamicDisasterPage({
     Key? key,
@@ -63,7 +63,7 @@ class _DynamicDisasterPageState extends State<DynamicDisasterPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 15,
+            height: 20,
           ),
           Flexible(
             flex: 1,
@@ -77,33 +77,45 @@ class _DynamicDisasterPageState extends State<DynamicDisasterPage> {
               ),
               elevation: 3,
               child: ListView(children: [
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(height: 10),
-                        Text(
-                          currentPage.title,
-                          style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width * 0.06,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          currentPage.content.content,
-                          style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width * 0.04,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.close),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              currentPage.title,
+                              style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.06,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              currentPage.content.content,
+                              style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.04,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ]),
             ),

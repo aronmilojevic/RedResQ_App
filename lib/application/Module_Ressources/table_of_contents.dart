@@ -49,10 +49,7 @@ class TableOfContents extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               elevation: 3,
-              child: /*Padding(
-                padding: const EdgeInsets.all(16),
-                child:*/
-                  ListView(children: [
+              child: ListView(children: [
                 RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
@@ -73,26 +70,18 @@ class TableOfContents extends StatelessWidget {
                           )),
                       _buildSubHeading(
                           'General Information: ${disasterType}...2'),
-                      // Add your content for Page 2 here
-
                       _buildSubHeading(
                           'What to do in case of ${disasterType}...3'),
-                      // Add your content for Page 3 here
-
                       _buildSubHeading(
                           'What NOT to do in case of ${disasterType}...4'),
-                      // Add your content for Page 4 here
-
                       _buildSubHeading(
                           'How to help others in case of ${disasterType}...5'),
-                      // Add your content for Page 5 here
                     ],
                   ),
                 ),
               ]),
             ),
           ),
-          //),
         ],
       ),
     );

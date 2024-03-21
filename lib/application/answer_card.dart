@@ -5,11 +5,13 @@ class AnswerCard extends StatefulWidget {
   final String title;
   final bool isCorrect;
   final VoidCallback onPressed;
+  final Function(bool) onAnswer;
 
   AnswerCard({
     required this.title,
     required this.isCorrect,
     required this.onPressed,
+    required this.onAnswer,
     Key? key,
   }) : super(key: key);
 
@@ -36,6 +38,7 @@ class _AnswerCardState extends State<AnswerCard> {
               _updateCardColor(Colors.green);
             } else {
               _updateCardColor(Colors.red);
+              _updateBackgroundImage();
             }
             widget.onPressed();
           },
@@ -62,6 +65,13 @@ class _AnswerCardState extends State<AnswerCard> {
   void _updateCardColor(Color color) {
     setState(() {
       _cardColor = color;
+      if (!widget.isCorrect) {
+        widget.onAnswer(false);
+      } else {
+        widget.onAnswer(true);
+      }
     });
   }
+
+  void _updateBackgroundImage() {}
 }

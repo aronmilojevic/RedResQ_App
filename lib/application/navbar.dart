@@ -4,6 +4,7 @@ import 'package:redresq_app/application/dashboard.dart';
 import 'package:redresq_app/application/modulesroom.dart';
 import 'package:redresq_app/application/news.dart';
 import 'package:redresq_app/application/newsroom.dart';
+import 'package:redresq_app/application/quiz_rank_page.dart';
 import 'package:redresq_app/application/quizroom.dart';
 import 'package:redresq_app/components/offline_no_connection.dart';
 import 'package:redresq_app/components/offline_no_user.dart';
@@ -77,7 +78,7 @@ class _NavigationExampleState extends State<NavigationExample> {
         },
         children: [
           if (widget.isOnline && !widget.isRestricted)
-            const Newsroom()
+            RankingComingSoonPage()
           else if (!widget.isOnline && !widget.isRestricted)
             NoInternetConnection()
           else if (widget.isOnline && widget.isRestricted)
@@ -132,8 +133,8 @@ class _NavigationExampleState extends State<NavigationExample> {
               _buildNavItem(Icons.emoji_events),
               _buildNavItem(Icons.description),
               _buildNavItem(Icons.home),
-              _buildNavItem(Icons.menu_book),
               _buildNavItem(Icons.lightbulb),
+              _buildNavItem(Icons.menu_book),
             ],
             elevation: 4,
           ),

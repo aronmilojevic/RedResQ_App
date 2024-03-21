@@ -20,8 +20,7 @@ class QuizRoom extends StatelessWidget {
                 AspectRatio(
                   aspectRatio: 2.75,
                   child: Card(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
+                    margin: const EdgeInsets.fromLTRB(10, 20, 10, 10),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -33,9 +32,9 @@ class QuizRoom extends StatelessWidget {
                         'Quizroom',
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
-                        style:  TextStyle(
+                        style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: cardWidth*0.1,
+                            fontSize: cardWidth * 0.1,
                             fontStyle: FontStyle.normal,
                             color: Colors.black),
                       ),
@@ -50,29 +49,28 @@ class QuizRoom extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           QuizCard(
-                              title: 'Earthquake', myColors: Color(0xFFCF945D)),
+                              title: 'Earthquake', myColors: Color(0xFFEDD6C1)),
                           QuizCard(
-                              title: 'Wildfire', myColors: Color(0xFFA9C9DB)),
+                              title: 'Wildfire', myColors: Color(0xFFC7CDE8)),
                           QuizCard(
-                              title: 'Tsunami', myColors: Color(0xFFB3D3F8)),
+                              title: 'Tsunami', myColors: Color(0xFFCCE1FA)),
                           QuizCard(
-                              title: 'Biohazard', myColors: Color(0xFFBDBD)),
+                              title: 'Biohazard', myColors: Color(0xFFC4C4C4)),
                         ],
                       ),
                     ),
                     Expanded(
                       child: Column(
-                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           QuizCard(
-                              title: 'Floods', myColors: Color(0xFF049BF04D)),
+                              title: 'Floods', myColors: Color(0xFF5db6d6)),
                           QuizCard(
-                              title: 'Volcano', myColors: Color(0xFFFFC107)),
+                              title: 'Volcano', myColors: Color(0xFFCF945D)),
                           QuizCard(
                               title: 'Tornado', myColors: Color(0xFF795548)),
                           QuizCard(
-                              title: 'Terrorist A',
-                              myColors: Color(0xFF607D8B)),
+                              title: 'Terrorist Attack',
+                              myColors: Color(0xFFA9C9DB)),
                         ],
                       ),
                     ),

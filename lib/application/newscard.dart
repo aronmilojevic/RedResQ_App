@@ -11,6 +11,8 @@ class NewsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double cardWidth = MediaQuery.of(context).size.width * 0.8;
+
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -24,9 +26,9 @@ class NewsCard extends StatelessWidget {
         );
       },
       child: AspectRatio(
-        aspectRatio: 2.75,
+        aspectRatio: 3.5,
         child: Card(
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -38,11 +40,11 @@ class NewsCard extends StatelessWidget {
               title,
               textAlign: TextAlign.center,
               softWrap: true,
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 23,
-                fontStyle: FontStyle.normal,
-                color: Color(0xff464444),
+                fontSize: cardWidth * 0.07,
+                color: Colors.black,
+                overflow: TextOverflow.visible,
               ),
             ),
           ),
