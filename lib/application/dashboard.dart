@@ -9,12 +9,13 @@ import 'package:redresq_app/application/newscard.dart';
 import 'package:redresq_app/API_Ressources/article.dart';
 import 'package:http/http.dart' as http;
 import 'package:redresq_app/login_register/profile/userprofile_drawer.dart';
+import 'package:redresq_app/shared/app_information.dart';
 
 Future<List<Article>> fetchArticle() async {
   final response =
       await http.get(Uri.parse('https://api.redresq.at/news/fetch'), headers: {
     HttpHeaders.authorizationHeader:
-        "bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3ZlcnNpb24iOiJVc2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9leHBpcmF0aW9uIjoiNjM4NDg3ODQwNzQzNjM0MDE3IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIzIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6InRvZG9yIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoidG9kb3JsYW5rb3ZzenVAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMiIsImV4cCI6MTcxMzE4NzI3NH0.XUQyx9eRGVN1UPMv72ON_S3e_sAgxzriDeft4uEvUGNsh8FxmuSBMBhzCsOX_r0oev60lj_HiLy-heZCSTi8GQ",
+        "bearer " + AppInformation.getUserToken().toString(),
   });
 
   if (response.statusCode == 200) {
@@ -30,7 +31,6 @@ Future<List<Article>> fetchArticle() async {
 Future<void> main() async {
   runApp(Dashboard());
 }
-
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -170,4 +170,3 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 }
-

@@ -10,6 +10,7 @@ import 'package:redresq_app/application/dashboard_card_news.dart';
 import 'package:redresq_app/API_Ressources/Quizzes/question.dart';
 import 'package:redresq_app/API_Ressources/Quizzes/quiz.dart';
 import 'package:redresq_app/API_Ressources/Quizzes/question.dart';
+import 'package:redresq_app/shared/app_information.dart';
 import 'package:http/http.dart' as http;
 
 class QuestionPage extends StatefulWidget {
@@ -37,11 +38,87 @@ class _QuestionPageState extends State<QuestionPage> {
   late List<GivenAnswer> givenAnswers = [];
   late var attemptId = "";
   late int result = 0;
-  var backgroundImage = DecorationImage(
+  var backgroundImage;
+  int wrongAnswersCount = 1;
+
+  List<List<String>> imagePaths = [
+    [
+      "lib/assets/quiz/earthquake_1.png",
+      "lib/assets/quiz/earthquake_2.png",
+      "lib/assets/quiz/earthquake_3.png",
+      "lib/assets/quiz/earthquake_4.png",
+    ],
+    [
+      "lib/assets/quiz/tsunami_1.png",
+      "lib/assets/quiz/tsunami_2.png",
+      "lib/assets/quiz/tsunami_3.png",
+      "lib/assets/quiz/tsunami_4.png",
+    ],
+    [
+      "lib/assets/quiz/floods_1.png",
+      "lib/assets/quiz/floods_2.png",
+      "lib/assets/quiz/floods_3.png",
+      "lib/assets/quiz/floods_4.png",
+    ],
+    [
+      "lib/assets/quiz/wildfire_1.png",
+      "lib/assets/quiz/wildfire_2.png",
+      "lib/assets/quiz/wildfire_3.png",
+      "lib/assets/quiz/wildfire_4.png",
+    ],
+    [
+      "lib/assets/quiz/terrorist_attack_1.png",
+      "lib/assets/quiz/terrorist_attack_2.png",
+      "lib/assets/quiz/terrorist_attack_3.png",
+      "lib/assets/quiz/terrorist_attack_4.png",
+    ],
+    [
+      "lib/assets/quiz/tornado_1.png",
+      "lib/assets/quiz/tornado_2.png",
+      "lib/assets/quiz/tornado_3.png",
+      "lib/assets/quiz/tornado_4.png",
+    ],
+    [
+      "lib/assets/quiz/biohazard_1.png",
+      "lib/assets/quiz/biohazard_2.png",
+      "lib/assets/quiz/biohazard_3.png",
+      "lib/assets/quiz/biohazard_4.png",
+    ],
+  ];
+
+  DecorationImage _getBackgroundImage() {
+    String imagePath;
+    switch (widget.type) {
+      case "earthquake":
+        imagePath = "lib/assets/quiz/earthquake_1.png";
+        break;
+      case "tsunami":
+        imagePath = "lib/assets/quiz/tsunami_1.png";
+        break;
+      case "floods":
+        imagePath = "lib/assets/quiz/floods_1.png";
+        break;
+      case "wildfire":
+        imagePath = "lib/assets/quiz/wildfire_1.png";
+        break;
+      case "terrorist_attack":
+        imagePath = "lib/assets/quiz/terrorist_attack_1.png";
+        break;
+      case "tornado":
+        imagePath = "lib/assets/quiz/tornado_1.png";
+        break;
+      case "biohazrd":
+        imagePath = "lib/assets/quiz/biohazrd_1.png";
+        break;
+      default:
+        imagePath = "lib/assets/quiz/terrorist_attack_1.png";
+        break;
+    }
+    return DecorationImage(
       fit: BoxFit.fill,
-      image: AssetImage(
-        "lib/assets/quiz/test.png",
-      ));
+      image: AssetImage(imagePath),
+    );
+  }
 
   @override
   void initState() {
@@ -56,7 +133,7 @@ class _QuestionPageState extends State<QuestionPage> {
         Uri.parse('https://api.redresq.at/quiz/get/?id=${widget.id}'),
         headers: {
           HttpHeaders.authorizationHeader:
-              'bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3ZlcnNpb24iOiJVc2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9leHBpcmF0aW9uIjoiNjM4NDg3ODQwNzQzNjM0MDE3IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIzIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6InRvZG9yIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoidG9kb3JsYW5rb3ZzenVAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMiIsImV4cCI6MTcxMzE4NzI3NH0.XUQyx9eRGVN1UPMv72ON_S3e_sAgxzriDeft4uEvUGNsh8FxmuSBMBhzCsOX_r0oev60lj_HiLy-heZCSTi8GQ',
+              "bearer " + AppInformation.getUserToken().toString(),
         },
       );
 
@@ -154,7 +231,7 @@ class _QuestionPageState extends State<QuestionPage> {
           headers: {
             HttpHeaders.contentTypeHeader: 'application/json',
             HttpHeaders.authorizationHeader:
-                'bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3ZlcnNpb24iOiJVc2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9leHBpcmF0aW9uIjoiNjM4NDg3ODQwNzQzNjM0MDE3IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIzIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6InRvZG9yIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoidG9kb3JsYW5rb3ZzenVAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMiIsImV4cCI6MTcxMzE4NzI3NH0.XUQyx9eRGVN1UPMv72ON_S3e_sAgxzriDeft4uEvUGNsh8FxmuSBMBhzCsOX_r0oev60lj_HiLy-heZCSTi8GQ',
+                "bearer " + AppInformation.getUserToken().toString(),
           },
           body: json);
 
@@ -165,7 +242,7 @@ class _QuestionPageState extends State<QuestionPage> {
               'https://api.redresq.at/attempt/result/?quizId=${quiz.id}&attemptId=${g}'),
           headers: {
             HttpHeaders.authorizationHeader:
-                'bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3ZlcnNpb24iOiJVc2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9leHBpcmF0aW9uIjoiNjM4NDg3ODQwNzQzNjM0MDE3IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIzIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6InRvZG9yIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoidG9kb3JsYW5rb3ZzenVAZ21haWwuY29tIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMiIsImV4cCI6MTcxMzE4NzI3NH0.XUQyx9eRGVN1UPMv72ON_S3e_sAgxzriDeft4uEvUGNsh8FxmuSBMBhzCsOX_r0oev60lj_HiLy-heZCSTi8GQ',
+                "bearer " + AppInformation.getUserToken().toString(),
           },
         );
         result = int.parse(jsonDecode(response2.body).toString());
@@ -210,7 +287,10 @@ class _QuestionPageState extends State<QuestionPage> {
                 if (index < snapshot.data![0].questions.length) {
                   var question = snapshot.data![0].questions[index];
                   return Container(
-                    decoration: BoxDecoration(image: backgroundImage),
+                    decoration: BoxDecoration(
+                      image:
+                          index == 0 ? _getBackgroundImage() : backgroundImage,
+                    ),
                     child: Column(
                       children: [
                         SizedBox(
@@ -307,11 +387,40 @@ class _QuestionPageState extends State<QuestionPage> {
 
   void _handleAnswer(bool isCorrect) {
     setState(() {
-      if (!isCorrect) {
-        backgroundImage = DecorationImage(
+      if (!isCorrect && wrongAnswersCount < imagePaths[0].length) {
+        int disasterIndex = _getDisasterIndex(widget.type);
+        if (disasterIndex != -1 &&
+            wrongAnswersCount < imagePaths[disasterIndex].length) {
+          backgroundImage = DecorationImage(
             fit: BoxFit.fill,
-            image: AssetImage("lib/assets/quiz/Quiz_Erdbeben_Verloren.png"));
+            image: AssetImage(imagePaths[disasterIndex][wrongAnswersCount]),
+          );
+          wrongAnswersCount++;
+        }
+      } else if (isCorrect && wrongAnswersCount == 1) {
+        backgroundImage = _getBackgroundImage();
       }
     });
+  }
+
+  int _getDisasterIndex(String type) {
+    switch (type) {
+      case "earthquake":
+        return 0;
+      case "tsunami":
+        return 1;
+      case "floods":
+        return 2;
+      case "wildfire":
+        return 3;
+      case "terrorist_attack":
+        return 4;
+      case "tornado":
+        return 5;
+      case "biohazard":
+        return 6;
+      default:
+        return 4;
+    }
   }
 }

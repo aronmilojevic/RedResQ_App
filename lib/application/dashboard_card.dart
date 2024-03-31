@@ -22,6 +22,7 @@ class DashboardCard extends StatelessWidget {
     return Expanded(
       child: Card(
         elevation: 5,
+        color: myGreyColor,
         margin: EdgeInsets.fromLTRB(card1, 0, card2, 10),
         child: ClipRRect(
           borderRadius: BorderRadius.only(

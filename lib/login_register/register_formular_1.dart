@@ -17,7 +17,6 @@ import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:http/http.dart' as http;
 
-
 class FirstFormular extends StatefulWidget {
   const FirstFormular({Key? key}) : super(key: key);
 
@@ -35,7 +34,7 @@ class _FirstFormularState extends State<FirstFormular> {
   TextEditingController _mobileNumberController = TextEditingController();
   var maskFormatter = MaskTextInputFormatter(
     mask: '+## ### #########',
-    filter: { "#": RegExp(r'[0-9]') }, // Erlaubt nur Ziffern in den Platzhaltern
+    filter: {"#": RegExp(r'[0-9]')}, // Erlaubt nur Ziffern in den Platzhaltern
     initialText: '+43 ', // Optional: Standardtext/Vorwahl
   );
 
@@ -86,7 +85,8 @@ class _FirstFormularState extends State<FirstFormular> {
         final String authToken = response.body;
         return authToken;
       } else {
-        print('Fehler beim Abrufen des Authentifizierungstokens: ${response.statusCode}');
+        print(
+            'Fehler beim Abrufen des Authentifizierungstokens: ${response.statusCode}');
         print('API-Antwort: ${response.body}');
         return null;
       }
@@ -98,7 +98,6 @@ class _FirstFormularState extends State<FirstFormular> {
 
   @override
   Widget build(BuildContext context) {
-
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -124,32 +123,38 @@ class _FirstFormularState extends State<FirstFormular> {
               SizedBox(height: screenHeight * 0.01),
               Text(
                 'Fill out the text fields below',
-                style: subHeaderTextStyle.copyWith(fontSize: screenHeight * 0.02),
+                style:
+                    subHeaderTextStyle.copyWith(fontSize: screenHeight * 0.02),
               ),
               SizedBox(height: screenHeight * 0.02),
               Image(
-                image: AssetImage('lib/assets/register/progress_formular_1outOf3.png'),
+                image: AssetImage(
+                    'lib/assets/register/progress_formular_1outOf3.png'),
                 width: screenWidth * 0.9,
                 height: screenHeight * 0.1,
                 fit: BoxFit.contain,
               ),
               SizedBox(height: screenHeight * 0.03),
-              _buildTextFieldWithIcon(Icons.person, _firstNameController, 'First name', screenWidth, screenHeight),
+              _buildTextFieldWithIcon(Icons.person, _firstNameController,
+                  'First name', screenWidth, screenHeight),
               SizedBox(height: screenHeight * 0.02),
-              _buildTextFieldWithIcon(Icons.person, _lastNameController, 'Last name', screenWidth, screenHeight),
+              _buildTextFieldWithIcon(Icons.person, _lastNameController,
+                  'Last name', screenWidth, screenHeight),
               SizedBox(height: screenHeight * 0.02),
               _buildGenderDropdown(),
               SizedBox(height: screenHeight * 0.02),
               _buildDateOfBirthTextField(screenWidth, screenHeight),
               SizedBox(height: screenHeight * 0.02),
-              _buildEMailField(Icons.email, _emailController, 'E-Mail', screenWidth, screenHeight),
+              _buildEMailField(Icons.email, _emailController, 'E-Mail',
+                  screenWidth, screenHeight),
               // Im Falle dass wir uns doch entscheiden Telefonnummern anzufordern
               //SizedBox(height: screenHeight * 0.02),
               //_buildMobileNumberTextField(Icons.phone, _mobileNumberController, 'Mobile number', screenWidth, screenHeight),
               SizedBox(height: screenHeight * 0.04),
               _buildNextButton(context, screenWidth, screenHeight),
               TextButton(
-                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage())),
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginPage())),
                 child: RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
@@ -178,7 +183,8 @@ class _FirstFormularState extends State<FirstFormular> {
     );
   }
 
-  Widget _buildEMailField(IconData icon, TextEditingController controller, String hintText, double screenWidth, double screenHeight) {
+  Widget _buildEMailField(IconData icon, TextEditingController controller,
+      String hintText, double screenWidth, double screenHeight) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
       child: Material(
@@ -213,7 +219,13 @@ class _FirstFormularState extends State<FirstFormular> {
     );
   }
 
-  Widget _buildTextFieldWithIcon(IconData icon, TextEditingController controller, String hintText, double screenWidth, double screenHeight, {bool isEmail = false}) {
+  Widget _buildTextFieldWithIcon(
+      IconData icon,
+      TextEditingController controller,
+      String hintText,
+      double screenWidth,
+      double screenHeight,
+      {bool isEmail = false}) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
       child: Material(
@@ -251,7 +263,9 @@ class _FirstFormularState extends State<FirstFormular> {
     return GestureDetector(
       onTap: () => _selectDate(context),
       child: AbsorbPointer(
-        child: _buildTextFieldWithIcon(Icons.cake, _dobController, 'Date of birth', screenWidth, screenHeight, isEmail: false),
+        child: _buildTextFieldWithIcon(Icons.cake, _dobController,
+            'Date of birth', screenWidth, screenHeight,
+            isEmail: false),
       ),
     );
   }
@@ -273,9 +287,7 @@ class _FirstFormularState extends State<FirstFormular> {
             ),
             dialogBackgroundColor: Colors.white,
             textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                primary: myRedColor,
-              ),
+              style: TextButton.styleFrom(foregroundColor: myRedColor),
             ),
             dialogTheme: DialogTheme(
               shape: RoundedRectangleBorder(
@@ -292,7 +304,12 @@ class _FirstFormularState extends State<FirstFormular> {
     }
   }
 
-  Widget _buildMobileNumberTextField(IconData icon, TextEditingController controller, String hintText, double screenWidth, double screenHeight) {
+  Widget _buildMobileNumberTextField(
+      IconData icon,
+      TextEditingController controller,
+      String hintText,
+      double screenWidth,
+      double screenHeight) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
       child: Material(
@@ -328,7 +345,8 @@ class _FirstFormularState extends State<FirstFormular> {
     );
   }
 
-  _buildNextButton(BuildContext context, double screenWidth, double screenHeight) {
+  _buildNextButton(
+      BuildContext context, double screenWidth, double screenHeight) {
     return Container(
       width: screenWidth * 0.9,
       child: MaterialButton(
@@ -353,19 +371,23 @@ class _FirstFormularState extends State<FirstFormular> {
               ),
             );
           } else {
-            showErrorSnackbar(context, 'Please fill out all fields before proceeding.');
+            showErrorSnackbar(
+                context, 'Please fill out all fields before proceeding.');
           }
         },
         child: Text(
           'Next',
-          style: TextStyle(color: Colors.white, fontSize: screenHeight * 0.0255, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: screenHeight * 0.0255,
+              fontWeight: FontWeight.bold),
         ),
         padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(screenHeight * 0.015)),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(screenHeight * 0.015)),
       ),
     );
   }
-
 
   Widget _buildGenderDropdown() {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -392,7 +414,8 @@ class _FirstFormularState extends State<FirstFormular> {
                 child: InkWell(
                   onTap: () {},
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.015),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: screenWidth * 0.015),
                     child: DropdownButtonFormField<int>(
                       value: _selectedGender,
                       onChanged: (int? value) {

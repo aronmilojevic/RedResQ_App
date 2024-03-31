@@ -14,17 +14,17 @@ class ModulesCard extends StatelessWidget {
       case 'biohazard':
         return 'lib/assets/learning_modules/biohazard.PNG';
       case 'tornado':
-        return 'assets/tornado_background.jpg';
+        return 'lib/assets/learning_modules/tornado.png';
       case 'volcano':
-        return 'assets/volcano_background.jpg';
+        return 'lib/assets/learning_modules/volcano.png';
       case 'earthquake':
         return 'lib/assets/learning_modules/earthquake.PNG';
       case 'terrorist attack':
-        return 'assets/terrorist_attack_background.jpg';
+        return 'lib/assets/learning_modules/terrorist_attack.png';
       case 'wildfire':
         return 'lib/assets/learning_modules/wildfire.PNG';
       case 'floods':
-        return 'assets/floods_background.jpg';
+        return 'lib/assets/learning_modules/floods.png';
       default:
         return 'assets/default_background.jpg';
     }

@@ -36,6 +36,7 @@ class DashboardCardNews extends StatelessWidget {
       flex: 1,
       child: Card(
         elevation: 5,
+        color: myGreyColor,
         margin: EdgeInsets.fromLTRB(card1, 5, card2, 10),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(30),

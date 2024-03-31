@@ -14,46 +14,47 @@ class News extends StatelessWidget {
 
     return Scaffold(
       body: Column(children: [
-        AspectRatio(
+        /* AspectRatio(
           aspectRatio: 2.75,
-          child: Card(
-            margin: const EdgeInsets.fromLTRB(20, 40, 20, 20),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            elevation: 3,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 50, 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: const Color(0xff464444),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+          child:*/
+        Card(
+          margin: const EdgeInsets.fromLTRB(20, 40, 20, 20),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          elevation: 3,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 50, 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: const Color(0xff464444),
                   ),
-                  Expanded(
-                    child: Text(
-                      title,
-                      textAlign: TextAlign.center,
-                      softWrap: true,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: cardWidth * 0.075,
-                          fontStyle: FontStyle.normal,
-                          color: Color(0xff464444),
-                          overflow: TextOverflow.visible),
-                    ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                Expanded(
+                  child: Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    softWrap: true,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: cardWidth * 0.06,
+                        fontStyle: FontStyle.normal,
+                        color: Color(0xff464444),
+                        overflow: TextOverflow.visible),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
+        // ),
         Flexible(
           flex: 1,
           child: Card(
