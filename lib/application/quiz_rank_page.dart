@@ -17,18 +17,10 @@ class RankingComingSoonPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'Your Rank',
+              'Ranking coming soon...',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              '1',
-              style: TextStyle(
-                fontSize: 18,
-                color: myBlackColor,
               ),
             ),
           ],
@@ -48,11 +40,11 @@ class ResultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Set your desired background color
+      backgroundColor: Colors.white,
       body: Center(
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.blue, // Set your desired container color
+            color: Colors.blue,
             borderRadius: BorderRadius.circular(20),
           ),
           padding: EdgeInsets.all(20),
@@ -64,7 +56,7 @@ class ResultPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white, // Set your desired text color
+                  color: Colors.white,
                 ),
               ),
               SizedBox(height: 20),
@@ -72,13 +64,12 @@ class ResultPage extends StatelessWidget {
                 'Your score: $result',
                 style: TextStyle(
                   fontSize: 18,
-                  color: Colors.white, // Set your desired text color
+                  color: Colors.white,
                 ),
               ),
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  // Add any action here, e.g., navigation
                   Navigator.push(
                     context,
                     MaterialPageRoute(

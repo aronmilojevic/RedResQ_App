@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:redresq_app/API_Ressources/Moduless/page.dart';
 import 'package:redresq_app/API_Ressources/Moduless/content.dart';
 import 'package:redresq_app/API_Ressources/Moduless/book.dart';
+import 'package:redresq_app/components/my_colors.dart';
 
 class DynamicDisasterPage extends StatefulWidget {
   final String disasterType;
@@ -80,12 +81,6 @@ class _DynamicDisasterPageState extends State<DynamicDisasterPage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    IconButton(
-                      icon: Icon(Icons.close),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
                       child: Align(
@@ -115,6 +110,14 @@ class _DynamicDisasterPageState extends State<DynamicDisasterPage> {
                         ),
                       ),
                     ),
+                    Center(
+                      child: IconButton(
+                        icon: Icon(Icons.close),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ]),
@@ -122,6 +125,13 @@ class _DynamicDisasterPageState extends State<DynamicDisasterPage> {
           ),
         ],
       ),
+      /*floatingActionButton: FloatingActionButton(
+        backgroundColor: myGreyColor,
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Icon(Icons.close),
+      ),*/
     );
   }
 
