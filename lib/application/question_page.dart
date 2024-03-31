@@ -310,12 +310,12 @@ class _QuestionPageState extends State<QuestionPage> {
                               color: Colors.transparent,
                               alignment: Alignment.center,
                               child: Text(
-                                widget.type,
+                                question.text,
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: cardWidth * 0.1,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: cardWidth * 0.04,
                                   color: Colors.black,
                                 ),
                               ),

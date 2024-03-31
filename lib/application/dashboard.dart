@@ -97,7 +97,7 @@ class _DashboardState extends State<Dashboard> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
-                        'Good Day $_name!',
+                        'Good Day!',
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -129,7 +129,22 @@ class _DashboardState extends State<Dashboard> {
                   card2: 20),
             ],
           ),
-          Flexible(
+      Row(
+        children: [
+          DashboardCard(
+            title: 'News 1',
+            content: 'Lorem Ipsum',
+            card1: 20,
+            card2: 5,
+          ),
+          DashboardCard(
+              title: 'News 2',
+              content: 'Lorem Ipsum',
+              card1: 5,
+              card2: 20),
+        ],
+      ),
+          /*Flexible(
             flex: 1,
             child: FutureBuilder<List<Article>>(
               future: articles,
@@ -164,7 +179,8 @@ class _DashboardState extends State<Dashboard> {
                 }
               },
             ),
-          ),
+          ),*/
+
         ],
       ),
     );
