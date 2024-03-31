@@ -42,7 +42,6 @@ class GetStartedPage2 extends StatelessWidget {
           backgroundColor: myRedColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(screenWidth * 0.05),
-
           ),
         ),
         child: Row(
@@ -83,7 +82,7 @@ class GetStartedPage2 extends StatelessWidget {
     return TextButton(
       onPressed: () {
         if (isContinue) {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => StartUI()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => StartUIRestricted()));
         } else {
           Navigator.of(context).pop();
         }

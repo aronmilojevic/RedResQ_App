@@ -1,76 +1,55 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:redresq_app/application/UIManagement.dart';
 import 'package:redresq_app/login_register/start_page_2.0.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:firebase_core/firebase_core.dart';
+import 'package:redresq_app/shared/app_information.dart';
 import 'firebase_options.dart';
 import 'package:redresq_app/notifications/notification_handler.dart';
-import 'package:redresq_app/location/location_service.dart';
 import 'dart:ui' as ui;
 
 
 void main() async {
-
-  print(ui.window.locale.toString());
-  runApp(
-    MaterialApp(
-      home: GetStartedPage2(),
-    ),
-  );
-
-  // Firebase
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   NotificationHandler().initNotifications();
 
-  final notificationSettings = await FirebaseMessaging.instance.requestPermission(provisional: true);
-
-
-
-
-/*
-  if(checkInternetConnection()==true){
+  print(ui.window.locale.toString());
+  if (await checkInternetConnection() == true) {
     AppInformation.initialize();
-    //Token erhalten
+    // Token erhalten
     String? token = AppInformation.getUserToken();
-
-
-    //Prüfen ob der Token noch gültig ist
-    if(checkUserToken(token)==true){
-      //Wenn ja wird das login übersprungen
+    // Prüfen ob der Token noch gültig ist
+    if (await checkUserToken(token) == true) {
+      // Wenn ja, wird das Login übersprungen
       runApp(
         MaterialApp(
           home: StartUI(),
-          //
         ),
       );
-    }else{
-      //Token nicht gültig also neu anmelden oder registrieren
+    } else {
+      // Token nicht gültig also neu anmelden oder registrieren
       runApp(
         MaterialApp(
           home: GetStartedPage2(),
-          //StartUI()
         ),
       );
     }
-
-  }else{
-    //kein Internet also kommt man in die Offline App
+  } else {
+    // Kein Internet, also kommt man in die Offline-App
     runApp(
       MaterialApp(
         home: StartUIOffline(),
-        //
       ),
-
     );
   }
-
- */
 }
+
 
 Future<bool> checkUserToken(String? token) async {
   final apiUrl = 'https://api.redresq.at/auth/checktoken';
